@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Артем Капитанов](https://up.htmlacademy.ru/react/5/user/1192723).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Сергеев](https://up.htmlacademy.ru/react/5/user/1205257).
 
 ---
 
