@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import ReviewCard from "../film-review-card/film-review-card";
 import reviewsProp from "../film-reviews-page/reviews.prop";
 import filmProp from "../film-page/film.prop";
+import PageFooter from "../page-footer/page-footer";
 
 class FilmReviewsPage extends PureComponent {
   constructor(props) {
@@ -16,7 +17,7 @@ class FilmReviewsPage extends PureComponent {
     const secondColumn = reviews.slice(reviewHalf);
 
     return (
-      <React.Fragment>
+      <>
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
             <div className="movie-card__bg">
@@ -149,21 +150,9 @@ class FilmReviewsPage extends PureComponent {
             </div>
           </section>
 
-          <footer className="page-footer">
-            <div className="logo">
-              <a href="main.html" className="logo__link logo__link--light">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
-            </div>
-          </footer>
+          <PageFooter/>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

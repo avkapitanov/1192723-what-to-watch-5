@@ -7,9 +7,9 @@ import MyFilmsPage from "../my-films-page/my-films-page";
 import FilmPage from "../film-page/film-page";
 import PlayerPage from "../player-page/player-page";
 import PromoFilm from "../promo-film/promo-film";
-import FilmReviewsPage from "../film-reviews-page/film-reviews-page";
 import filmsProp from "../film-page/films.prop";
 import reviewsProp from "../film-reviews-page/reviews.prop";
+import FilmAddReviewForm from "../film-add-review-form/film-add-review-form";
 
 const App = (props) => {
   const {promoFilm, films, reviews} = props;
@@ -20,11 +20,13 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <React.Fragment>
-            <PromoFilm { ...promoFilm }/>
-            <MainPage films={films}/>
-          </React.Fragment>
+        <Route exact path="/"
+          render={({history}) => (
+            <>
+              <PromoFilm { ...promoFilm }/>
+              <MainPage films={films} history={history}/>
+            </>
+          )}>
         </Route>
         <Route exact path="/login">
           <LoginPage/>
@@ -33,10 +35,10 @@ const App = (props) => {
           <MyFilmsPage myFilms={myFilms}/>
         </Route>
         <Route exact path="/films/:id/review">
-          <FilmReviewsPage film={film} reviews={reviews}/>
+          <FilmAddReviewForm film={film}/>
         </Route>
         <Route exact path="/films/:id">
-          <FilmPage/>
+          <FilmPage film={film} reviews={reviews}/>
         </Route>
         <Route exact path="/player/:id">
           <PlayerPage/>

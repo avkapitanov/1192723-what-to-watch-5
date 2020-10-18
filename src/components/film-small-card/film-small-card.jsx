@@ -1,9 +1,10 @@
 import React from "react";
 import filmProp from "../film-page/film.prop";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const FilmSmallCard = (props) => {
-  const {onMouseEnter, onMouseLeave, film} = props;
+  const {onMouseEnter, onMouseLeave, onImageClick, film} = props;
   const {id, poster, title} = film;
 
   return (
@@ -17,11 +18,17 @@ const FilmSmallCard = (props) => {
         onMouseLeave();
       }}
     >
-      <div className="small-movie-card__image">
-        <img src={poster} alt={title} width="280" height="175"/>
+      <div className="small-movie-card__image" onClick={(evt) => {
+        evt.preventDefault();
+        onImageClick(film);
+      }}>
+        <img src={poster} alt={title} width="280" height="175" />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        <Link to={{
+          pathname: `/films/${id}`
+        }}
+        className="small-movie-card__link">{title}</Link>
       </h3>
     </article>
   );
@@ -30,6 +37,7 @@ const FilmSmallCard = (props) => {
 FilmSmallCard.propTypes = {
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
+  onImageClick: PropTypes.func.isRequired,
   film: filmProp
 };
 

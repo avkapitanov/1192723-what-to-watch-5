@@ -1,5 +1,5 @@
 import {nanoid} from 'nanoid';
-import {getRandomElement, getRandomElements, getRandomInteger} from "../utils/utils";
+import {getRandomElement, getRandomElements, getRandomInteger} from "../utils";
 
 const FILMS_CARD_COUNT = 20;
 const FILM_MIN_RELEASE_YEAR = 2000;

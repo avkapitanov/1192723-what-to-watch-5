@@ -1,5 +1,5 @@
 import {nanoid} from 'nanoid';
-import {getRandomElements, getRandomInteger, generateDate, getRandomFloat} from "../utils/utils";
+import {getRandomElements, getRandomInteger, generateDate, getRandomFloat} from "../utils";
 
 const REVIEWS_FILM_CARD_COUNT = 9;
 const MIN_REVIEW_SENTENCE = 1;

@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import FilmList from "../film-list/film-list";
 import filmsProp from "../film-page/films.prop";
+import PageFooter from "../page-footer/page-footer";
+import PropTypes from "prop-types";
 
 class MainPage extends PureComponent {
   constructor(props) {
@@ -8,7 +10,7 @@ class MainPage extends PureComponent {
   }
 
   render() {
-    const {films} = this.props;
+    const {films, history} = this.props;
 
     return (
       <div className="page-content">
@@ -48,33 +50,24 @@ class MainPage extends PureComponent {
             </li>
           </ul>
 
-          <FilmList films={films}/>
+          <FilmList films={films} history={history}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <PageFooter/>
       </div>
     );
   }
 }
 
 MainPage.propTypes = {
-  films: filmsProp
+  films: filmsProp,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default MainPage;
