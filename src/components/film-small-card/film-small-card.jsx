@@ -18,6 +18,25 @@ class FilmSmallCard extends PureComponent {
     this.resetHoverTime = this.resetHoverTime.bind(this);
   }
 
+  _renderPlayer() {
+    const {film} = this.props;
+    const {poster, title, video} = film;
+    const {isPlaying} = this.state;
+
+    let visualFilm;
+    if (!isPlaying) {
+      visualFilm = <img src={poster} alt={title} width="280" height="175" />;
+    } else {
+      visualFilm = <SmallCardVideoPlayer
+        isPlaying={false}
+        src={video}
+        poster={poster}
+      />;
+    }
+
+    return visualFilm;
+  }
+
   checkHoverTime() {
     this._timerId = setTimeout(() => {
       this.setState({isPlaying: true});
@@ -31,19 +50,9 @@ class FilmSmallCard extends PureComponent {
 
   render() {
     const {onMouseEnter, onMouseLeave, onImageClick, film} = this.props;
-    const {id, poster, title, video} = film;
-    const {isPlaying} = this.state;
+    const {id, title} = film;
 
-    let visualFilm;
-    if (!isPlaying) {
-      visualFilm = <img src={poster} alt={title} width="280" height="175" />;
-    } else {
-      visualFilm = <SmallCardVideoPlayer
-        isPlaying={false}
-        src={video}
-        poster={poster}
-      />;
-    }
+    const visualFilm = this._renderPlayer();
 
     return (
       <article className="small-movie-card catalog__movies-card" key={id}
