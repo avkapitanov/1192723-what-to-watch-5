@@ -15,7 +15,7 @@ const App = (props) => {
   const {promoFilm, films, reviews} = props;
 
   const myFilms = films.slice(0, 5);
-  const film = films;
+  const [film] = films;
 
   return (
     <BrowserRouter>

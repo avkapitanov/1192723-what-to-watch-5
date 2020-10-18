@@ -48,6 +48,10 @@ class FilmSmallCard extends PureComponent {
     this.setState({isPlaying: false});
   }
 
+  componentWillUnmount() {
+    clearTimeout(this._timerId);
+  }
+
   render() {
     const {onMouseEnter, onMouseLeave, onImageClick, film} = this.props;
     const {id, title} = film;
