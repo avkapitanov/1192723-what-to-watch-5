@@ -1294,7 +1294,8 @@ main {
     z-index: 3;
     -webkit-transform: scale(1.2);
             transform: scale(1.2); }
-  .small-movie-card img {
+  .small-movie-card img,
+  .small-movie-card video {
     vertical-align: top;
     width: 100%;
     height: 100%;
