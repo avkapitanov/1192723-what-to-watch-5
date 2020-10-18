@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const PromoFilm = ({title, genre, year}) => {
+const PromoFilm = ({title, genre, year, poster, background}) => {
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+        <img src={background} alt={title}/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -29,7 +29,7 @@ const PromoFilm = ({title, genre, year}) => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+            <img src={poster} alt={title} width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
@@ -64,6 +64,8 @@ PromoFilm.propTypes = {
   title: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
+  poster: PropTypes.string.isRequired,
+  background: PropTypes.string.isRequired
 };
 
 export default PromoFilm;
