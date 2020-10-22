@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import UserBlock from "../user-block/user-block";
+import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 
 const PromoFilm = ({title, genre, year, poster, background}) => {
   return (
@@ -20,7 +20,7 @@ const PromoFilm = ({title, genre, year, poster, background}) => {
           </a>
         </div>
 
-        <UserBlock/>
+        <UserAvatarBlock/>
       </header>
 
       <div className="movie-card__wrap">

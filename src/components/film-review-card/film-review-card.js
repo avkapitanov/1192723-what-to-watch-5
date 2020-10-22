@@ -1,5 +1,5 @@
 import React from "react";
-import reviewProp from "../film-reviews-page/review.prop";
+import reviewProp from "../film-page-reviews-tab/review.prop";
 import {humanizeReviewDate, formatReviewDate} from "../../utils";
 
 const ReviewCard = (props) => {

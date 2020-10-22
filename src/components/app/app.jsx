@@ -8,7 +8,7 @@ import FilmPage from "../film-page/film-page";
 import PlayerPage from "../player-page/player-page";
 import PromoFilm from "../promo-film/promo-film";
 import filmsProp from "../film-page/films.prop";
-import reviewsProp from "../film-reviews-page/reviews.prop";
+import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 import FilmAddReviewForm from "../film-add-review-form/film-add-review-form";
 
 const App = (props) => {
@@ -37,8 +37,11 @@ const App = (props) => {
         <Route exact path="/films/:id/review">
           <FilmAddReviewForm film={film}/>
         </Route>
-        <Route exact path="/films/:id">
-          <FilmPage film={film} reviews={reviews}/>
+        <Route exact path="/films/:id"
+          render={({history}) => (
+            <FilmPage film={film} reviews={reviews} films={films} history={history}/>
+          )}
+        >
         </Route>
         <Route exact path="/player/:id">
           <PlayerPage/>
