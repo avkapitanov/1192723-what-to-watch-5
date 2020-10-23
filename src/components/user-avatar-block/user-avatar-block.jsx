@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserBlock = () => {
+const UserAvatarBlock = () => {
   return (
     <div className="user-block">
       <div className="user-block__avatar">
@@ -10,4 +10,4 @@ const UserBlock = () => {
   );
 };
 
-export default UserBlock;
+export default UserAvatarBlock;
