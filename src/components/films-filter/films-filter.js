@@ -1,7 +1,6 @@
 import React from "react";
 import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
-import filmsProp from "../film-page/films.prop";
 import PropTypes from "prop-types";
 
 const FilmsFilter = (props) => {
@@ -23,7 +22,6 @@ const FilmsFilter = (props) => {
 export {FilmsFilter};
 
 FilmsFilter.propTypes = {
-  films: filmsProp,
   changeFilterGenre: PropTypes.func.isRequired,
   selectedFilterGenre: PropTypes.string.isRequired,
   filterGenres: PropTypes.array.isRequired
@@ -38,6 +36,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeFilterGenre(evt) {
     evt.preventDefault();
     dispatch(ActionCreator.changeFilterGenre(evt.target.dataset.genre));
+    dispatch(ActionCreator.resetRenderedFilmsCount());
   },
 });
 

@@ -7,6 +7,7 @@ import filmsProp from "./films.prop";
 import SimilarFilms from "../similar-films/similar-films";
 import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import {connect} from "react-redux";
 
 const FilmPage = (props) => {
   const {film, reviews, films, history} = props;
@@ -96,4 +97,10 @@ FilmPage.propTypes = {
   }).isRequired
 };
 
-export default FilmPage;
+export {FilmPage};
+
+const mapStateToProps = (state) => ({
+  films: state.films
+});
+
+export default connect(mapStateToProps)(FilmPage);

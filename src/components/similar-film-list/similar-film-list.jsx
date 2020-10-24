@@ -2,11 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import FilmSmallCard from "../film-small-card/film-small-card";
 import filmsProp from "../film-page/films.prop";
-import {connect} from "react-redux";
-import {filterFilmsByGenre} from "../../utils";
-import ShowMoreFilmsBtn from "../show-more-films-btn/show-more-films-btn";
 
-class FilmList extends PureComponent {
+class SimilarFilmList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -35,14 +32,12 @@ class FilmList extends PureComponent {
   }
 
   render() {
-    const {films, renderedFilmsCount, selectedFilterGenre} = this.props;
-
-    const filteredFilms = filterFilmsByGenre(films, selectedFilterGenre);
+    const {films} = this.props;
 
     return (
       <>
         <div className="catalog__movies-list">
-          {filteredFilms.slice(0, renderedFilmsCount).map((film) => (
+          {films.map((film) => (
             <FilmSmallCard key={film.id} film={film}
               onMouseEnter={this.onMouseEnter}
               onMouseLeave={this.onMouseLeave}
@@ -50,27 +45,16 @@ class FilmList extends PureComponent {
             />
           ))}
         </div>
-        <ShowMoreFilmsBtn filmsCount={filteredFilms.length}/>
       </>
     );
   }
 }
 
-FilmList.propTypes = {
+SimilarFilmList.propTypes = {
   films: filmsProp,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  renderedFilmsCount: PropTypes.number.isRequired,
-  selectedFilterGenre: PropTypes.string.isRequired
 };
 
-export {FilmList};
-
-const mapStateToProps = (state) => ({
-  films: state.films,
-  renderedFilmsCount: state.renderedFilmsCount,
-  selectedFilterGenre: state.selectedFilterGenre
-});
-
-export default connect(mapStateToProps)(FilmList);
+export default SimilarFilmList;

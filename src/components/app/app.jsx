@@ -26,7 +26,7 @@ const App = (props) => {
           render={({history}) => (
             <>
               <PromoFilm { ...promoFilm }/>
-              <MainPage films={films} history={history}/>
+              <MainPage history={history}/>
             </>
           )}>
         </Route>
@@ -41,7 +41,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/films/:id"
           render={({history}) => (
-            <FilmPage film={film} reviews={reviews} films={films} history={history}/>
+            <FilmPage film={film} reviews={reviews} history={history}/>
           )}
         >
         </Route>
