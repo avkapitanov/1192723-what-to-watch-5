@@ -1,3 +1,5 @@
+import {DEFAULT_GENRE_FILTER_VALUE} from "./const";
+
 const MAX_DAY_GAP = 730;
 
 export const getRandomInteger = (from = 0, to = 1) => {
@@ -53,4 +55,20 @@ export const formatReviewDate = (date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${day}`;
 };
 
+export const extend = (firstObj, secondObj) => {
+  return Object.assign({}, firstObj, secondObj);
+};
 
+export const getUniqueGenresFromFilms = (films) => {
+  const allGenresSet = new Set(films.reduce((acc, film) => acc.concat(film.genre), [DEFAULT_GENRE_FILTER_VALUE]));
+
+  return Array.from(allGenresSet);
+};
+
+export const filterFilmsByGenre = (films, genre) => {
+  if (genre === DEFAULT_GENRE_FILTER_VALUE) {
+    return films;
+  }
+
+  return films.filter((film) => film.genre.includes(genre));
+};

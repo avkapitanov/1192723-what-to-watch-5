@@ -10,6 +10,8 @@ import PromoFilm from "../promo-film/promo-film";
 import filmsProp from "../film-page/films.prop";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 import FilmAddReviewForm from "../film-add-review-form/film-add-review-form";
+import {connect} from "react-redux";
+import {filterFilmsByGenre} from "../../utils";
 
 const App = (props) => {
   const {promoFilm, films, reviews} = props;
@@ -57,4 +59,10 @@ App.propTypes = {
   reviews: reviewsProp
 };
 
-export default App;
+export {App};
+
+const mapStateToProps = (state) => ({
+  films: filterFilmsByGenre(state.films, state.selectedFilterGenre),
+});
+
+export default connect(mapStateToProps)(App);

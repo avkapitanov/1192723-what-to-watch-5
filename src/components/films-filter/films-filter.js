@@ -1,40 +1,44 @@
 import React from "react";
+import {ActionCreator} from "../../store/action";
+import {connect} from "react-redux";
+import filmsProp from "../film-page/films.prop";
+import PropTypes from "prop-types";
 
-const FilmsFilter = () => {
+const FilmsFilter = (props) => {
+  const {filterGenres, selectedFilterGenre, changeFilterGenre} = props;
+
   return (
     <ul className="catalog__genres-list">
-      <li className="catalog__genres-item catalog__genres-item--active">
-        <a href="#" className="catalog__genres-link">All genres</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Comedies</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Crime</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Documentary</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Dramas</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Horror</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Kids & Family</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Romance</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Sci-Fi</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="#" className="catalog__genres-link">Thrillers</a>
-      </li>
+      {
+        filterGenres.map((genre) =>
+          <li key={genre} className={`catalog__genres-item ${selectedFilterGenre === genre ? `catalog__genres-item--active` : ``}`}>
+            <a href="#" className="catalog__genres-link" data-genre={genre} onClick={changeFilterGenre}>{genre}</a>
+          </li>
+        )
+      }
     </ul>
   );
 };
 
-export default FilmsFilter;
+export {FilmsFilter};
+
+FilmsFilter.propTypes = {
+  films: filmsProp,
+  changeFilterGenre: PropTypes.func.isRequired,
+  selectedFilterGenre: PropTypes.string.isRequired,
+  filterGenres: PropTypes.array.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  selectedFilterGenre: state.selectedFilterGenre,
+  filterGenres: state.filterGenres
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeFilterGenre(evt) {
+    evt.preventDefault();
+    dispatch(ActionCreator.changeFilterGenre(evt.target.dataset.genre));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmsFilter);
