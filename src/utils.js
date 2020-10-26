@@ -1,4 +1,4 @@
-import {DEFAULT_GENRE_FILTER_VALUE} from "./const";
+import {DEFAULT_GENRE_FILTER_VALUE, MAX_GENRES_IN_FILTER} from "./const";
 
 const MAX_DAY_GAP = 730;
 
@@ -62,7 +62,7 @@ export const extend = (firstObj, secondObj) => {
 export const getUniqueGenresFromFilms = (films) => {
   const allGenresSet = new Set(films.reduce((acc, film) => acc.concat(film.genre), [DEFAULT_GENRE_FILTER_VALUE]));
 
-  return Array.from(allGenresSet);
+  return Array.from(allGenresSet).slice(0, MAX_GENRES_IN_FILTER + 1);
 };
 
 export const filterFilmsByGenre = (films, genre) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import filmsProp from "../film-page/films.prop";
-import FilmList from "../film-list/film-list";
 import PropTypes from "prop-types";
+import SimilarFilmList from "../similar-film-list/similar-film-list";
 
 const SimilarFilms = (props) => {
   const {similarFilms, history} = props;
@@ -10,7 +10,7 @@ const SimilarFilms = (props) => {
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
 
-      <FilmList films={similarFilms} history={history}/>
+      <SimilarFilmList films={similarFilms} history={history}/>
     </section>
   );
 };
