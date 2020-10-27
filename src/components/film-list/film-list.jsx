@@ -5,22 +5,13 @@ import filmsProp from "../film-page/films.prop";
 import {connect} from "react-redux";
 import {filterFilmsByGenre} from "../../utils";
 import ShowMoreFilmsBtn from "../show-more-films-btn/show-more-films-btn";
+import {withRouter} from "react-router-dom";
+import withActiveItem from "../../hocks/with-active-item/with-active-item";
 
 class FilmList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeCard: null
-    };
-
-    this.onMouseEnter = (card) => {
-      this.setState(() => ({
-        activeCard: card,
-      }));
-    };
-
-    this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onImageClick = this.onImageClick.bind(this);
   }
 
@@ -28,14 +19,8 @@ class FilmList extends PureComponent {
     this.props.history.push(`/films/${card.id}`);
   }
 
-  onMouseLeave() {
-    this.setState(() => ({
-      activeCard: null,
-    }));
-  }
-
   render() {
-    const {films, renderedFilmsCount, selectedFilterGenre} = this.props;
+    const {films, renderedFilmsCount, selectedFilterGenre, onMouseEnter, onMouseLeave} = this.props;
 
     const filteredFilms = filterFilmsByGenre(films, selectedFilterGenre);
 
@@ -44,8 +29,8 @@ class FilmList extends PureComponent {
         <div className="catalog__movies-list">
           {filteredFilms.slice(0, renderedFilmsCount).map((film) => (
             <FilmSmallCard key={film.id} film={film}
-              onMouseEnter={this.onMouseEnter}
-              onMouseLeave={this.onMouseLeave}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
               onImageClick={this.onImageClick}
             />
           ))}
@@ -62,7 +47,9 @@ FilmList.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   renderedFilmsCount: PropTypes.number.isRequired,
-  selectedFilterGenre: PropTypes.string.isRequired
+  selectedFilterGenre: PropTypes.string.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired
 };
 
 export {FilmList};
@@ -73,4 +60,4 @@ const mapStateToProps = (state) => ({
   selectedFilterGenre: state.selectedFilterGenre
 });
 
-export default connect(mapStateToProps)(FilmList);
+export default connect(mapStateToProps)(withRouter(withActiveItem(FilmList)));

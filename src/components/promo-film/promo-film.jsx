@@ -1,8 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import PageHeaderLogo from "../page-header-logo/page-header-logo";
+import {connect} from "react-redux";
 
-const PromoFilm = ({title, genre, year, poster, background}) => {
+const PromoFilm = ({promoFilm}) => {
+  const {title, genre, year, poster, background} = promoFilm;
+
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -12,13 +16,7 @@ const PromoFilm = ({title, genre, year, poster, background}) => {
       <h1 className="visually-hidden">WTW</h1>
 
       <header className="page-header movie-card__head">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+        <PageHeaderLogo/>
 
         <UserAvatarBlock/>
       </header>
@@ -58,11 +56,19 @@ const PromoFilm = ({title, genre, year, poster, background}) => {
 };
 
 PromoFilm.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  poster: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired
+  promoFilm: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired
+  })
 };
 
-export default PromoFilm;
+export {PromoFilm};
+
+const mapStateToProps = (state) => ({
+  promoFilm: state.promoFilm
+});
+
+export default connect(mapStateToProps)(PromoFilm);

@@ -2,22 +2,13 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import FilmSmallCard from "../film-small-card/film-small-card";
 import filmsProp from "../film-page/films.prop";
+import {withRouter} from "react-router-dom";
+import withActiveItem from "../../hocks/with-active-item/with-active-item";
 
 class SimilarFilmList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeCard: null
-    };
-
-    this.onMouseEnter = (card) => {
-      this.setState(() => ({
-        activeCard: card,
-      }));
-    };
-
-    this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onImageClick = this.onImageClick.bind(this);
   }
 
@@ -25,22 +16,16 @@ class SimilarFilmList extends PureComponent {
     this.props.history.push(`/films/${card.id}`);
   }
 
-  onMouseLeave() {
-    this.setState(() => ({
-      activeCard: null,
-    }));
-  }
-
   render() {
-    const {films} = this.props;
+    const {films, onMouseEnter, onMouseLeave} = this.props;
 
     return (
       <>
         <div className="catalog__movies-list">
           {films.map((film) => (
             <FilmSmallCard key={film.id} film={film}
-              onMouseEnter={this.onMouseEnter}
-              onMouseLeave={this.onMouseLeave}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
               onImageClick={this.onImageClick}
             />
           ))}
@@ -55,6 +40,8 @@ SimilarFilmList.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired
 };
 
-export default SimilarFilmList;
+export default withRouter(withActiveItem(SimilarFilmList));

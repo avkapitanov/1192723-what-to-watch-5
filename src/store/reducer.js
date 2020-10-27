@@ -2,10 +2,12 @@ import {extend, getUniqueGenresFromFilms} from "../utils";
 import {ActionType} from "./action";
 import {DEFAULT_GENRE_FILTER_VALUE, INITIAL_FILMS_COUNT} from "../const";
 import films from "../mocks/films";
+import promoFilm from "../mocks/promo-film";
 
 const initialState = {
   selectedFilterGenre: DEFAULT_GENRE_FILTER_VALUE,
   films,
+  promoFilm,
   filterGenres: getUniqueGenresFromFilms(films),
   renderedFilmsCount: INITIAL_FILMS_COUNT
 };

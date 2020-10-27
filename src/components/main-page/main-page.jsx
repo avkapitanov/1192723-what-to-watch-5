@@ -1,37 +1,26 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import FilmList from "../film-list/film-list";
 import PageFooter from "../page-footer/page-footer";
-import PropTypes from "prop-types";
 import FilmsFilter from "../films-filter/films-filter";
+import PromoFilm from "../promo-film/promo-film";
 
-class MainPage extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const {history} = this.props;
-
-    return (
+const MainPage = () => {
+  return (
+    <>
+      <PromoFilm/>
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <FilmsFilter/>
 
-          <FilmList history={history}/>
+          <FilmList/>
         </section>
 
         <PageFooter/>
       </div>
-    );
-  }
-}
-
-MainPage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired
+    </>
+  );
 };
 
 export default MainPage;

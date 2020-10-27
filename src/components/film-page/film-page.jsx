@@ -8,9 +8,12 @@ import SimilarFilms from "../similar-films/similar-films";
 import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
+import PageHeaderLogo from "../page-header-logo/page-header-logo";
+import {Link} from "react-router-dom";
+import {getFilmById} from "../../store/selectors";
 
 const FilmPage = (props) => {
-  const {film, reviews, films, history} = props;
+  const {film, reviews, films} = props;
 
   const similarFilms = films.filter((f) => {
     const similarGenres = f.genre.filter((genre) => {
@@ -30,13 +33,7 @@ const FilmPage = (props) => {
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header movie-card__head">
-              <div className="logo">
-                <a href="main.html" className="logo__link">
-                  <span className="logo__letter logo__letter--1">W</span>
-                  <span className="logo__letter logo__letter--2">T</span>
-                  <span className="logo__letter logo__letter--3">W</span>
-                </a>
-              </div>
+              <PageHeaderLogo/>
 
               <UserAvatarBlock/>
             </header>
@@ -45,7 +42,7 @@ const FilmPage = (props) => {
               <div className="movie-card__desc">
                 <h2 className="movie-card__title">{film.title}</h2>
                 <p className="movie-card__meta">
-                  <span className="movie-card__genre">Drama</span>
+                  <span className="movie-card__genre">{film.genre.join(`, `)}</span>
                   <span className="movie-card__year">{film.year}</span>
                 </p>
 
@@ -62,7 +59,10 @@ const FilmPage = (props) => {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  <Link to={{
+                    pathname: `/films/${film.id}/review`
+                  }}
+                  className="btn movie-card__button">Add review</Link>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@ const FilmPage = (props) => {
           <div className="movie-card__wrap movie-card__translate-top">
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
-                <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+                <img src={film.poster} alt={film.title + ` poster`} width="218" height="327"/>
               </div>
 
               <FilmPageTabs film={film} reviews={reviews}/>
@@ -80,7 +80,7 @@ const FilmPage = (props) => {
         </section>
 
         <div className="page-content">
-          <SimilarFilms similarFilms={similarFilms} history={history}/>
+          <SimilarFilms similarFilms={similarFilms}/>
 
           <PageFooter/>
         </div>
@@ -99,8 +99,9 @@ FilmPage.propTypes = {
 
 export {FilmPage};
 
-const mapStateToProps = (state) => ({
-  films: state.films
+const mapStateToProps = (state, props) => ({
+  films: state.films,
+  film: getFilmById(state, props)
 });
 
 export default connect(mapStateToProps)(FilmPage);
