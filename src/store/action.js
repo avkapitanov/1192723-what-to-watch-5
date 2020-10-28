@@ -4,7 +4,9 @@ export const ActionType = {
   CHANGE_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
   INC_RENDERED_FILMS_COUNT: `INC_RENDERED_FILMS_COUNT`,
   RESET_RENDERED_FILMS_COUNT: `RESET_RENDERED_FILMS_COUNT`,
-  GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`
+  GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
+  LOAD_FILMS: `LOAD_FILMS`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
 };
 
 export const ActionCreator = {
@@ -18,5 +20,13 @@ export const ActionCreator = {
   }),
   resetRenderedFilmsCount: () => ({
     type: ActionType.RESET_RENDERED_FILMS_COUNT,
+  }),
+  loadFilms: (films) => ({
+    type: ActionType.LOAD_FILMS,
+    payload: films,
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
   })
 };

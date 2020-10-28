@@ -72,3 +72,23 @@ export const filterFilmsByGenre = (films, genre) => {
 
   return films.filter((film) => film.genre.includes(genre));
 };
+
+export const adaptFilmsToClient = (films) => {
+  return films.map(adaptFilmToClient);
+};
+
+const adaptFilmToClient = (film) => {
+  const adaptedFilm = extend(
+      film,
+      {
+        title: film.name,
+        genre: [film.genre],
+        year: film.released,
+        poster: film.preview_image,
+        background: film.background_image,
+        video: film.video_link
+      }
+  );
+
+  return adaptedFilm;
+};

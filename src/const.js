@@ -11,4 +11,12 @@ export const DEFAULT_GENRE_FILTER_VALUE = `All genres`;
 export const INITIAL_FILMS_COUNT = 8;
 export const FILMS_COUNT_PER_STEP = 8;
 export const MAX_GENRES_IN_FILTER = 9;
-
+export const API_ENDPOINT = `https://5.react.pages.academy/wtw`;
+export const REQUEST_TIMEOUT = 5000;
+export const HttpResponseCode = {
+  UNAUTHORIZED: 401
+};
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
