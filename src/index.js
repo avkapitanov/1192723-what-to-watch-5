@@ -4,7 +4,6 @@ import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import App from "./components/app/app";
-import reviews from "./mocks/reviews";
 import {reducer} from "./store/reducer";
 import {createAPI} from "./services/api";
 import {ActionCreator} from "./store/action";
@@ -29,9 +28,7 @@ Promise.all([
 .then(() => {
   ReactDOM.render(
       <Provider store={store}>
-        <App
-          reviews={reviews}
-        />
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import PageFooter from "../page-footer/page-footer";
 import FilmPageTabs from "../film-page-tabs/film-page-tabs";
-import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 import filmProp from "./film.prop";
 import filmsProp from "./films.prop";
 import SimilarFilms from "../similar-films/similar-films";
@@ -13,7 +12,7 @@ import {Link} from "react-router-dom";
 import {getFilmById} from "../../store/selectors";
 
 const FilmPage = (props) => {
-  const {film, reviews, films} = props;
+  const {film, films} = props;
 
   const similarFilms = films.filter((f) => {
     const similarGenres = f.genre.filter((genre) => {
@@ -74,7 +73,7 @@ const FilmPage = (props) => {
                 <img src={film.poster} alt={film.title + ` poster`} width="218" height="327"/>
               </div>
 
-              <FilmPageTabs film={film} reviews={reviews}/>
+              <FilmPageTabs film={film}/>
             </div>
           </div>
         </section>
@@ -89,7 +88,6 @@ const FilmPage = (props) => {
 };
 
 FilmPage.propTypes = {
-  reviews: reviewsProp,
   film: filmProp,
   films: filmsProp,
   history: PropTypes.shape({

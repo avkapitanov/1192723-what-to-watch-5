@@ -1,7 +1,7 @@
 import {createSelector} from "reselect";
 
 const getFilms = (state) => state.films;
-const getFilmId = (_state, props) => props.match.params.id;
+const getFilmId = (_state, props) => +props.match.params.id;
 
 export const getFilmById = createSelector(
     [getFilms, getFilmId],

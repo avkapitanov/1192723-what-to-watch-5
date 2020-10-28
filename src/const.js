@@ -20,3 +20,25 @@ export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
+export const FilmRating = {
+  BAD: {
+    VALUE: 3,
+    TEXT: `Bad`
+  },
+  NORMAL: {
+    VALUE: 5,
+    TEXT: `Normal`
+  },
+  GOOD: {
+    VALUE: 8,
+    TEXT: `Good`
+  },
+  VERY_GOOD: {
+    VALUE: 10,
+    TEXT: `Very good`
+  },
+  AWESOME: {
+    TEXT: `Awesome`
+  }
+};
+

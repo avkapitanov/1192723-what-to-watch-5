@@ -6,13 +6,12 @@ import MyFilmsPage from "../my-films-page/my-films-page";
 import FilmPage from "../film-page/film-page";
 import PlayerPage from "../player-page/player-page";
 import filmsProp from "../film-page/films.prop";
-import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 import {connect} from "react-redux";
 import {filterFilmsByGenre} from "../../utils";
 import FilmAddReviewPage from "../film-add-review-page/film-add-review-page";
 
 const App = (props) => {
-  const {films, reviews} = props;
+  const {films} = props;
 
   const myFilms = films.slice(0, 5);
   const [film] = films;
@@ -28,12 +27,7 @@ const App = (props) => {
         <Route exact path="/films/:id/review">
           <FilmAddReviewPage film={film}/>
         </Route>
-        <Route exact path="/films/:id"
-          render={({match, history}) => (
-            <FilmPage reviews={reviews} match={match} history={history}/>
-          )}
-        >
-        </Route>
+        <Route exact path="/films/:id" component={FilmPage} />
         <Route exact path="/player/:id" component={PlayerPage} />
       </Switch>
     </BrowserRouter>
@@ -41,8 +35,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  films: filmsProp,
-  reviews: reviewsProp
+  films: filmsProp
 };
 
 export {App};
