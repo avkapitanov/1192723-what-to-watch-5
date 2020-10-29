@@ -1,4 +1,4 @@
-import {DEFAULT_GENRE_FILTER_VALUE, MAX_GENRES_IN_FILTER} from "./const";
+import {DEFAULT_GENRE_FILTER_VALUE, FilmRating, MAX_GENRES_IN_FILTER} from "./const";
 
 const MAX_DAY_GAP = 730;
 
@@ -71,4 +71,45 @@ export const filterFilmsByGenre = (films, genre) => {
   }
 
   return films.filter((film) => film.genre.includes(genre));
+};
+
+export const adaptFilmsToClient = (films) => {
+  return films.map(adaptFilmToClient);
+};
+
+const adaptFilmToClient = (film) => {
+  const adaptedFilm = extend(
+      film,
+      {
+        title: film.name,
+        genre: [film.genre],
+        year: film.released,
+        poster: film.preview_image,
+        background: film.background_image,
+        video: film.video_link
+      }
+  );
+
+  return adaptedFilm;
+};
+
+export const formatFilmDuration = (time) => {
+  const hours = Math.floor(time / 60);
+  const minutes = time - (hours * 60);
+
+  return `${hours}h ${minutes}m`;
+};
+
+export const formatToHumanFilmRating = (rating) => {
+  if (rating < FilmRating.BAD.VALUE) {
+    return FilmRating.BAD.TEXT;
+  } else if (rating < FilmRating.NORMAL.VALUE) {
+    return FilmRating.NORMAL.TEXT;
+  } else if (rating < FilmRating.GOOD.VALUE) {
+    return FilmRating.GOOD.TEXT;
+  } else if (rating < FilmRating.VERY_GOOD.VALUE) {
+    return FilmRating.VERY_GOOD.TEXT;
+  }
+
+  return FilmRating.AWESOME.TEXT;
 };
