@@ -6,6 +6,7 @@ export default PropTypes.shape({
   genre: PropTypes.array.isRequired,
   year: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired,
+  posterImage: PropTypes.string.isRequired,
   background: PropTypes.string.isRequired,
   video: PropTypes.string.isRequired
 });

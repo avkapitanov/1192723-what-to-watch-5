@@ -13,3 +13,8 @@ export const checkAuth = () => (dispatch, _getState, api) => (
       throw err;
     })
 );
+
+export const fetchPromoFilm = () => (dispatch, _getState, api) => (
+  api.get(`/films/promo`)
+    .then(({data}) => dispatch(ActionCreator.loadPromoFilm(data)))
+);

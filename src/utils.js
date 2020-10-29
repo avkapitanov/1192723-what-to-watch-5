@@ -77,7 +77,7 @@ export const adaptFilmsToClient = (films) => {
   return films.map(adaptFilmToClient);
 };
 
-const adaptFilmToClient = (film) => {
+export const adaptFilmToClient = (film) => {
   const adaptedFilm = extend(
       film,
       {
@@ -85,10 +85,18 @@ const adaptFilmToClient = (film) => {
         genre: [film.genre],
         year: film.released,
         poster: film.preview_image,
+        posterImage: film.poster_image,
         background: film.background_image,
         video: film.video_link
       }
   );
+
+  delete adaptedFilm.name;
+  delete adaptedFilm.released;
+  delete adaptedFilm.preview_image;
+  delete adaptedFilm.poster_image;
+  delete adaptedFilm.background_image;
+  delete adaptedFilm.video_link;
 
   return adaptedFilm;
 };

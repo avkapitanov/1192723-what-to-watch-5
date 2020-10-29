@@ -6,6 +6,7 @@ export const ActionType = {
   RESET_RENDERED_FILMS_COUNT: `RESET_RENDERED_FILMS_COUNT`,
   GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
   LOAD_FILMS: `LOAD_FILMS`,
+  LOAD_PROMO: `LOAD_PROMO`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
 };
 
@@ -28,5 +29,9 @@ export const ActionCreator = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
+  }),
+  loadPromoFilm: (film) => ({
+    type: ActionType.LOAD_PROMO,
+    payload: film,
   })
 };
