@@ -41,4 +41,9 @@ export const FilmRating = {
     TEXT: `Awesome`
   }
 };
+export const ReducerNameSpace = {
+  DATA: `DATA`,
+  PROCESS: `PROCESS`,
+};
+
 

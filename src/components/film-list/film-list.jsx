@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import FilmSmallCard from "../film-small-card/film-small-card";
 import filmsProp from "../film-page/films.prop";
 import {connect} from "react-redux";
-import {filterFilmsByGenre} from "../../utils";
+import {filterFilmsByGenre} from "../../store/selectors";
 import ShowMoreFilmsBtn from "../show-more-films-btn/show-more-films-btn";
 import {withRouter} from "react-router-dom";
 import withActiveItem from "../../hocks/with-active-item/with-active-item";
+import {extend} from "../../utils";
 
 class FilmList extends PureComponent {
   constructor(props) {
@@ -20,14 +21,12 @@ class FilmList extends PureComponent {
   }
 
   render() {
-    const {films, renderedFilmsCount, selectedFilterGenre, onMouseEnter, onMouseLeave} = this.props;
-
-    const filteredFilms = filterFilmsByGenre(films, selectedFilterGenre);
+    const {films, renderedFilmsCount, onMouseEnter, onMouseLeave} = this.props;
 
     return (
       <>
         <div className="catalog__movies-list">
-          {filteredFilms.slice(0, renderedFilmsCount).map((film) => (
+          {films.slice(0, renderedFilmsCount).map((film) => (
             <FilmSmallCard key={film.id} film={film}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
@@ -35,7 +34,7 @@ class FilmList extends PureComponent {
             />
           ))}
         </div>
-        <ShowMoreFilmsBtn filmsCount={filteredFilms.length}/>
+        <ShowMoreFilmsBtn filmsCount={films.length}/>
       </>
     );
   }
@@ -54,10 +53,10 @@ FilmList.propTypes = {
 
 export {FilmList};
 
-const mapStateToProps = (state) => ({
-  films: state.films,
-  renderedFilmsCount: state.renderedFilmsCount,
-  selectedFilterGenre: state.selectedFilterGenre
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  films: filterFilmsByGenre(extend(DATA, PROCESS)),
+  renderedFilmsCount: PROCESS.renderedFilmsCount,
+  selectedFilterGenre: PROCESS.selectedFilterGenre
 });
 
 export default connect(mapStateToProps)(withRouter(withActiveItem(FilmList)));

@@ -25,8 +25,8 @@ ShowMoreFilmsBtn.propTypes = {
   renderedFilmsCount: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  renderedFilmsCount: state.renderedFilmsCount
+const mapStateToProps = ({PROCESS}) => ({
+  renderedFilmsCount: PROCESS.renderedFilmsCount
 });
 
 const mapDispatchToProps = (dispatch) => ({

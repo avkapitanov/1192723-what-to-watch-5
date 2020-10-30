@@ -2,14 +2,18 @@ import React from "react";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import FilmAddReviewForm from "../film-add-review-form/film-add-review-form";
+import {getFilmById} from "../../store/selectors";
+import {connect} from "react-redux";
+import filmProp from "../film-page/film.prop";
 
-const FilmAddReviewPage = () => {
+const FilmAddReviewPage = (props) => {
+  const {film} = props;
 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={film.background} alt={film.title}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -41,4 +45,14 @@ const FilmAddReviewPage = () => {
   );
 };
 
-export default FilmAddReviewPage;
+FilmAddReviewPage.propTypes = {
+  film: filmProp
+};
+
+export {FilmAddReviewPage};
+
+const mapStateToProps = ({DATA}, props) => ({
+  film: getFilmById(DATA, props)
+});
+
+export default connect(mapStateToProps)(FilmAddReviewPage);

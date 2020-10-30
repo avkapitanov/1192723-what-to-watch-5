@@ -17,10 +17,10 @@ const FilmPageDetailsTab = (props) => {
             <strong className="movie-card__details-name">Starring</strong>
             <span className="movie-card__details-value">
               {film.starring.map((star, ind, arr) => {
-                if (ind !== arr.length - 1) {
-                  return <React.Fragment key={ind}>{star.trim()}, <br/></React.Fragment>;
+                if (ind === arr.length - 1) {
+                  return <React.Fragment key={ind}>{star.trim()}</React.Fragment>;
                 }
-                return <React.Fragment key={ind}>{star.trim()}</React.Fragment>;
+                return <React.Fragment key={ind}>{star.trim()}, <br/></React.Fragment>;
               })}
             </span>
           </p>

@@ -27,7 +27,7 @@ class FilmPage extends PureComponent {
 
     const similarFilms = films.filter((f) => {
       const similarGenres = f.genre.filter((genre) => {
-        return film.genre.includes(genre);
+        return film.genre.includes(genre) && film.id !== f.id;
       });
       return similarGenres.length > 0;
     }).slice(0, 4);
@@ -109,9 +109,9 @@ FilmPage.propTypes = {
 
 export {FilmPage};
 
-const mapStateToProps = (state, props) => ({
-  films: state.films,
-  film: getFilmById(state, props)
+const mapStateToProps = ({DATA}, props) => ({
+  films: DATA.films,
+  film: getFilmById(DATA, props)
 });
 
 export default connect(mapStateToProps)(FilmPage);

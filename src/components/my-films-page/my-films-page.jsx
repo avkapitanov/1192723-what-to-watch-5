@@ -1,43 +1,29 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import FilmList from "../film-list/film-list";
-import filmsProp from "../film-page/films.prop";
 import PageFooter from "../page-footer/page-footer";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 
-class MyFilmsPage extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const MyFilmsPage = () => {
+  return (
+    <div className="user-page">
+      <header className="page-header user-page__head">
+        <PageHeaderLogo/>
 
-  render() {
-    const {myFilms} = this.props;
+        <h1 className="page-title user-page__title">My list</h1>
 
-    return (
-      <div className="user-page">
-        <header className="page-header user-page__head">
-          <PageHeaderLogo/>
+        <UserAvatarBlock/>
+      </header>
 
-          <h1 className="page-title user-page__title">My list</h1>
+      <section className="catalog">
+        <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <UserAvatarBlock/>
-        </header>
+        <FilmList/>
+      </section>
 
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <FilmList films={myFilms}/>
-        </section>
-
-        <PageFooter/>
-      </div>
-    );
-  }
-
-}
-
-MyFilmsPage.propTypes = {
-  myFilms: filmsProp
+      <PageFooter/>
+    </div>
+  );
 };
 
 export default MyFilmsPage;
