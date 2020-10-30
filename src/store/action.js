@@ -7,7 +7,8 @@ export const ActionType = {
   GET_FILMS_BY_GENRE: `GET_FILMS_BY_GENRE`,
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO: `LOAD_PROMO`,
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
 };
 
 export const ActionCreator = {
@@ -26,12 +27,16 @@ export const ActionCreator = {
     type: ActionType.LOAD_FILMS,
     payload: films,
   }),
-  requireAuthorization: (status) => ({
+  requireAuthorization: (status, data) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
+    payload: {status, data},
   }),
   loadPromoFilm: (film) => ({
     type: ActionType.LOAD_PROMO,
     payload: film,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   })
 };

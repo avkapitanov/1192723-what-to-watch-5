@@ -116,3 +116,16 @@ export const formatToHumanFilmRating = (rating) => {
 
   return FilmRating.AWESOME.TEXT;
 };
+
+export const adaptUserToClient = (user) => {
+  const adaptedUser = extend(
+      user,
+      {
+        avatarUrl: user.avatar_url,
+      }
+  );
+
+  delete adaptedUser.avatar_url;
+
+  return adaptedUser;
+};

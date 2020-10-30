@@ -44,6 +44,7 @@ export const FilmRating = {
 export const ReducerNameSpace = {
   DATA: `DATA`,
   PROCESS: `PROCESS`,
+  USER: `USER`
 };
 
 
