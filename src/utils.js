@@ -79,24 +79,27 @@ export const adaptFilmsToClient = (films) => {
 
 export const adaptFilmToClient = (film) => {
   const adaptedFilm = extend(
-      film,
+      {},
       {
+        id: film.id,
         title: film.name,
         genre: [film.genre],
         year: film.released,
         poster: film.preview_image,
         posterImage: film.poster_image,
         background: film.background_image,
-        video: film.video_link
+        backgroundColor: film.background_color,
+        video: film.video_link,
+        previewVideoLink: film.preview_video_link,
+        description: film.description,
+        rating: film.rating,
+        scoresCount: film.scores_count,
+        director: film.director,
+        starring: film.starring,
+        runTime: film.run_time,
+        isFavorite: film.is_favorite
       }
   );
-
-  delete adaptedFilm.name;
-  delete adaptedFilm.released;
-  delete adaptedFilm.preview_image;
-  delete adaptedFilm.poster_image;
-  delete adaptedFilm.background_image;
-  delete adaptedFilm.video_link;
 
   return adaptedFilm;
 };
