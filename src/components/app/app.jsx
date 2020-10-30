@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import LoginPage from "../login-page/login-page";
 import MyFilmsPage from "../my-films-page/my-films-page";
@@ -9,6 +9,7 @@ import filmsProp from "../film-page/films.prop";
 import {connect} from "react-redux";
 import {filterFilmsByGenre} from "../../utils";
 import FilmAddReviewPage from "../film-add-review-page/film-add-review-page";
+import browserHistory from "../../browser-history";
 
 const App = (props) => {
   const {films} = props;
@@ -17,7 +18,7 @@ const App = (props) => {
   const [film] = films;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/" component={MainPage} />
         <Route exact path="/login" component={LoginPage} />

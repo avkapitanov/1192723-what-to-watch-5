@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PageFooter from "../page-footer/page-footer";
 import FilmPageTabs from "../film-page-tabs/film-page-tabs";
 import filmProp from "./film.prop";
@@ -11,17 +11,28 @@ import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {Link} from "react-router-dom";
 import {getFilmById} from "../../store/selectors";
 
-const FilmPage = (props) => {
-  const {film, films} = props;
+class FilmPage extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  const similarFilms = films.filter((f) => {
-    const similarGenres = f.genre.filter((genre) => {
-      return film.genre.includes(genre);
-    });
-    return similarGenres.length > 0;
-  }).slice(0, 4);
+    this.handlePlayBtnClick = (evt) => {
+      evt.preventDefault();
+      const {history} = this.props;
+      history.push(`/player/` + evt.target.closest(`button`).dataset.id);
+    };
+  }
 
-  return (
+  render() {
+    const {film, films} = this.props;
+
+    const similarFilms = films.filter((f) => {
+      const similarGenres = f.genre.filter((genre) => {
+        return film.genre.includes(genre);
+      });
+      return similarGenres.length > 0;
+    }).slice(0, 4);
+
+    return (
       <>
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
@@ -46,7 +57,7 @@ const FilmPage = (props) => {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" type="button" data-id={film.id} onClick={this.handlePlayBtnClick}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
@@ -70,7 +81,7 @@ const FilmPage = (props) => {
           <div className="movie-card__wrap movie-card__translate-top">
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
-                <img src={film.poster} alt={film.title + ` poster`} width="218" height="327"/>
+                <img src={film.posterImage} alt={film.title + ` poster`} width="218" height="327"/>
               </div>
 
               <FilmPageTabs film={film}/>
@@ -84,8 +95,9 @@ const FilmPage = (props) => {
           <PageFooter/>
         </div>
       </>
-  );
-};
+    );
+  }
+}
 
 FilmPage.propTypes = {
   film: filmProp,

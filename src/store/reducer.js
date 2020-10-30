@@ -1,13 +1,11 @@
-import {adaptFilmsToClient, extend, getUniqueGenresFromFilms} from "../utils";
+import {adaptFilmsToClient, adaptFilmToClient, extend, getUniqueGenresFromFilms} from "../utils";
 import {ActionType} from "./action";
 import {DEFAULT_GENRE_FILTER_VALUE, INITIAL_FILMS_COUNT} from "../const";
-import promoFilm from "../mocks/promo-film";
 import reviews from "../mocks/reviews";
 
 const initialState = {
   selectedFilterGenre: DEFAULT_GENRE_FILTER_VALUE,
   films: [],
-  promoFilm,
   filterGenres: [],
   renderedFilmsCount: INITIAL_FILMS_COUNT,
   reviews
@@ -36,6 +34,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.REQUIRED_AUTHORIZATION:
       return extend(state, {
         authorizationStatus: action.payload,
+      });
+    case ActionType.LOAD_PROMO:
+      return extend(state, {
+        promoFilm: adaptFilmToClient(action.payload)
       });
   }
 
