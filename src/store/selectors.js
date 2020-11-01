@@ -4,6 +4,7 @@ import {DEFAULT_GENRE_FILTER_VALUE} from "../const";
 const getFilms = (state) => state.films;
 const getFilmId = (_state, props) => +props.match.params.id;
 const getSelectedGenre = (state) => state.selectedFilterGenre;
+export const getMyFilms = (state) => state.DATA.myFilms;
 
 export const getFilmById = createSelector(
     [getFilms, getFilmId],

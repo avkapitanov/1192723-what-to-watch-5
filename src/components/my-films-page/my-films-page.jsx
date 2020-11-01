@@ -1,29 +1,60 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import FilmList from "../film-list/film-list";
 import PageFooter from "../page-footer/page-footer";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import {connect} from "react-redux";
+import {getMyFilms} from "../../store/selectors";
+import filmsProp from "../film-page/films.prop";
+import {fetchMyFilmsList} from "../../store/api-actions";
+import PropTypes from "prop-types";
 
-const MyFilmsPage = () => {
-  return (
-    <div className="user-page">
-      <header className="page-header user-page__head">
-        <PageHeaderLogo/>
+class MyFilmsPage extends PureComponent {
+  componentDidMount() {
+    this.props.onMount();
+  }
 
-        <h1 className="page-title user-page__title">My list</h1>
+  render() {
+    const {films} = this.props;
 
-        <UserAvatarBlock/>
-      </header>
+    return (
+      <div className="user-page">
+        <header className="page-header user-page__head">
+          <PageHeaderLogo/>
 
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
+          <h1 className="page-title user-page__title">My list</h1>
 
-        <FilmList/>
-      </section>
+          <UserAvatarBlock/>
+        </header>
 
-      <PageFooter/>
-    </div>
-  );
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
+
+          <FilmList films={films}/>
+        </section>
+
+        <PageFooter/>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  films: getMyFilms(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onMount() {
+    dispatch(fetchMyFilmsList());
+  }
+});
+
+export {MyFilmsPage};
+
+MyFilmsPage.propTypes = {
+  films: filmsProp,
+  onMount: PropTypes.func.isRequired
 };
 
-export default MyFilmsPage;
+export default connect(mapStateToProps, mapDispatchToProps)(MyFilmsPage);
+

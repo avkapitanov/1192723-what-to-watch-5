@@ -6,6 +6,11 @@ export const fetchFilmsList = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadFilms(data)))
 );
 
+export const fetchMyFilmsList = () => (dispatch, _getState, api) => (
+  api.get(`/favorite`)
+    .then(({data}) => dispatch(ActionCreator.loadMyFilms(data)))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then(({data}) => dispatch(ActionCreator.requireAuthorization(

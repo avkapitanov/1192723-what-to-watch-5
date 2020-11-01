@@ -3,13 +3,13 @@ import PageFooter from "../page-footer/page-footer";
 import FilmPageTabs from "../film-page-tabs/film-page-tabs";
 import filmProp from "./film.prop";
 import filmsProp from "./films.prop";
-import SimilarFilms from "../similar-films/similar-films";
 import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {Link} from "react-router-dom";
 import {getFilmById} from "../../store/selectors";
+import FilmList from "../film-list/film-list";
 
 class FilmPage extends PureComponent {
   constructor(props) {
@@ -90,7 +90,11 @@ class FilmPage extends PureComponent {
         </section>
 
         <div className="page-content">
-          <SimilarFilms similarFilms={similarFilms}/>
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+
+            <FilmList films={similarFilms}/>
+          </section>
 
           <PageFooter/>
         </div>
