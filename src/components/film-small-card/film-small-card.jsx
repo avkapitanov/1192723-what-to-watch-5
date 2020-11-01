@@ -1,94 +1,61 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import filmProp from "../film-page/film.prop";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import SmallCardVideoPlayer from "../small-card-video-player/small-card-video-player";
-import {HOVER_TIME_BEFORE_PLAYING} from "../../const";
+import withPlayingStatus from "../../hocks/with-playing-status/with-playing-status";
 
-class FilmSmallCard extends PureComponent {
-  constructor(props) {
-    super(props);
-    this._timerId = null;
+const renderPlayer = (props) => {
+  const {film, isPlaying} = props;
+  const {poster, title, video} = film;
 
-    this.state = {
-      isPlaying: false
-    };
-
-    this.checkHoverTime = this.checkHoverTime.bind(this);
-    this.resetHoverTime = this.resetHoverTime.bind(this);
+  let visualFilm;
+  if (!isPlaying) {
+    visualFilm = <img src={poster} alt={title} width="280" height="175" />;
+  } else {
+    visualFilm = <SmallCardVideoPlayer
+      isPlaying={false}
+      src={video}
+      poster={poster}
+    />;
   }
 
-  _renderPlayer() {
-    const {film} = this.props;
-    const {poster, title, video} = film;
-    const {isPlaying} = this.state;
+  return visualFilm;
+};
 
-    let visualFilm;
-    if (!isPlaying) {
-      visualFilm = <img src={poster} alt={title} width="280" height="175" />;
-    } else {
-      visualFilm = <SmallCardVideoPlayer
-        isPlaying={false}
-        src={video}
-        poster={poster}
-      />;
-    }
+const FilmSmallCard = (props) => {
+  const {onMouseEnter, onMouseLeave, onImageClick, film} = props;
+  const {id, title} = film;
 
-    return visualFilm;
-  }
+  const visualFilm = renderPlayer(props);
 
-  checkHoverTime() {
-    this._timerId = setTimeout(() => {
-      this.setState({isPlaying: true});
-    }, HOVER_TIME_BEFORE_PLAYING);
-  }
-
-  resetHoverTime() {
-    clearTimeout(this._timerId);
-    this.setState({isPlaying: false});
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._timerId);
-  }
-
-  render() {
-    const {onMouseEnter, onMouseLeave, onImageClick, film} = this.props;
-    const {id, title} = film;
-
-    const visualFilm = this._renderPlayer();
-
-    return (
-      <article className="small-movie-card catalog__movies-card" key={id}
-        onMouseEnter={(evt) => {
+  return (
+    <article className="small-movie-card catalog__movies-card" key={id}
+      onMouseEnter={(evt) => {
+        evt.preventDefault();
+        onMouseEnter(film);
+      }}
+      onMouseLeave={(evt) => {
+        evt.preventDefault();
+        onMouseLeave();
+      }}
+    >
+      <div className="small-movie-card__image"
+        onClick={(evt) => {
           evt.preventDefault();
-          onMouseEnter(film);
-          this.checkHoverTime();
+          onImageClick(film);
+        }}>
+        {visualFilm}
+      </div>
+      <h3 className="small-movie-card__title">
+        <Link to={{
+          pathname: `/films/${id}`
         }}
-        onMouseLeave={(evt) => {
-          evt.preventDefault();
-          onMouseLeave();
-          this.resetHoverTime();
-        }}
-      >
-        <div className="small-movie-card__image"
-          onClick={(evt) => {
-            evt.preventDefault();
-            onImageClick(film);
-          }}>
-          {visualFilm}
-        </div>
-        <h3 className="small-movie-card__title">
-          <Link to={{
-            pathname: `/films/${id}`
-          }}
-          className="small-movie-card__link">{title}</Link>
-        </h3>
-      </article>
-    );
-  }
-
-}
+        className="small-movie-card__link">{title}</Link>
+      </h3>
+    </article>
+  );
+};
 
 FilmSmallCard.propTypes = {
   onMouseEnter: PropTypes.func.isRequired,
@@ -97,4 +64,4 @@ FilmSmallCard.propTypes = {
   film: filmProp
 };
 
-export default FilmSmallCard;
+export default withPlayingStatus(FilmSmallCard);

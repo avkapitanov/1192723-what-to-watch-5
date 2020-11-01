@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FilmSmallCard from "../film-small-card/film-small-card";
 import filmsProp from "../film-page/films.prop";
 import {withRouter} from "react-router-dom";
-import withActiveItem from "../../hocks/with-active-item/with-active-item";
+import withActiveFilm from "../../hocks/with-active-film/with-active-film";
 import withShowMore from "../../hocks/with-show-more/with-show-more";
 
 class FilmList extends PureComponent {
@@ -42,4 +42,4 @@ FilmList.propTypes = {
   onMouseLeave: PropTypes.func.isRequired
 };
 
-export default withRouter(withShowMore(withActiveItem(FilmList)));
+export default withRouter(withShowMore(withActiveFilm(FilmList)));

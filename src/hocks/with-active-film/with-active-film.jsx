@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 
-const withActiveItem = (Component) => {
+const withActiveFilm = (Component) => {
   return class WithActiveItem extends PureComponent {
     constructor(props) {
       super(props);
@@ -36,4 +36,4 @@ const withActiveItem = (Component) => {
   };
 };
 
-export default withActiveItem;
+export default withActiveFilm;
