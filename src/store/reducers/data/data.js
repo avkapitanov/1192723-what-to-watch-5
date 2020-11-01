@@ -30,6 +30,17 @@ const data = (state = initialState, action) => {
       return extend(state, {
         promoFilm: adaptFilmToClient(action.payload)
       });
+    case ActionType.CHANGE_FILM_FAVORITE_STATUS:
+      const adaptedFilm = adaptFilmToClient(action.payload);
+      const index = state.films.findIndex((film) => film.id === adaptedFilm.id);
+      const newFilms = [
+        ...state.films.slice(0, index),
+        adaptedFilm,
+        ...state.films.slice(index + 1)
+      ];
+      return extend(state, {
+        films: newFilms
+      });
   }
 
   return state;

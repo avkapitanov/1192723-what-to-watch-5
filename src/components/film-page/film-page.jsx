@@ -10,6 +10,7 @@ import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {Link} from "react-router-dom";
 import {getFilmById} from "../../store/selectors";
 import FilmList from "../film-list/film-list";
+import {fetchAddToMyList} from "../../store/api-actions";
 
 class FilmPage extends PureComponent {
   constructor(props) {
@@ -23,7 +24,7 @@ class FilmPage extends PureComponent {
   }
 
   render() {
-    const {film, films} = this.props;
+    const {film, films, handleMyListBtnClick} = this.props;
 
     const similarFilms = films.filter((f) => {
       const similarGenres = f.genre.filter((genre) => {
@@ -63,7 +64,7 @@ class FilmPage extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button">
+                  <button className="btn btn--list movie-card__button" type="button" data-id={film.id} data-status={film.isFavorite ? `0` : `1`} onClick={handleMyListBtnClick}>
                     <svg viewBox="0 0 19 20" width="19" height="20">
                       <use xlinkHref="#add"></use>
                     </svg>
@@ -108,7 +109,8 @@ FilmPage.propTypes = {
   films: filmsProp,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  handleMyListBtnClick: PropTypes.func.isRequired
 };
 
 export {FilmPage};
@@ -118,4 +120,12 @@ const mapStateToProps = ({DATA}, props) => ({
   film: getFilmById(DATA, props)
 });
 
-export default connect(mapStateToProps)(FilmPage);
+const mapDispatchToProps = (dispatch) => ({
+  handleMyListBtnClick(evt) {
+    evt.preventDefault();
+    const btnDataset = evt.target.closest(`button`).dataset;
+    dispatch(fetchAddToMyList(btnDataset.id, btnDataset.status));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);

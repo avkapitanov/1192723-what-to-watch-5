@@ -5,7 +5,8 @@ export const ActionType = {
   LOAD_MY_FILMS: `LOAD_MY_FILMS`,
   LOAD_PROMO: `LOAD_PROMO`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  CHANGE_FILM_FAVORITE_STATUS: `CHANGE_FILM_FAVORITE_STATUS`
 };
 
 export const ActionCreator = {
@@ -32,5 +33,9 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  changeFavoriteStatus: (film) => ({
+    type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
+    payload: film,
   })
 };
