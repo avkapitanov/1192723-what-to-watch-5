@@ -1,17 +1,21 @@
 import React, {PureComponent} from "react";
 import FilmList from "../film-list/film-list";
-import filmsProp from "../film-page/films.prop";
 import PageFooter from "../page-footer/page-footer";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import {connect} from "react-redux";
+import {getMyFilms} from "../../store/selectors";
+import filmsProp from "../film-page/films.prop";
+import {fetchMyFilmsList} from "../../store/api-actions";
+import PropTypes from "prop-types";
 
 class MyFilmsPage extends PureComponent {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    this.props.onMount();
   }
 
   render() {
-    const {myFilms} = this.props;
+    const {films} = this.props;
 
     return (
       <div className="user-page">
@@ -26,18 +30,31 @@ class MyFilmsPage extends PureComponent {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <FilmList films={myFilms}/>
+          <FilmList films={films}/>
         </section>
 
         <PageFooter/>
       </div>
     );
   }
-
 }
 
+const mapStateToProps = (state) => ({
+  films: getMyFilms(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onMount() {
+    dispatch(fetchMyFilmsList());
+  }
+});
+
+export {MyFilmsPage};
+
 MyFilmsPage.propTypes = {
-  myFilms: filmsProp
+  films: filmsProp,
+  onMount: PropTypes.func.isRequired
 };
 
-export default MyFilmsPage;
+export default connect(mapStateToProps, mapDispatchToProps)(MyFilmsPage);
+

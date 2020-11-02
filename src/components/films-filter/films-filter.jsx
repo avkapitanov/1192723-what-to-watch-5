@@ -27,16 +27,15 @@ FilmsFilter.propTypes = {
   filterGenres: PropTypes.array.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  selectedFilterGenre: state.selectedFilterGenre,
-  filterGenres: state.filterGenres
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  selectedFilterGenre: PROCESS.selectedFilterGenre,
+  filterGenres: DATA.filterGenres
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeFilterGenre(evt) {
     evt.preventDefault();
     dispatch(ActionCreator.changeFilterGenre(evt.target.dataset.genre));
-    dispatch(ActionCreator.resetRenderedFilmsCount());
   },
 });
 

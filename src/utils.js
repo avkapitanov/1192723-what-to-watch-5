@@ -65,14 +65,6 @@ export const getUniqueGenresFromFilms = (films) => {
   return Array.from(allGenresSet).slice(0, MAX_GENRES_IN_FILTER + 1);
 };
 
-export const filterFilmsByGenre = (films, genre) => {
-  if (genre === DEFAULT_GENRE_FILTER_VALUE) {
-    return films;
-  }
-
-  return films.filter((film) => film.genre.includes(genre));
-};
-
 export const adaptFilmsToClient = (films) => {
   return films.map(adaptFilmToClient);
 };
@@ -123,4 +115,17 @@ export const formatToHumanFilmRating = (rating) => {
   }
 
   return FilmRating.AWESOME.TEXT;
+};
+
+export const adaptUserToClient = (user) => {
+  const adaptedUser = extend(
+      user,
+      {
+        avatarUrl: user.avatar_url,
+      }
+  );
+
+  delete adaptedUser.avatar_url;
+
+  return adaptedUser;
 };

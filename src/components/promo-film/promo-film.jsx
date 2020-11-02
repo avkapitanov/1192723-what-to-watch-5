@@ -78,8 +78,8 @@ PromoFilm.propTypes = {
 
 export {PromoFilm};
 
-const mapStateToProps = (state) => ({
-  promoFilm: state.promoFilm
+const mapStateToProps = ({DATA}) => ({
+  promoFilm: DATA.promoFilm
 });
 
 export default connect(mapStateToProps)(withRouter(PromoFilm));

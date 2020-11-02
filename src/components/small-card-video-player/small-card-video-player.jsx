@@ -1,48 +1,22 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import withLoadingVideo from "../../hocks/with-loading-video/with-loading-video";
 
-export default class SmallCardVideoPlayer extends PureComponent {
-  constructor(props) {
-    super(props);
+const SmallCardVideoPlayer = (props) => {
+  const {src, poster, isLoading, videoRef} = props;
 
-    this.videoRef = React.createRef();
-
-    this.state = {
-      isLoading: true
-    };
+  const loaderStyle = {
+    position: `absolute`,
+    top: `50%`,
+    left: `50%`,
+    marginLeft: `-28px`,
+    marginTop: `-60px`,
+  };
+  if (!isLoading) {
+    loaderStyle.display = `none`;
   }
 
-  componentDidMount() {
-    this._video = this.videoRef.current;
-
-    this._video.oncanplaythrough = () => this.setState({
-      isLoading: false,
-    });
-  }
-
-  componentWillUnmount() {
-    this._video.oncanplaythrough = null;
-    this._video.onplay = null;
-    this._video.onpause = null;
-    this._video = null;
-  }
-
-  render() {
-    const {src, poster} = this.props;
-    const {isLoading} = this.state;
-
-    const loaderStyle = {
-      position: `absolute`,
-      top: `50%`,
-      left: `50%`,
-      marginLeft: `-28px`,
-      marginTop: `-60px`,
-    };
-    if (!isLoading) {
-      loaderStyle.display = `none`;
-    }
-
-    return (
+  return (
       <>
         <svg width="57" height="57" viewBox="0 0 57 57" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style={loaderStyle}>
           <g fill="none" fillRule="evenodd">
@@ -89,14 +63,20 @@ export default class SmallCardVideoPlayer extends PureComponent {
             </g>
           </g>
         </svg>
-        <video ref={this.videoRef} autoPlay muted src={src} poster={poster} style={{display: isLoading ? `none` : `block`}}></video>
+        <video ref={videoRef} autoPlay muted src={src} poster={poster} style={{display: isLoading ? `none` : `block`}}></video>
       </>
-    );
-  }
-}
+  );
+};
 
 SmallCardVideoPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   src: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  videoRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({current: PropTypes.instanceOf(Element)})
+  ]),
 };
+
+export default withLoadingVideo(SmallCardVideoPlayer);

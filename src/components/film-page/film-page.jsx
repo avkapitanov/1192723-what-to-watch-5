@@ -3,13 +3,14 @@ import PageFooter from "../page-footer/page-footer";
 import FilmPageTabs from "../film-page-tabs/film-page-tabs";
 import filmProp from "./film.prop";
 import filmsProp from "./films.prop";
-import SimilarFilms from "../similar-films/similar-films";
 import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {Link} from "react-router-dom";
 import {getFilmById} from "../../store/selectors";
+import FilmList from "../film-list/film-list";
+import {fetchAddToMyList} from "../../store/api-actions";
 
 class FilmPage extends PureComponent {
   constructor(props) {
@@ -23,11 +24,11 @@ class FilmPage extends PureComponent {
   }
 
   render() {
-    const {film, films} = this.props;
+    const {film, films, handleMyListBtnClick} = this.props;
 
     const similarFilms = films.filter((f) => {
       const similarGenres = f.genre.filter((genre) => {
-        return film.genre.includes(genre);
+        return film.genre.includes(genre) && film.id !== f.id;
       });
       return similarGenres.length > 0;
     }).slice(0, 4);
@@ -63,7 +64,7 @@ class FilmPage extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button">
+                  <button className="btn btn--list movie-card__button" type="button" data-id={film.id} data-status={film.isFavorite ? `0` : `1`} onClick={handleMyListBtnClick}>
                     <svg viewBox="0 0 19 20" width="19" height="20">
                       <use xlinkHref="#add"></use>
                     </svg>
@@ -90,7 +91,11 @@ class FilmPage extends PureComponent {
         </section>
 
         <div className="page-content">
-          <SimilarFilms similarFilms={similarFilms}/>
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+
+            <FilmList films={similarFilms}/>
+          </section>
 
           <PageFooter/>
         </div>
@@ -104,14 +109,23 @@ FilmPage.propTypes = {
   films: filmsProp,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  handleMyListBtnClick: PropTypes.func.isRequired
 };
 
 export {FilmPage};
 
-const mapStateToProps = (state, props) => ({
-  films: state.films,
-  film: getFilmById(state, props)
+const mapStateToProps = ({DATA}, props) => ({
+  films: DATA.films,
+  film: getFilmById(DATA, props)
 });
 
-export default connect(mapStateToProps)(FilmPage);
+const mapDispatchToProps = (dispatch) => ({
+  handleMyListBtnClick(evt) {
+    evt.preventDefault();
+    const btnDataset = evt.target.closest(`button`).dataset;
+    dispatch(fetchAddToMyList(btnDataset.id, btnDataset.status));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);
