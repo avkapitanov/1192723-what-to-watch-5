@@ -47,4 +47,7 @@ export const ReducerNameSpace = {
   USER: `USER`
 };
 export const REVIEW_RATING_MODIFIER = 2;
+export const MIN_REVIEW_TEXT = 50;
+export const MAX_REVIEW_TEXT = 400;
+export const HOVER_TIME_BEFORE_HIDE_ERROR = 5000;
 
