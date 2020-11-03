@@ -10,8 +10,9 @@ import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {Link} from "react-router-dom";
 import {getFilm, getFilmReviews, getLoggedFlag} from "../../store/selectors";
 import FilmList from "../film-list/film-list";
-import {fetchAddToMyList, fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
+import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
+import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
 
 class FilmPage extends PureComponent {
   constructor(props) {
@@ -31,7 +32,7 @@ class FilmPage extends PureComponent {
   }
 
   render() {
-    const {film, films, handleMyListBtnClick, isLogged, reviews} = this.props;
+    const {film, films, isLogged, reviews} = this.props;
 
     if (!film) {
       return null;
@@ -80,12 +81,7 @@ class FilmPage extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button" data-id={film.id} data-status={film.isFavorite ? `0` : `1`} onClick={handleMyListBtnClick}>
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>
-                    <span>My list</span>
-                  </button>
+                  <AddToMyListBtn filmId={film.id} isFavorite={film.isFavorite}/>
                   {addReviewBtn}
                 </div>
               </div>
@@ -127,7 +123,6 @@ FilmPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object
   }),
-  handleMyListBtnClick: PropTypes.func.isRequired,
   fetchFilm: PropTypes.func.isRequired,
   fetchFilmComments: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired
@@ -143,11 +138,6 @@ const mapStateToProps = ({DATA, USER}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleMyListBtnClick(evt) {
-    evt.preventDefault();
-    const btnDataset = evt.target.closest(`button`).dataset;
-    dispatch(fetchAddToMyList(btnDataset.id, btnDataset.status));
-  },
   fetchFilmComments(id) {
     dispatch(fetchFilmCommentsList(id));
   },

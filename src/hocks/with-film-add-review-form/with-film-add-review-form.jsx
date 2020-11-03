@@ -24,10 +24,6 @@ const withFilmAddReviewForm = (Component) => {
       this.onError = this.onError.bind(this);
     }
 
-    componentWillUnmount() {
-      clearTimeout(this._timerId);
-    }
-
     onError() {
       this.setState({
         isDisabled: false,

@@ -6,7 +6,8 @@ const initialState = {
   myFilms: [],
   filterGenres: [],
   reviews: [],
-  film: null
+  film: null,
+  promoFilm: null
 };
 
 const data = (state = initialState, action) => {
@@ -27,16 +28,16 @@ const data = (state = initialState, action) => {
         promoFilm: adaptFilmToClient(action.payload)
       });
     case ActionType.CHANGE_FILM_FAVORITE_STATUS:
-      const adaptedFilm = adaptFilmToClient(action.payload);
-      const index = state.films.findIndex((film) => film.id === adaptedFilm.id);
-      const newFilms = [
-        ...state.films.slice(0, index),
-        adaptedFilm,
-        ...state.films.slice(index + 1)
-      ];
-      return extend(state, {
-        films: newFilms
+      const adaptedFilm = adaptFilmToClient(action.payload.film);
+      const newState = extend(state, {
+        film: adaptedFilm
       });
+      if (action.payload.isPromo) {
+        return extend(newState, {
+          promoFilm: adaptedFilm
+        });
+      }
+      return newState;
     case ActionType.LOAD_REVIEWS_FOR_FILM:
       return extend(state, {
         reviews: action.payload
