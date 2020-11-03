@@ -1,4 +1,4 @@
-import {ActionCreator} from "./action";
+import {ActionCreator, getReviewsForFilm, loadFilm} from "./action";
 import {AuthorizationStatus} from "../const";
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
@@ -36,3 +36,19 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     )))
     .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
 );
+
+export const fetchFilmCommentsList = (id) => (dispatch, _getState, api) => (
+  api.get(`/comments/${id}`)
+    .then(({data}) => dispatch(getReviewsForFilm(data)))
+);
+
+export const fetchFilm = (id) => (dispatch, _getState, api) => (
+  api.get(`/films/${id}`)
+    .then(({data}) => dispatch(loadFilm(data)))
+);
+
+export const fetchReview = (id, rating, comment) => (dispatch, _getState, api) => (
+  api.post(`/comments/${id}`, {rating, comment})
+    .then(() => dispatch(ActionCreator.redirectToRoute(`/films/${id}`)))
+);
+

@@ -8,9 +8,10 @@ import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {Link} from "react-router-dom";
-import {getFilmById} from "../../store/selectors";
+import {getFilm, getFilmReviews, getLoggedFlag} from "../../store/selectors";
 import FilmList from "../film-list/film-list";
-import {fetchAddToMyList} from "../../store/api-actions";
+import {fetchAddToMyList, fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
+import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 
 class FilmPage extends PureComponent {
   constructor(props) {
@@ -23,8 +24,18 @@ class FilmPage extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.props.fetchFilm(id);
+    this.props.fetchFilmComments(id);
+  }
+
   render() {
-    const {film, films, handleMyListBtnClick} = this.props;
+    const {film, films, handleMyListBtnClick, isLogged, reviews} = this.props;
+
+    if (!film) {
+      return null;
+    }
 
     const similarFilms = films.filter((f) => {
       const similarGenres = f.genre.filter((genre) => {
@@ -32,6 +43,11 @@ class FilmPage extends PureComponent {
       });
       return similarGenres.length > 0;
     }).slice(0, 4);
+
+    const addReviewBtn = (isLogged && <Link to={{
+      pathname: `/films/${film.id}/review`
+    }}
+    className="btn movie-card__button">Add review</Link>);
 
     return (
       <>
@@ -70,10 +86,7 @@ class FilmPage extends PureComponent {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <Link to={{
-                    pathname: `/films/${film.id}/review`
-                  }}
-                  className="btn movie-card__button">Add review</Link>
+                  {addReviewBtn}
                 </div>
               </div>
             </div>
@@ -85,7 +98,7 @@ class FilmPage extends PureComponent {
                 <img src={film.posterImage} alt={film.title + ` poster`} width="218" height="327"/>
               </div>
 
-              <FilmPageTabs film={film}/>
+              <FilmPageTabs film={film} reviews={reviews}/>
             </div>
           </div>
         </section>
@@ -107,17 +120,26 @@ class FilmPage extends PureComponent {
 FilmPage.propTypes = {
   film: filmProp,
   films: filmsProp,
+  reviews: reviewsProp,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  handleMyListBtnClick: PropTypes.func.isRequired
+  match: PropTypes.shape({
+    params: PropTypes.object
+  }),
+  handleMyListBtnClick: PropTypes.func.isRequired,
+  fetchFilm: PropTypes.func.isRequired,
+  fetchFilmComments: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired
 };
 
 export {FilmPage};
 
-const mapStateToProps = ({DATA}, props) => ({
+const mapStateToProps = ({DATA, USER}) => ({
   films: DATA.films,
-  film: getFilmById(DATA, props)
+  film: getFilm(DATA),
+  isLogged: getLoggedFlag(USER),
+  reviews: getFilmReviews(DATA)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -125,6 +147,12 @@ const mapDispatchToProps = (dispatch) => ({
     evt.preventDefault();
     const btnDataset = evt.target.closest(`button`).dataset;
     dispatch(fetchAddToMyList(btnDataset.id, btnDataset.status));
+  },
+  fetchFilmComments(id) {
+    dispatch(fetchFilmCommentsList(id));
+  },
+  fetchFilm(id) {
+    dispatch(fetchFilm(id));
   }
 });
 

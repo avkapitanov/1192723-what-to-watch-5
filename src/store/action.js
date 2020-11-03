@@ -6,14 +6,12 @@ export const ActionType = {
   LOAD_PROMO: `LOAD_PROMO`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
-  CHANGE_FILM_FAVORITE_STATUS: `CHANGE_FILM_FAVORITE_STATUS`
+  CHANGE_FILM_FAVORITE_STATUS: `CHANGE_FILM_FAVORITE_STATUS`,
+  LOAD_REVIEWS_FOR_FILM: `LOAD_REVIEWS_FOR_FILM`,
+  LOAD_FILM: `LOAD_FILM`,
 };
 
 export const ActionCreator = {
-  changeFilterGenre: (genre) => ({
-    type: ActionType.CHANGE_FILTER_GENRE,
-    payload: genre,
-  }),
   loadFilms: (films) => ({
     type: ActionType.LOAD_FILMS,
     payload: films,
@@ -39,3 +37,18 @@ export const ActionCreator = {
     payload: film,
   })
 };
+
+export const changeFilterGenre = (genre) => ({
+  type: ActionType.CHANGE_FILTER_GENRE,
+  payload: genre,
+});
+
+export const getReviewsForFilm = (comments) => ({
+  type: ActionType.LOAD_REVIEWS_FOR_FILM,
+  payload: comments,
+});
+
+export const loadFilm = (film) => ({
+  type: ActionType.LOAD_FILM,
+  payload: film,
+});

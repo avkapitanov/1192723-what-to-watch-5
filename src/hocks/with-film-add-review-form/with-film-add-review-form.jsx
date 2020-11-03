@@ -8,7 +8,7 @@ const withFilmAddReviewForm = (Component) => {
 
       this.state = {
         "rating": DEFAULT_RATING_FORM_VALUE,
-        "review-text": ``,
+        "reviewText": ``,
       };
 
       this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -22,6 +22,7 @@ const withFilmAddReviewForm = (Component) => {
     render() {
       return <Component
         {...this.props}
+        {...this.state}
         onFormChange={this.handleFieldChange}
       />;
     }

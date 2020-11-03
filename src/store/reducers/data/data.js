@@ -1,12 +1,12 @@
 import {adaptFilmsToClient, adaptFilmToClient, extend, getUniqueGenresFromFilms} from "../../../utils";
 import {ActionType} from "../../action";
-import reviews from "../../../mocks/reviews";
 
 const initialState = {
   films: [],
   myFilms: [],
   filterGenres: [],
-  reviews
+  reviews: [],
+  film: null
 };
 
 const data = (state = initialState, action) => {
@@ -36,6 +36,14 @@ const data = (state = initialState, action) => {
       ];
       return extend(state, {
         films: newFilms
+      });
+    case ActionType.LOAD_REVIEWS_FOR_FILM:
+      return extend(state, {
+        reviews: action.payload
+      });
+    case ActionType.LOAD_FILM:
+      return extend(state, {
+        film: adaptFilmToClient(action.payload)
       });
   }
 

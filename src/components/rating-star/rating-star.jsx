@@ -13,7 +13,7 @@ const RatingStar = (props) => {
           return (
             <React.Fragment key={`star-${numb}`}>
               <input className="rating__input" id={`star-${value}`} type="radio" name="rating" value={value}
-                defaultChecked={currentRating === value}
+                defaultChecked={+currentRating === value}
               />
               <label className="rating__label" htmlFor={`star-${value}`}>Rating {value}</label>
             </React.Fragment>
@@ -26,7 +26,7 @@ const RatingStar = (props) => {
 };
 
 RatingStar.propTypes = {
-  currentRating: PropTypes.number.isRequired
+  currentRating: PropTypes.string.isRequired
 };
 
 export default RatingStar;
