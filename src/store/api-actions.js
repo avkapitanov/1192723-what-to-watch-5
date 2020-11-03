@@ -31,6 +31,8 @@ export const fetchPromoFilm = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(({data}) => dispatch(ActionCreator.requireAuthorization(
+        AuthorizationStatus.AUTH, data
+    )))
     .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
 );

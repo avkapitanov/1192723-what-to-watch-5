@@ -10,7 +10,7 @@ const initialState = {
 const user = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
-      const adaptedUser = action.payload.data ? adaptUserToClient(action.payload.data) : {};
+      const adaptedUser = adaptUserToClient(action.payload.data);
       return Object.assign({}, state, {
         authorizationStatus: action.payload.status,
         authInfo: adaptedUser

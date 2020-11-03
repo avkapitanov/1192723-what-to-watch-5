@@ -22,10 +22,6 @@ const data = (state = initialState, action) => {
       return extend(state, {
         myFilms: adaptedMyFilms
       });
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return extend(state, {
-        authorizationStatus: action.payload,
-      });
     case ActionType.LOAD_PROMO:
       return extend(state, {
         promoFilm: adaptFilmToClient(action.payload)
