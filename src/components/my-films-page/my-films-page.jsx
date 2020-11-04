@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 
 class MyFilmsPage extends PureComponent {
   componentDidMount() {
-    this.props.onMount();
+    this.props.fetchMyFilms();
   }
 
   render() {
@@ -44,7 +44,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onMount() {
+  fetchMyFilms() {
     dispatch(fetchMyFilmsList());
   }
 });
@@ -53,7 +53,7 @@ export {MyFilmsPage};
 
 MyFilmsPage.propTypes = {
   films: filmsProp,
-  onMount: PropTypes.func.isRequired
+  fetchMyFilms: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyFilmsPage);

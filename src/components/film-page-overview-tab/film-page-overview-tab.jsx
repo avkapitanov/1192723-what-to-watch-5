@@ -11,7 +11,7 @@ const FilmPageOverviewTab = (props) => {
         <div className="movie-rating__score">{film.rating}</div>
         <p className="movie-rating__meta">
           <span className="movie-rating__level">{formatToHumanFilmRating(film.rating)}</span>
-          <span className="movie-rating__count">{film.scores_count} ratings</span>
+          <span className="movie-rating__count">{film.scoresCount} ratings</span>
         </p>
       </div>
 

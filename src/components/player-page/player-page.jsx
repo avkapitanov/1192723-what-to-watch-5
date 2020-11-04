@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {getFilmById} from "../../store/selectors";
+import {getFilm} from "../../store/selectors";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import filmProp from "../film-page/film.prop";
@@ -104,8 +104,8 @@ PlayerPage.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = ({DATA}, props) => ({
-  film: getFilmById(DATA, props)
+const mapStateToProps = (state) => ({
+  film: getFilm(state)
 });
 
 export default connect(mapStateToProps)(withPlayer(PlayerPage));

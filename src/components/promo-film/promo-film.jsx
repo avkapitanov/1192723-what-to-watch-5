@@ -5,6 +5,8 @@ import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import filmProp from "../film-page/film.prop";
+import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import {getPromoFilm} from "../../store/selectors";
 
 class PromoFilm extends PureComponent {
   constructor(props) {
@@ -18,7 +20,7 @@ class PromoFilm extends PureComponent {
   }
 
   render() {
-    const {id, title, genre, year, posterImage, background} = this.props.promoFilm;
+    const {id, title, genre, year, posterImage, background, isFavorite} = this.props.promoFilm;
 
     return (
       <section className="movie-card">
@@ -54,12 +56,7 @@ class PromoFilm extends PureComponent {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <AddToMyListBtn filmId={id} isFavorite={isFavorite} isPromo={true}/>
               </div>
             </div>
           </div>
@@ -78,8 +75,8 @@ PromoFilm.propTypes = {
 
 export {PromoFilm};
 
-const mapStateToProps = ({DATA}) => ({
-  promoFilm: DATA.promoFilm
+const mapStateToProps = (state) => ({
+  promoFilm: getPromoFilm(state)
 });
 
 export default connect(mapStateToProps)(withRouter(PromoFilm));
