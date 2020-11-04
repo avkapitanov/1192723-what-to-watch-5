@@ -2,6 +2,7 @@ import React from "react";
 import {changeFilterGenre} from "../../store/action";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {getFilterGenres, getSelectedGenre} from "../../store/selectors";
 
 const FilmsFilter = (props) => {
   const {filterGenres, selectedFilterGenre, changeFilterGenreAction} = props;
@@ -27,9 +28,9 @@ FilmsFilter.propTypes = {
   filterGenres: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({DATA, PROCESS}) => ({
-  selectedFilterGenre: PROCESS.selectedFilterGenre,
-  filterGenres: DATA.filterGenres
+const mapStateToProps = (state) => ({
+  selectedFilterGenre: getSelectedGenre(state),
+  filterGenres: getFilterGenres(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

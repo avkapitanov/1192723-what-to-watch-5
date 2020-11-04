@@ -25,8 +25,8 @@ const AddToMyListBtn = (props) => {
   );
 };
 
-const mapStateToProps = ({USER}) => ({
-  isLogged: getLoggedFlag(USER)
+const mapStateToProps = (state) => ({
+  isLogged: getLoggedFlag(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

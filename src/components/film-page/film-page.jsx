@@ -8,7 +8,7 @@ import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
 import PageHeaderLogo from "../page-header-logo/page-header-logo";
 import {Link} from "react-router-dom";
-import {getFilm, getFilmReviews, getLoggedFlag} from "../../store/selectors";
+import {getFilm, getFilmReviews, getFilms, getLoggedFlag} from "../../store/selectors";
 import FilmList from "../film-list/film-list";
 import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
@@ -130,11 +130,11 @@ FilmPage.propTypes = {
 
 export {FilmPage};
 
-const mapStateToProps = ({DATA, USER}) => ({
-  films: DATA.films,
-  film: getFilm(DATA),
-  isLogged: getLoggedFlag(USER),
-  reviews: getFilmReviews(DATA)
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
+  film: getFilm(state),
+  isLogged: getLoggedFlag(state),
+  reviews: getFilmReviews(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

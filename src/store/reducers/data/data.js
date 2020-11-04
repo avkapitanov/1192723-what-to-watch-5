@@ -2,30 +2,46 @@ import {adaptFilmsToClient, adaptFilmToClient, extend, getUniqueGenresFromFilms}
 import {ActionType} from "../../action";
 
 const initialState = {
-  films: [],
+  films: {
+    ids: [],
+    promoId: null,
+    entities: {}
+  },
   myFilms: [],
   filterGenres: [],
   reviews: [],
   film: null,
-  promoFilm: null
 };
 
 const data = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
       const adaptedFilms = adaptFilmsToClient(action.payload);
+
+      const byId = adaptedFilms.reduce((acc, film) => {
+        acc[film.id] = film;
+        return acc;
+      }, {});
+
       return extend(state, {
-        films: adaptedFilms,
-        filterGenres: getUniqueGenresFromFilms(adaptedFilms)
+        films: extend(state.films, {
+          ids: Object.keys(byId),
+          entities: byId
+        }),
+        filterGenres: getUniqueGenresFromFilms(adaptedFilms),
       });
     case ActionType.LOAD_MY_FILMS:
       const adaptedMyFilms = adaptFilmsToClient(action.payload);
+
       return extend(state, {
         myFilms: adaptedMyFilms
       });
     case ActionType.LOAD_PROMO:
+      const adaptedPromo = adaptFilmToClient(action.payload);
       return extend(state, {
-        promoFilm: adaptFilmToClient(action.payload)
+        films: extend(state.films, {
+          promoId: adaptedPromo.id
+        })
       });
     case ActionType.CHANGE_FILM_FAVORITE_STATUS:
       const adaptedFilm = adaptFilmToClient(action.payload.film);

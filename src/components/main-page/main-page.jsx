@@ -3,8 +3,7 @@ import FilmList from "../film-list/film-list";
 import PageFooter from "../page-footer/page-footer";
 import FilmsFilter from "../films-filter/films-filter";
 import PromoFilm from "../promo-film/promo-film";
-import {filterFilmsByGenre} from "../../store/selectors";
-import {extend} from "../../utils";
+import {filterFilmsByGenre, getSelectedGenre} from "../../store/selectors";
 import {connect} from "react-redux";
 import filmsProp from "../film-page/films.prop";
 import PropTypes from "prop-types";
@@ -30,9 +29,9 @@ const MainPage = (props) => {
   );
 };
 
-const mapStateToProps = ({DATA, PROCESS}) => ({
-  films: filterFilmsByGenre(extend(DATA, PROCESS)),
-  selectedFilterGenre: PROCESS.selectedFilterGenre
+const mapStateToProps = (state) => ({
+  films: filterFilmsByGenre(state),
+  selectedFilterGenre: getSelectedGenre(state)
 });
 
 export {MainPage};

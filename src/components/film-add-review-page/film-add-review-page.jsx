@@ -74,8 +74,8 @@ FilmAddReviewPage.propTypes = {
 
 export {FilmAddReviewPage};
 
-const mapStateToProps = ({DATA}) => ({
-  film: getFilm(DATA)
+const mapStateToProps = (state) => ({
+  film: getFilm(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

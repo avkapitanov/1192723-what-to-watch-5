@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import filmProp from "../film-page/film.prop";
 import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import {getPromoFilm} from "../../store/selectors";
 
 class PromoFilm extends PureComponent {
   constructor(props) {
@@ -74,8 +75,8 @@ PromoFilm.propTypes = {
 
 export {PromoFilm};
 
-const mapStateToProps = ({DATA}) => ({
-  promoFilm: DATA.promoFilm
+const mapStateToProps = (state) => ({
+  promoFilm: getPromoFilm(state)
 });
 
 export default connect(mapStateToProps)(withRouter(PromoFilm));

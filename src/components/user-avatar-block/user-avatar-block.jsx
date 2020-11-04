@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import {AuthorizationStatus} from "../../const";
+import {getAuthInfo, getAuthorizationStatus} from "../../store/selectors";
 
 class UserAvatarBlock extends PureComponent {
   constructor(props) {
@@ -56,9 +57,9 @@ UserAvatarBlock.propTypes = {
 
 export {UserAvatarBlock};
 
-const mapStateToProps = ({USER}) => ({
-  authInfo: USER.authInfo,
-  authorizationStatus: USER.authorizationStatus
+const mapStateToProps = (state) => ({
+  authInfo: getAuthInfo(state),
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 export default connect(mapStateToProps)(withRouter(UserAvatarBlock));
