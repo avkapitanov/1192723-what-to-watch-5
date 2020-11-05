@@ -1,5 +1,6 @@
 import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
+import {PLAYER_PAUSE_BTN_TYPE} from "../../const";
 
 const withPlayer = (Component) => {
   class WithPlayer extends PureComponent {
@@ -12,6 +13,14 @@ const withPlayer = (Component) => {
         isPlaying: false,
         currentTime: 0,
         duration: 0
+      };
+
+      this.handlePlayerPlayPauseBtnClick = (evt) => {
+        if (evt.target.closest(`button`).dataset.type === PLAYER_PAUSE_BTN_TYPE) {
+          this.handlePlayBtnClick();
+        } else {
+          this.handlePauseBtnClick();
+        }
       };
 
       this.handlePauseBtnClick = () => {
@@ -77,8 +86,7 @@ const withPlayer = (Component) => {
           isPlaying={isPlaying}
           currentTime={currentTime}
           duration={duration}
-          handlePauseBtnClick={this.handlePauseBtnClick}
-          handlePlayBtnClick={this.handlePlayBtnClick}
+          handlePlayerPlayPauseBtnClick={this.handlePlayerPlayPauseBtnClick}
           updateVideoPlayingInfo={this.updateVideoPlayingInfo}
           videoRef={this._videoRef}
         >

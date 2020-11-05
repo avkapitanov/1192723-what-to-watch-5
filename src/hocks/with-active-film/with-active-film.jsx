@@ -15,13 +15,11 @@ const withActiveFilm = (Component) => {
         }));
       };
 
-      this.onMouseLeave = this.onMouseLeave.bind(this);
-    }
-
-    onMouseLeave() {
-      this.setState(() => ({
-        activeCard: null,
-      }));
+      this.onMouseLeave = () => {
+        this.setState(() => ({
+          activeCard: null,
+        }));
+      };
     }
 
     render() {
