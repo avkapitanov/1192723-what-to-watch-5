@@ -37,9 +37,9 @@ const mockStore = configureStore([]);
 const store = mockStore({
   DATA: {
     films: {
-      promoId: 1,
       entities: films
     },
+    promoId: 1
   },
   USER: {
     authorizationStatus: AuthorizationStatus.AUTH,

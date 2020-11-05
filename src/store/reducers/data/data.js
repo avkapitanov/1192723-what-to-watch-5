@@ -4,9 +4,10 @@ import {ActionType} from "../../action";
 const initialState = {
   films: {
     ids: [],
-    promoId: null,
     entities: {}
   },
+  filmId: null,
+  promoId: null,
   myFilms: [],
   filterGenres: [],
   reviews: [],
@@ -18,10 +19,10 @@ const data = (state = initialState, action) => {
     case ActionType.LOAD_FILMS:
       const adaptedFilms = adaptFilmsToClient(action.payload);
 
-      const byId = adaptedFilms.reduce((acc, film) => {
-        acc[film.id] = film;
-        return acc;
-      }, {});
+      const byId = adaptedFilms.reduce((acc, film) => extend(
+          acc,
+          {[film.id]: film}
+      ), {});
 
       return extend(state, {
         films: extend(state.films, {
@@ -39,9 +40,7 @@ const data = (state = initialState, action) => {
     case ActionType.LOAD_PROMO:
       const adaptedPromo = adaptFilmToClient(action.payload);
       return extend(state, {
-        films: extend(state.films, {
-          promoId: adaptedPromo.id
-        })
+        promoId: adaptedPromo.id
       });
     case ActionType.CHANGE_FILM_FAVORITE_STATUS:
       const adaptedFilm = adaptFilmToClient(action.payload.film);
@@ -59,8 +58,10 @@ const data = (state = initialState, action) => {
         reviews: action.payload
       });
     case ActionType.LOAD_FILM:
+      const film = adaptFilmToClient(action.payload);
       return extend(state, {
-        film: adaptFilmToClient(action.payload)
+        film,
+        filmId: film.id
       });
   }
 

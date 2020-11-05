@@ -8,7 +8,7 @@ import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
 import PageLogo from "../page-logo/page-logo";
 import {Link} from "react-router-dom";
-import {getFilm, getFilmReviews, getFilms, getLoggedFlag} from "../../store/selectors";
+import {getFilm, getFilmId, getFilmReviews, getLoggedFlag, getSimilarFilms} from "../../store/selectors";
 import FilmList from "../film-list/film-list";
 import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
@@ -24,27 +24,31 @@ class FilmPage extends PureComponent {
       const {history} = this.props;
       history.push(`/player/` + evt.target.closest(`button`).dataset.id);
     };
+
+    this.updateFilmInfo = () => {
+      const id = this.props.match.params.id;
+      this.props.fetchFilm(id);
+      this.props.fetchFilmComments(id);
+    };
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
-    this.props.fetchFilm(id);
-    this.props.fetchFilmComments(id);
+    this.updateFilmInfo();
+  }
+
+  componentDidUpdate() {
+    const id = +this.props.match.params.id;
+    if (this.props.filmId !== id) {
+      this.updateFilmInfo();
+    }
   }
 
   render() {
-    const {film, films, isLogged, reviews} = this.props;
+    const {film, isLogged, reviews, similarFilms} = this.props;
 
     if (!film) {
       return null;
     }
-
-    const similarFilms = films.filter((f) => {
-      const similarGenres = f.genre.filter((genre) => {
-        return film.genre.includes(genre) && film.id !== f.id;
-      });
-      return similarGenres.length > 0;
-    }).slice(0, 4);
 
     const addReviewBtn = (isLogged && <Link to={{
       pathname: `/films/${film.id}/review`
@@ -115,8 +119,9 @@ class FilmPage extends PureComponent {
 }
 
 FilmPage.propTypes = {
+  filmId: PropTypes.number,
   film: filmProp,
-  films: filmsProp,
+  similarFilms: filmsProp,
   reviews: reviewsProp,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
@@ -132,10 +137,11 @@ FilmPage.propTypes = {
 export {FilmPage};
 
 const mapStateToProps = (state) => ({
-  films: getFilms(state),
+  filmId: getFilmId(state),
   film: getFilm(state),
   isLogged: getLoggedFlag(state),
-  reviews: getFilmReviews(state)
+  reviews: getFilmReviews(state),
+  similarFilms: getSimilarFilms(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

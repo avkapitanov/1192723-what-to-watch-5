@@ -83,9 +83,9 @@ const mockStore = configureStore([]);
 const store = mockStore({
   DATA: {
     films: {
-      promoId: 3,
       entities: films
     },
+    promoId: 3,
     filterGenres: [
       `All genres`,
       `Drama`,
