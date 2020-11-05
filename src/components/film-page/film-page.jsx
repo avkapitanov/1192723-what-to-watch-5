@@ -13,6 +13,7 @@ import FilmList from "../film-list/film-list";
 import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import {FilmTab} from "../../const";
 
 class FilmPage extends PureComponent {
   constructor(props) {
@@ -94,7 +95,7 @@ class FilmPage extends PureComponent {
                 <img src={film.posterImage} alt={film.title + ` poster`} width="218" height="327"/>
               </div>
 
-              <FilmPageTabs film={film} reviews={reviews}/>
+              <FilmPageTabs film={film} reviews={reviews} tabs={Object.values(FilmTab)}/>
             </div>
           </div>
         </section>

@@ -34,6 +34,8 @@ const FilmAddReviewForm = (props) => {
   );
 };
 
+export {FilmAddReviewForm};
+
 FilmAddReviewForm.propTypes = {
   onFormChange: PropTypes.func.isRequired,
   onSubmitForm: PropTypes.func.isRequired,
