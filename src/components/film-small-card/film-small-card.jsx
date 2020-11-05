@@ -7,11 +7,11 @@ import withPlayingStatus from "../../hocks/with-playing-status/with-playing-stat
 
 const FilmSmallCard = (props) => {
   const {onMouseEnter, onMouseLeave, onImageClick, film, isPlaying} = props;
-  const {id, title, poster, video} = film;
+  const {id, title, poster, previewVideoLink} = film;
 
   const visualFilm = isPlaying ? <SmallCardVideoPlayer
     isPlaying={false}
-    src={video}
+    src={previewVideoLink}
     poster={poster}
   /> : <img src={poster} alt={title} width="280" height="175" />;
 

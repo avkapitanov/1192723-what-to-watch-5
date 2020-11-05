@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddToMyListBtn component render correctly With authorized user 1`] = `
+<button
+  className="btn btn--list movie-card__button"
+  onClick={[Function]}
+  type="button"
+>
+  <svg
+    height="20"
+    viewBox="0 0 19 20"
+    width="19"
+  >
+    <use
+      xlinkHref="#add"
+    />
+  </svg>
+  <span>
+    My list
+  </span>
+</button>
+`;
+
+exports[`AddToMyListBtn component render correctly With unauthorized user 1`] = `null`;
