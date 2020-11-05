@@ -2,7 +2,7 @@ import React from "react";
 import RatingStar from "../rating-star/rating-star";
 import {REVIEW_RATING_MODIFIER, MAX_RATING_VALUE_FORM} from "../../const";
 import PropTypes from "prop-types";
-import withFilmAddReviewForm from "../../hocks/with-film-add-review-form/with-film-add-review-form";
+import withFilmAddReviewForm from "../../hocs/with-film-add-review-form/with-film-add-review-form";
 import filmProp from "../film-page/film.prop";
 import {fetchReview} from "../../store/api-actions";
 import {connect} from "react-redux";

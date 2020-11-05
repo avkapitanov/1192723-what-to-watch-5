@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import withLoadingVideo from "../../hocks/with-loading-video/with-loading-video";
+import withLoadingVideo from "../../hocs/with-loading-video/with-loading-video";
 import Loader from "../loader/loader";
 
 const SmallCardVideoPlayer = (props) => {

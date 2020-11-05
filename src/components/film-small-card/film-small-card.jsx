@@ -3,7 +3,7 @@ import filmProp from "../film-page/film.prop";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import SmallCardVideoPlayer from "../small-card-video-player/small-card-video-player";
-import withPlayingStatus from "../../hocks/with-playing-status/with-playing-status";
+import withPlayingStatus from "../../hocs/with-playing-status/with-playing-status";
 
 const FilmSmallCard = (props) => {
   const {onMouseEnter, onMouseLeave, onImageClick, film, isPlaying} = props;

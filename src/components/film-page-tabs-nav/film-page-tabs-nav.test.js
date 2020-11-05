@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FilmPageTabsNav from "./film-page-nav-tabs";
+import FilmPageTabsNav from "./film-page-tabs-nav";
 
 const tabs = [
   `Overview`,

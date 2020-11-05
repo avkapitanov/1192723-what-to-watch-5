@@ -3,7 +3,7 @@ import {getFilm} from "../../store/selectors";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import filmProp from "../film-page/film.prop";
-import withPlayer from "../../hocks/with-player/with-player";
+import withPlayer from "../../hocs/with-player/with-player";
 import {PLAYER_PAUSE_BTN_TYPE, PLAYER_PLAY_BTN_TYPE} from "../../const";
 
 class PlayerPage extends PureComponent {

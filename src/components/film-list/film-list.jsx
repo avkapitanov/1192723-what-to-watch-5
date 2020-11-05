@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import FilmSmallCard from "../film-small-card/film-small-card";
 import filmsProp from "../film-page/films.prop";
 import {withRouter} from "react-router-dom";
-import withActiveFilm from "../../hocks/with-active-film/with-active-film";
-import withShowMore from "../../hocks/with-show-more/with-show-more";
+import withActiveFilm from "../../hocs/with-active-film/with-active-film";
+import withShowMore from "../../hocs/with-show-more/with-show-more";
 
 class FilmList extends PureComponent {
   constructor(props) {
