@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FilmPageTabsNavItem from "../film-page-tabs-nav-item/film-page-tabs-nav-item";
-import {FilmTab} from "../../const";
 
 const FilmPageTabsNav = (props) => {
-  const {activeTab, onActiveTabChange} = props;
+  const {tabs, activeTab, onActiveTabChange} = props;
 
   return (
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">
         {
-          Object.values(FilmTab).map((tab) =>
+          tabs.map((tab) =>
             <FilmPageTabsNavItem
               key={tab}
               isActive={activeTab === tab}
@@ -25,6 +24,7 @@ const FilmPageTabsNav = (props) => {
 };
 
 FilmPageTabsNav.propTypes = {
+  tabs: PropTypes.array.isRequired,
   activeTab: PropTypes.string.isRequired,
   onActiveTabChange: PropTypes.func.isRequired,
 };

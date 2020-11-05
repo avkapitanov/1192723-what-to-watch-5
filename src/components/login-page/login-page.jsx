@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PageFooter from "../page-footer/page-footer";
 import {login} from "../../store/api-actions";
 import {connect} from "react-redux";
-import PageHeaderLogo from "../page-header-logo/page-header-logo";
+import PageLogo from "../page-logo/page-logo";
 
 class LoginPage extends PureComponent {
   constructor(props) {
@@ -27,7 +27,7 @@ class LoginPage extends PureComponent {
     return (
       <div className="user-page">
         <header className="page-header user-page__head">
-          <PageHeaderLogo/>
+          <PageLogo/>
 
           <h1 className="page-title user-page__title">Sign in</h1>
         </header>

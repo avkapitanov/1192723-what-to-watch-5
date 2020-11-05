@@ -6,7 +6,7 @@ import filmsProp from "./films.prop";
 import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
-import PageHeaderLogo from "../page-header-logo/page-header-logo";
+import PageLogo from "../page-logo/page-logo";
 import {Link} from "react-router-dom";
 import {getFilm, getFilmReviews, getFilms, getLoggedFlag} from "../../store/selectors";
 import FilmList from "../film-list/film-list";
@@ -61,7 +61,7 @@ class FilmPage extends PureComponent {
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header movie-card__head">
-              <PageHeaderLogo/>
+              <PageLogo/>
 
               <UserAvatarBlock/>
             </header>

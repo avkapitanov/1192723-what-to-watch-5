@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilmPageTabsNavItem component render correctly Active tab 1`] = `
+<li
+  className="movie-nav__item movie-nav__item--active"
+>
+  <a
+    className="movie-nav__link"
+    data-tab="Overview"
+    href="#"
+    onClick={[Function]}
+  >
+    Overview
+  </a>
+</li>
+`;
+
+exports[`FilmPageTabsNavItem component render correctly Inactive tab 1`] = `
+<li
+  className="movie-nav__item "
+>
+  <a
+    className="movie-nav__link"
+    data-tab="Overview"
+    href="#"
+    onClick={[Function]}
+  >
+    Overview
+  </a>
+</li>
+`;

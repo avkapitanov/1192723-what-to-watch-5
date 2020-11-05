@@ -27,7 +27,7 @@ const FilmPageTabs = (props) => {
 
   return (
     <div className="movie-card__desc">
-      <FilmPageTabsNav activeTab={activeTab} onActiveTabChange={onActiveTabChange}/>
+      <FilmPageTabsNav tabs={Object.values(FilmTab)} activeTab={activeTab} onActiveTabChange={onActiveTabChange}/>
       {tabContent}
     </div>
   );

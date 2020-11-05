@@ -1,13 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-const PageHeaderLogo = () => {
+const PageLogo = ({isFooter}) => {
+  const additionalClass = isFooter ? ` logo__link--light` : ``;
+
   return (
     <div className="logo">
       <Link to={{
         pathname: `/`
       }}
-      className="logo__link">
+      className={`logo__link${additionalClass}`}>
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>
         <span className="logo__letter logo__letter--3">W</span>
@@ -16,4 +19,12 @@ const PageHeaderLogo = () => {
   );
 };
 
-export default PageHeaderLogo;
+PageLogo.defaultProps = {
+  isFooter: false
+};
+
+PageLogo.propTypes = {
+  isFooter: PropTypes.bool
+};
+
+export default PageLogo;

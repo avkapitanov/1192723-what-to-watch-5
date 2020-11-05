@@ -1,6 +1,6 @@
 import React from "react";
 import RatingStar from "../rating-star/rating-star";
-import {REVIEW_RATING_MODIFIER} from "../../const";
+import {REVIEW_RATING_MODIFIER, MAX_RATING_VALUE_FORM} from "../../const";
 import PropTypes from "prop-types";
 import withFilmAddReviewForm from "../../hocks/with-film-add-review-form/with-film-add-review-form";
 import filmProp from "../film-page/film.prop";
@@ -20,7 +20,7 @@ const FilmAddReviewForm = (props) => {
         setSubmitProcess();
         onSubmitForm(film.id, rating, reviewText, onError);
       }}>
-        <RatingStar currentRating={rating} isDisabled={isDisabled}/>
+        <RatingStar currentRating={rating} isDisabled={isDisabled} maxRating={MAX_RATING_VALUE_FORM}/>
         <div className="add-review__text">
           <textarea className="add-review__textarea" name="reviewText" id="review-text" placeholder="Review text" disabled={isDisabled}></textarea>
           <div className="add-review__submit">

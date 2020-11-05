@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
-import PageHeaderLogo from "../page-header-logo/page-header-logo";
+import PageLogo from "../page-logo/page-logo";
 import FilmAddReviewForm from "../film-add-review-form/film-add-review-form";
 import {getFilm} from "../../store/selectors";
 import {connect} from "react-redux";
@@ -33,7 +33,7 @@ class FilmAddReviewPage extends PureComponent {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header">
-            <PageHeaderLogo/>
+            <PageLogo/>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
