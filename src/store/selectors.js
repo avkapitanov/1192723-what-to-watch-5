@@ -8,7 +8,7 @@ export const getFilms = createSelector(
 );
 export const getFilmId = (state) => state.DATA.filmId;
 export const getSelectedGenre = (state) => state.PROCESS.selectedFilterGenre;
-export const getMyFilms = (state) => state.DATA.myFilms;
+const getMyFilmsIds = (state) => state.DATA.myFilms;
 export const getLoggedFlag = (state) => state.USER.authorizationStatus === AuthorizationStatus.AUTH;
 export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
 export const getAuthInfo = (state) => state.USER.authInfo;
@@ -41,5 +41,12 @@ export const getSimilarFilms = createSelector(
         });
         return similarGenres.length > 0;
       }).slice(0, 4);
+    }
+);
+
+export const getMyFilms = createSelector(
+    [getFilms, getMyFilmsIds],
+    (films, myFilmIds) => {
+      return films.filter((film) => myFilmIds.includes(film.id));
     }
 );

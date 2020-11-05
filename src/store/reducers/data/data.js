@@ -1,4 +1,8 @@
-import {adaptFilmsToClient, adaptFilmToClient, extend, getUniqueGenresFromFilms} from "../../../utils";
+import {
+  adaptFilmToClient,
+  extend,
+  getNewFilmsState, getNewFilmsStateAfterFilmUpdate, getNewMyFilmsState,
+} from "../../../utils";
 import {ActionType} from "../../action";
 
 const initialState = {
@@ -17,26 +21,9 @@ const initialState = {
 const data = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
-      const adaptedFilms = adaptFilmsToClient(action.payload);
-
-      const byId = adaptedFilms.reduce((acc, film) => extend(
-          acc,
-          {[film.id]: film}
-      ), {});
-
-      return extend(state, {
-        films: extend(state.films, {
-          ids: Object.keys(byId),
-          entities: byId
-        }),
-        filterGenres: getUniqueGenresFromFilms(adaptedFilms),
-      });
+      return extend(state, getNewFilmsState(action.payload));
     case ActionType.LOAD_MY_FILMS:
-      const adaptedMyFilms = adaptFilmsToClient(action.payload);
-
-      return extend(state, {
-        myFilms: adaptedMyFilms
-      });
+      return extend(state, getNewMyFilmsState(action.payload));
     case ActionType.LOAD_PROMO:
       const adaptedPromo = adaptFilmToClient(action.payload);
       return extend(state, {
@@ -58,10 +45,10 @@ const data = (state = initialState, action) => {
         reviews: action.payload
       });
     case ActionType.LOAD_FILM:
-      const film = adaptFilmToClient(action.payload);
+      return extend(state, getNewFilmsStateAfterFilmUpdate(state, action.payload));
+    case ActionType.CHANGE_FILM_ROUTE_ID:
       return extend(state, {
-        film,
-        filmId: film.id
+        filmId: action.payload
       });
   }
 

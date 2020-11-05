@@ -20,6 +20,10 @@ class PromoFilm extends PureComponent {
   }
 
   render() {
+    if (!this.props.promoFilm) {
+      return null;
+    }
+
     const {id, title, genre, year, posterImage, background, isFavorite} = this.props.promoFilm;
 
     return (

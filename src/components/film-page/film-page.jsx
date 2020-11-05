@@ -14,6 +14,7 @@ import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
 import {FilmTab} from "../../const";
+import {changeFilmRouteId} from "../../store/action";
 
 class FilmPage extends PureComponent {
   constructor(props) {
@@ -39,6 +40,7 @@ class FilmPage extends PureComponent {
   componentDidUpdate() {
     const id = +this.props.match.params.id;
     if (this.props.filmId !== id) {
+      this.props.changeRoute(+id);
       this.updateFilmInfo();
     }
   }
@@ -131,6 +133,7 @@ FilmPage.propTypes = {
   }),
   fetchFilm: PropTypes.func.isRequired,
   fetchFilmComments: PropTypes.func.isRequired,
+  changeRoute: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired
 };
 
@@ -147,6 +150,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchFilmComments(id) {
     dispatch(fetchFilmCommentsList(id));
+  },
+  changeRoute(id) {
+    dispatch(changeFilmRouteId(id));
   },
   fetchFilm(id) {
     dispatch(fetchFilm(id));
