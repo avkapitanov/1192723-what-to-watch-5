@@ -42,4 +42,6 @@ FilmList.propTypes = {
   onMouseLeave: PropTypes.func.isRequired
 };
 
+export {FilmList};
+
 export default withRouter(withShowMore(withActiveFilm(FilmList)));
