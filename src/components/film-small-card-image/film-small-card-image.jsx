@@ -15,9 +15,7 @@ const FilmSmallCardImage = (props) => {
     isPlaying={false}
     src={previewVideoLink}
     poster={poster}
-  /> : <img src={poster} alt={title} width="280" height="175"
-    onClick={() => onImageClick(id)}
-  />;
+  /> : <img src={poster} alt={title} width="280" height="175" />;
 
   const onImageClick = (card) => {
     history.push(`/films/${card.id}`);
@@ -25,6 +23,7 @@ const FilmSmallCardImage = (props) => {
 
   return (
     <div className="small-movie-card__image"
+      onClick={() => onImageClick(id)}
       onMouseEnter={(evt) => {
         evt.preventDefault();
         onMouseEnter(film);
