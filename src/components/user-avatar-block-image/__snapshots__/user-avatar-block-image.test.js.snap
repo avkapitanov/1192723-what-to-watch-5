@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserAvatarBlockImage component render correctly 1`] = `
+<div
+  className="user-block__avatar"
+>
+  <img
+    alt="User avatar"
+    height="63"
+    onClick={[Function]}
+    src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/9.jpg"
+    width="63"
+  />
+</div>
+`;

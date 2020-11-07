@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import PropTypes from "prop-types";
 import Loader from "../loader/loader";
 
 const SmallCardVideoPlayer = (props) => {
-  const videoRef = React.createRef();
+  const videoRef = useRef();
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {

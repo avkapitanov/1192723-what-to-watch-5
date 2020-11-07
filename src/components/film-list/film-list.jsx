@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import FilmSmallCard from "../film-small-card/film-small-card";
 import filmsProp from "../film-page/films.prop";
 import {withRouter} from "react-router-dom";
-import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import withShowMore from "../../hocs/with-show-more/with-show-more";
 
 class FilmList extends PureComponent {
@@ -16,14 +15,12 @@ class FilmList extends PureComponent {
   }
 
   render() {
-    const {films, onMouseEnter, onMouseLeave, perPage} = this.props;
+    const {films, perPage} = this.props;
 
     return (
       <div className="catalog__movies-list">
         {films.slice(0, perPage).map((film) => (
           <FilmSmallCard key={film.id} film={film}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
             onImageClick={this.onImageClick}
           />
         ))}
@@ -37,11 +34,9 @@ FilmList.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  perPage: PropTypes.number.isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired
+  perPage: PropTypes.number.isRequired
 };
 
 export {FilmList};
 
-export default withRouter(withShowMore(withActiveFilm(FilmList)));
+export default withRouter(withShowMore(FilmList));
