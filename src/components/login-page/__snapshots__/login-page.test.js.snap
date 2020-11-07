@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginPage component render correctly 1`] = `
+exports[`LoginPage component render correctl Auth 1`] = `null`;
+
+exports[`LoginPage component render correctl No auth 1`] = `
 <div
   className="user-page"
 >
