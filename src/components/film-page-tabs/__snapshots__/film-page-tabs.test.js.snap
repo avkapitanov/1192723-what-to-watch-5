@@ -11,11 +11,10 @@ exports[`FilmPageTabs component render correctly Active Tab Details 1`] = `
       className="movie-nav__list"
     >
       <li
-        className="movie-nav__item "
+        className="movie-nav__item movie-nav__item--active"
       >
         <a
           className="movie-nav__link"
-          data-tab="Overview"
           href="#"
           onClick={[Function]}
         >
@@ -23,11 +22,10 @@ exports[`FilmPageTabs component render correctly Active Tab Details 1`] = `
         </a>
       </li>
       <li
-        className="movie-nav__item movie-nav__item--active"
+        className="movie-nav__item "
       >
         <a
           className="movie-nav__link"
-          data-tab="Details"
           href="#"
           onClick={[Function]}
         >
@@ -39,7 +37,6 @@ exports[`FilmPageTabs component render correctly Active Tab Details 1`] = `
       >
         <a
           className="movie-nav__link"
-          data-tab="Reviews"
           href="#"
           onClick={[Function]}
         >
@@ -49,90 +46,52 @@ exports[`FilmPageTabs component render correctly Active Tab Details 1`] = `
     </ul>
   </nav>
   <div
-    className="movie-card__text movie-card__row"
+    className="movie-rating"
   >
     <div
-      className="movie-card__text-col"
+      className="movie-rating__score"
     >
-      <p
-        className="movie-card__details-item"
-      >
-        <strong
-          className="movie-card__details-name"
-        >
-          Director
-        </strong>
-        <span
-          className="movie-card__details-value"
-        >
-          Lynne Ramsay
-        </span>
-      </p>
-      <p
-        className="movie-card__details-item"
-      >
-        <strong
-          className="movie-card__details-name"
-        >
-          Starring
-        </strong>
-        <span
-          className="movie-card__details-value"
-        >
-          Tilda Swinton
-          , 
-          <br />
-          John C. Reilly
-          , 
-          <br />
-          Ezra Miller
-        </span>
-      </p>
+      3.8
     </div>
-    <div
-      className="movie-card__text-col"
+    <p
+      className="movie-rating__meta"
     >
-      <p
-        className="movie-card__details-item"
+      <span
+        className="movie-rating__level"
       >
-        <strong
-          className="movie-card__details-name"
-        >
-          Run Time
-        </strong>
-        <span
-          className="movie-card__details-value"
-        >
-          1h 52m
-        </span>
-      </p>
-      <p
-        className="movie-card__details-item"
+        Normal
+      </span>
+      <span
+        className="movie-rating__count"
       >
-        <strong
-          className="movie-card__details-name"
-        >
-          Genre
-        </strong>
-        <span
-          className="movie-card__details-value"
-        >
-          Drama
-        </span>
-      </p>
-      <p
-        className="movie-card__details-item"
-      >
-        <strong
-          className="movie-card__details-name"
-        >
-          Released
-        </strong>
-        <span
-          className="movie-card__details-value"
-        />
-      </p>
-    </div>
+        123240
+         ratings
+      </span>
+    </p>
+  </div>
+  <div
+    className="movie-card__text"
+  >
+    <p>
+      Kevin's mother struggles to love her strange child, despite the increasingly dangerous things he says and does as he grows up. But Kevin is just getting started, and his final act will be beyond anything anyone imagined.
+    </p>
+    <p
+      className="movie-card__director"
+    >
+      <strong>
+        Director: 
+        Lynne Ramsay
+      </strong>
+    </p>
+    <p
+      className="movie-card__starring"
+    >
+      <strong>
+        Starring: 
+        Tilda Swinton, John C. Reilly, Ezra Miller
+         and other
+      </strong>
+    </p>
   </div>
 </div>
 `;
@@ -152,7 +111,6 @@ exports[`FilmPageTabs component render correctly Active Tab Overview 1`] = `
       >
         <a
           className="movie-nav__link"
-          data-tab="Overview"
           href="#"
           onClick={[Function]}
         >
@@ -164,7 +122,6 @@ exports[`FilmPageTabs component render correctly Active Tab Overview 1`] = `
       >
         <a
           className="movie-nav__link"
-          data-tab="Details"
           href="#"
           onClick={[Function]}
         >
@@ -176,7 +133,6 @@ exports[`FilmPageTabs component render correctly Active Tab Overview 1`] = `
       >
         <a
           className="movie-nav__link"
-          data-tab="Reviews"
           href="#"
           onClick={[Function]}
         >
@@ -247,11 +203,10 @@ exports[`FilmPageTabs component render correctly Active Tab Reviews 1`] = `
       className="movie-nav__list"
     >
       <li
-        className="movie-nav__item "
+        className="movie-nav__item movie-nav__item--active"
       >
         <a
           className="movie-nav__link"
-          data-tab="Overview"
           href="#"
           onClick={[Function]}
         >
@@ -263,7 +218,6 @@ exports[`FilmPageTabs component render correctly Active Tab Reviews 1`] = `
       >
         <a
           className="movie-nav__link"
-          data-tab="Details"
           href="#"
           onClick={[Function]}
         >
@@ -271,11 +225,10 @@ exports[`FilmPageTabs component render correctly Active Tab Reviews 1`] = `
         </a>
       </li>
       <li
-        className="movie-nav__item movie-nav__item--active"
+        className="movie-nav__item "
       >
         <a
           className="movie-nav__link"
-          data-tab="Reviews"
           href="#"
           onClick={[Function]}
         >
@@ -285,115 +238,52 @@ exports[`FilmPageTabs component render correctly Active Tab Reviews 1`] = `
     </ul>
   </nav>
   <div
-    className="movie-card__reviews movie-card__row"
+    className="movie-rating"
   >
     <div
-      className="movie-card__reviews-col"
+      className="movie-rating__score"
     >
-      <div
-        className="review"
-      >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Mollie
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2020-10-30"
-            >
-              October 30, 2020
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          3.3
-        </div>
-      </div>
-      <div
-        className="review"
-      >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Kendall
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2020-10-13"
-            >
-              October 13, 2020
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          9.4
-        </div>
-      </div>
+      3.8
     </div>
-    <div
-      className="movie-card__reviews-col"
+    <p
+      className="movie-rating__meta"
     >
-      <div
-        className="review"
+      <span
+        className="movie-rating__level"
       >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            This movie is perfect in all its categories: credits, sound track, production, casting, writing, photography, editing, acting, and direction. I was amazed with the freedom of the use of the camera. This movie will change the way movies are made. Slow-mo, stills, black and white, and color were all used to brilliant effect.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Zak
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2020-10-06"
-            >
-              October 06, 2020
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          3.3
-        </div>
-      </div>
-    </div>
+        Normal
+      </span>
+      <span
+        className="movie-rating__count"
+      >
+        123240
+         ratings
+      </span>
+    </p>
+  </div>
+  <div
+    className="movie-card__text"
+  >
+    <p>
+      Kevin's mother struggles to love her strange child, despite the increasingly dangerous things he says and does as he grows up. But Kevin is just getting started, and his final act will be beyond anything anyone imagined.
+    </p>
+    <p
+      className="movie-card__director"
+    >
+      <strong>
+        Director: 
+        Lynne Ramsay
+      </strong>
+    </p>
+    <p
+      className="movie-card__starring"
+    >
+      <strong>
+        Starring: 
+        Tilda Swinton, John C. Reilly, Ezra Miller
+         and other
+      </strong>
+    </p>
   </div>
 </div>
 `;

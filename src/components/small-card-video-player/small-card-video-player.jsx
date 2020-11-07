@@ -1,10 +1,24 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
-import withLoadingVideo from "../../hocs/with-loading-video/with-loading-video";
 import Loader from "../loader/loader";
 
 const SmallCardVideoPlayer = (props) => {
-  const {src, poster, isLoading, videoRef} = props;
+  const videoRef = React.createRef();
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let video = videoRef.current;
+    video.oncanplaythrough = () => setLoading(false);
+
+    return () => {
+      video.oncanplaythrough = null;
+      video.onplay = null;
+      video.onpause = null;
+      video = null;
+    };
+  }, [isLoading]);
+
+  const {src, poster} = props;
 
   return (
       <>
@@ -15,14 +29,8 @@ const SmallCardVideoPlayer = (props) => {
 };
 
 SmallCardVideoPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
   src: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  videoRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({current: PropTypes.instanceOf(Element)})
-  ]),
 };
 
-export default withLoadingVideo(SmallCardVideoPlayer);
+export default SmallCardVideoPlayer;

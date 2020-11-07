@@ -6,7 +6,7 @@ const FilmPageTabsNavItem = (props) => {
 
   return (
     <li className={`movie-nav__item ${isActive ? `movie-nav__item--active` : ``}`}>
-      <a href="#" className="movie-nav__link" data-tab={tabName} onClick={onActiveTabChange}>{tabName}</a>
+      <a href="#" className="movie-nav__link" onClick={onActiveTabChange}>{tabName}</a>
     </li>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {FilmPageTabs} from "./film-page-tabs";
+import FilmPageTabs from "./film-page-tabs";
 
 const film = {
   id: 1,

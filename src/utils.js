@@ -103,7 +103,7 @@ export const getNewFilmsStateAfterFilmUpdate = (state, payload) => {
   return {
     films: extend(state.films,
         {
-          ids: state.ids.slice().push(film.id),
+          ids: [...state.ids, film.id],
           entities: extend(state.films.entities,
               {
                 [film.id]: film

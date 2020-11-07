@@ -13,7 +13,10 @@ const FilmPageTabsNav = (props) => {
             <FilmPageTabsNavItem
               key={tab}
               isActive={activeTab === tab}
-              onActiveTabChange={onActiveTabChange}
+              onActiveTabChange={(evt) => {
+                evt.preventDefault();
+                onActiveTabChange(tab);
+              }}
               tabName={tab}
             />
           )

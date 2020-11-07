@@ -12,7 +12,6 @@ exports[`FilmPageTabsNav component render correctly 1`] = `
     >
       <a
         className="movie-nav__link"
-        data-tab="Overview"
         href="#"
         onClick={[Function]}
       >
@@ -24,7 +23,6 @@ exports[`FilmPageTabsNav component render correctly 1`] = `
     >
       <a
         className="movie-nav__link"
-        data-tab="Details"
         href="#"
         onClick={[Function]}
       >
@@ -36,7 +34,6 @@ exports[`FilmPageTabsNav component render correctly 1`] = `
     >
       <a
         className="movie-nav__link"
-        data-tab="Reviews"
         href="#"
         onClick={[Function]}
       >

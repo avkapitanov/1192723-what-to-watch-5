@@ -18,7 +18,7 @@ it(`FilmsFilter component render correctly`, () => {
       <FilmsFilter
         filterGenres={filterGenres}
         selectedFilterGenre={selectedFilterGenre}
-        changeFilterGenreAction={() => {}}
+        onChangeFilterGenre={() => {}}
       />
   ).toJSON();
 

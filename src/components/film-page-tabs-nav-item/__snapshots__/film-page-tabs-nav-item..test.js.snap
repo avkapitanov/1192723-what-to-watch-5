@@ -6,7 +6,6 @@ exports[`FilmPageTabsNavItem component render correctly Active tab 1`] = `
 >
   <a
     className="movie-nav__link"
-    data-tab="Overview"
     href="#"
     onClick={[Function]}
   >
@@ -21,7 +20,6 @@ exports[`FilmPageTabsNavItem component render correctly Inactive tab 1`] = `
 >
   <a
     className="movie-nav__link"
-    data-tab="Overview"
     href="#"
     onClick={[Function]}
   >

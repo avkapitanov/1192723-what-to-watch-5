@@ -12,11 +12,13 @@ class PromoFilm extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handlePlayBtnClick = (evt) => {
-      evt.preventDefault();
-      const {history} = this.props;
-      history.push(`/player/` + evt.target.closest(`button`).dataset.id);
-    };
+    this.handlePlayBtnClick = this.handlePlayBtnClick.bind(this);
+  }
+
+  handlePlayBtnClick(evt) {
+    evt.preventDefault();
+    const {history} = this.props;
+    history.push(`/player/` + evt.currentTarget.dataset.id);
   }
 
   render() {
@@ -77,10 +79,10 @@ PromoFilm.propTypes = {
   }).isRequired,
 };
 
-export {PromoFilm};
-
 const mapStateToProps = (state) => ({
   promoFilm: getPromoFilm(state)
 });
+
+export {PromoFilm};
 
 export default connect(mapStateToProps)(withRouter(PromoFilm));
