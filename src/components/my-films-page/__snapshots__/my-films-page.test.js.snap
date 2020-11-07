@@ -62,16 +62,16 @@ exports[`MyFilmsPage component render correctly 1`] = `
     >
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
       >
         <div
           className="small-movie-card__image"
-          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <img
             alt="We need to talk about Kevin"
             height="175"
+            onClick={[Function]}
             src="https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/We_need_to_talk_about_Kevin.jpg"
             width="280"
           />
@@ -90,16 +90,16 @@ exports[`MyFilmsPage component render correctly 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
       >
         <div
           className="small-movie-card__image"
-          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <img
             alt="What We Do in the Shadows"
             height="175"
+            onClick={[Function]}
             src="https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/What-We-Do-in-the-Shadows.jpg"
             width="280"
           />
@@ -118,16 +118,16 @@ exports[`MyFilmsPage component render correctly 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
       >
         <div
           className="small-movie-card__image"
-          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <img
             alt="Bronson"
             height="175"
+            onClick={[Function]}
             src="https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg"
             width="280"
           />
