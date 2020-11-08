@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import FilmList from "../film-list/film-list";
 import PageFooter from "../page-footer/page-footer";
 import FilmsFilter from "../films-filter/films-filter";
@@ -7,9 +7,14 @@ import {filterFilmsByGenre, getSelectedGenre} from "../../store/selectors";
 import {connect} from "react-redux";
 import filmsProp from "../film-page/films.prop";
 import PropTypes from "prop-types";
+import {fetchPromoFilm} from "../../store/api-actions";
 
 const MainPage = (props) => {
-  const {films, selectedFilterGenre} = props;
+  const {films, selectedFilterGenre, fetchPromo} = props;
+
+  useEffect(() => {
+    fetchPromo();
+  }, []);
 
   return (
     <>
@@ -38,7 +43,14 @@ export {MainPage};
 
 MainPage.propTypes = {
   films: filmsProp,
-  selectedFilterGenre: PropTypes.string.isRequired
+  selectedFilterGenre: PropTypes.string.isRequired,
+  fetchPromo: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(MainPage);
+const mapDispatchToProps = (dispatch) => ({
+  fetchPromo() {
+    dispatch(fetchPromoFilm());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

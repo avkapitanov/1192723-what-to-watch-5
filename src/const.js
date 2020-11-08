@@ -54,4 +54,11 @@ export const HOVER_TIME_BEFORE_HIDE_ERROR = 5000;
 export const PLAYER_PAUSE_BTN_TYPE = `pause`;
 export const PLAYER_PLAY_BTN_TYPE = `play`;
 export const EMAIL_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+export const APIRoute = {
+  FILMS: `/films`,
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`,
+  PROMO_FILM: `/films/promo`,
+  LOGIN: `/login`
+};
 

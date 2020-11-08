@@ -25,7 +25,6 @@ describe(`AddToMyListBtn component render correctly`, () => {
               filmId={1}
               isFavorite={false}
               onAddToMyListBtnClick={() => {}}
-              isPromo={false}
             />
           </BrowserRouter>
         </Provider>
@@ -48,7 +47,6 @@ describe(`AddToMyListBtn component render correctly`, () => {
               filmId={1}
               isFavorite={false}
               handleMyListBtnClick={() => {}}
-              isPromo={false}
             />
           </BrowserRouter>
         </Provider>

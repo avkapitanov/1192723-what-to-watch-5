@@ -8,8 +8,7 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   CHANGE_FILM_FAVORITE_STATUS: `CHANGE_FILM_FAVORITE_STATUS`,
   LOAD_REVIEWS_FOR_FILM: `LOAD_REVIEWS_FOR_FILM`,
-  LOAD_FILM: `LOAD_FILM`,
-  CHANGE_FILM_ROUTE_ID: `CHANGE_FILM_ROUTE_ID`
+  FETCH_FILM_REQUEST: `FETCH_FILM_REQUEST`,
 };
 
 export const loadFilms = (films) => ({
@@ -37,9 +36,9 @@ export const redirectToRoute = (url) => ({
   payload: url,
 });
 
-export const changeFavoriteStatus = (film, isPromo) => ({
+export const changeFavoriteStatus = (film) => ({
   type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
-  payload: {film, isPromo},
+  payload: film,
 });
 
 export const changeFilterGenre = (genre) => ({
@@ -53,11 +52,6 @@ export const getReviewsForFilm = (comments) => ({
 });
 
 export const loadFilm = (film) => ({
-  type: ActionType.LOAD_FILM,
+  type: ActionType.FETCH_FILM_REQUEST,
   payload: film,
-});
-
-export const changeFilmRouteId = (id) => ({
-  type: ActionType.CHANGE_FILM_ROUTE_ID,
-  payload: id,
 });

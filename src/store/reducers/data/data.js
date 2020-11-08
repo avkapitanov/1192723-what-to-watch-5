@@ -1,7 +1,6 @@
 import {
-  adaptFilmToClient,
   extend,
-  getNewFilmsState, getNewFilmsStateAfterFilmUpdate, getNewMyFilmsState,
+  getNewFilmsStateAfterFilmUpdate,
 } from "../../../utils";
 import {ActionType} from "../../action";
 
@@ -21,34 +20,26 @@ const initialState = {
 const data = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
-      return extend(state, getNewFilmsState(action.payload));
+      return extend(state, action.payload);
     case ActionType.LOAD_MY_FILMS:
-      return extend(state, getNewMyFilmsState(action.payload));
+      return extend(state, action.payload);
     case ActionType.LOAD_PROMO:
-      const adaptedPromo = adaptFilmToClient(action.payload);
       return extend(state, {
-        promoId: adaptedPromo.id
+        films: getNewFilmsStateAfterFilmUpdate(state, action.payload),
+        promoId: action.payload.id
       });
     case ActionType.CHANGE_FILM_FAVORITE_STATUS:
-      const adaptedFilm = adaptFilmToClient(action.payload.film);
-      const newState = extend(state, {
-        film: adaptedFilm
+      return extend(state, {
+        films: getNewFilmsStateAfterFilmUpdate(state, action.payload)
       });
-      if (action.payload.isPromo) {
-        return extend(newState, {
-          promoFilm: adaptedFilm
-        });
-      }
-      return newState;
     case ActionType.LOAD_REVIEWS_FOR_FILM:
       return extend(state, {
         reviews: action.payload
       });
-    case ActionType.LOAD_FILM:
-      return extend(state, getNewFilmsStateAfterFilmUpdate(state, action.payload));
-    case ActionType.CHANGE_FILM_ROUTE_ID:
+    case ActionType.FETCH_FILM_REQUEST:
       return extend(state, {
-        filmId: action.payload
+        films: getNewFilmsStateAfterFilmUpdate(state, action.payload),
+        filmId: action.payload.id
       });
   }
 

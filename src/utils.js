@@ -79,40 +79,32 @@ export const getNewMyFilmsState = (payload) => {
   };
 };
 
-export const getNewFilmsStateAfterFilmUpdate = (state, payload) => {
-  const film = adaptFilmToClient(payload);
-
+export const getNewFilmsStateAfterFilmUpdate = (state, film) => {
   if (state.films.ids.includes(film.id.toString())) {
-    return {
-      films: extend(state.films,
-          {
-            entities: extend(state.films.entities,
-                {
-                  [film.id]: extend(
-                      state.films.entities[film.id],
-                      film
-                  )
-                }
-            )
-          }
-      ),
-      filmId: film.id
-    };
-  }
-
-  return {
-    films: extend(state.films,
+    return extend(state.films,
         {
-          ids: [...state.ids, film.id],
           entities: extend(state.films.entities,
               {
-                [film.id]: film
+                [film.id]: extend(
+                    state.films.entities[film.id],
+                    film
+                )
               }
           )
         }
-    ),
-    filmId: film.id
-  };
+    );
+  }
+
+  return extend(state.films,
+      {
+        ids: [...state.ids, film.id],
+        entities: extend(state.films.entities,
+            {
+              [film.id]: film
+            }
+        )
+      }
+  );
 };
 
 export const formatFilmDuration = (time) => {

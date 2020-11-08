@@ -9,7 +9,7 @@ const FilmSmallCardImage = (props) => {
   const [isPlaying, setPlaying] = useState(false);
   let timerId = null;
 
-  useEffect(() => () => resetHoverTime(), []);
+  useEffect(() => () => clearTimeout(timerId));
 
   const {film} = props;
   const {id, title, poster, previewVideoLink} = film;
