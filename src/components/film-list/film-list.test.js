@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {FilmList} from "./film-list";
+import FilmList from "./film-list";
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
 
@@ -82,7 +82,7 @@ describe(`FilmList component render correctly`, () => {
         <BrowserRouter history={browserHistory}>
           <FilmList
             films={films}
-            perPage={2}
+            perPage={1}
           />
         </BrowserRouter>
     ).toJSON();
@@ -95,7 +95,7 @@ describe(`FilmList component render correctly`, () => {
         <BrowserRouter history={browserHistory}>
           <FilmList
             films={films}
-            perPage={1}
+            perPage={2}
           />
         </BrowserRouter>
     ).toJSON();

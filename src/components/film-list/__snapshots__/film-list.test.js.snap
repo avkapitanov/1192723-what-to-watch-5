@@ -60,6 +60,34 @@ exports[`FilmList component render correctly With one element 1`] = `
       </a>
     </h3>
   </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Bronson"
+        height="175"
+        src="https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/3"
+        onClick={[Function]}
+      >
+        Bronson
+      </a>
+    </h3>
+  </article>
 </div>
 `;
 
@@ -92,6 +120,62 @@ exports[`FilmList component render correctly With two elements 1`] = `
         onClick={[Function]}
       >
         We need to talk about Kevin
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="What We Do in the Shadows"
+        height="175"
+        src="https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/What-We-Do-in-the-Shadows.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/2"
+        onClick={[Function]}
+      >
+        What We Do in the Shadows
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Bronson"
+        height="175"
+        src="https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/bronson.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/3"
+        onClick={[Function]}
+      >
+        Bronson
       </a>
     </h3>
   </article>
