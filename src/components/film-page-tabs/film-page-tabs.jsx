@@ -1,16 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
-import withFilmPageTabs from "../../hocks/with-film-page-tabs/with-film-page-tabs";
 import FilmPageOverviewTab from "../film-page-overview-tab/film-page-overview-tab";
 import FilmPageDetailsTab from "../film-page-details-tab/film-page-details-tab";
 import FilmPageReviewsTab from "../film-page-reviews-tab/film-page-reviews-tab";
-import FilmPageTabsNav from "../film-page-tabs-nav/film-page-nav-tabs";
-import {FilmTab} from "../../const";
+import FilmPageTabsNav from "../film-page-tabs-nav/film-page-tabs-nav";
+import {DEFAULT_ACTIVE_TAB, FilmTab} from "../../const";
 import filmProp from "../film-page/film.prop";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 
 const FilmPageTabs = (props) => {
-  const {film, activeTab, onActiveTabChange, reviews} = props;
+  const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
+  const {tabs, film, reviews} = props;
 
   let tabContent;
   switch (activeTab) {
@@ -27,7 +27,7 @@ const FilmPageTabs = (props) => {
 
   return (
     <div className="movie-card__desc">
-      <FilmPageTabsNav activeTab={activeTab} onActiveTabChange={onActiveTabChange}/>
+      <FilmPageTabsNav tabs={tabs} activeTab={activeTab} onActiveTabChange={setActiveTab}/>
       {tabContent}
     </div>
   );
@@ -36,8 +36,7 @@ const FilmPageTabs = (props) => {
 FilmPageTabs.propTypes = {
   film: filmProp,
   reviews: reviewsProp,
-  activeTab: PropTypes.string.isRequired,
-  onActiveTabChange: PropTypes.func.isRequired
+  tabs: PropTypes.array.isRequired
 };
 
-export default withFilmPageTabs(FilmPageTabs);
+export default FilmPageTabs;

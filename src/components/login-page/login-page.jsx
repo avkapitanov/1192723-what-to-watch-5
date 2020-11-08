@@ -1,71 +1,44 @@
-import React, {PureComponent, createRef} from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import PageFooter from "../page-footer/page-footer";
-import {login} from "../../store/api-actions";
+import PageLogo from "../page-logo/page-logo";
+import LoginForm from "../login-form/login-form";
 import {connect} from "react-redux";
-import PageHeaderLogo from "../page-header-logo/page-header-logo";
+import PropTypes from "prop-types";
+import {getLoggedFlag} from "../../store/selectors";
+import {Redirect} from "react-router-dom";
 
-class LoginPage extends PureComponent {
-  constructor(props) {
-    super(props);
+const LoginPage = (props) => {
+  const {isLogged} = props;
 
-    this._loginRef = createRef();
-    this._passwordRef = createRef();
-
-    this.handleSubmit = (evt) => {
-      const {onSubmit} = this.props;
-
-      evt.preventDefault();
-
-      onSubmit({
-        login: this._loginRef.current.value,
-        password: this._passwordRef.current.value,
-      });
-    };
+  if (isLogged) {
+    return <Redirect to={`/`} />;
   }
-  render() {
-    return (
-      <div className="user-page">
-        <header className="page-header user-page__head">
-          <PageHeaderLogo/>
 
-          <h1 className="page-title user-page__title">Sign in</h1>
-        </header>
+  return (
+    <div className="user-page">
+      <header className="page-header user-page__head">
+        <PageLogo/>
 
-        <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form" onSubmit={this.handleSubmit}>
-            <div className="sign-in__fields">
-              <div className="sign-in__field">
-                <input ref={this._loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"/>
-                <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
-              </div>
-              <div className="sign-in__field">
-                <input ref={this._passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password"/>
-                <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
-              </div>
-            </div>
-            <div className="sign-in__submit">
-              <button className="sign-in__btn" type="submit">Sign in</button>
-            </div>
-          </form>
-        </div>
+        <h1 className="page-title user-page__title">Sign in</h1>
+      </header>
 
-        <PageFooter/>
+      <div className="sign-in user-page__content">
+        <LoginForm />
       </div>
-    );
-  }
-}
+
+      <PageFooter/>
+    </div>
+  );
+};
+
+LoginPage.propTypes = {
+  isLogged: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  isLogged: getLoggedFlag(state)
+});
 
 export {LoginPage};
 
-LoginPage.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  }
-});
-
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps)(LoginPage);

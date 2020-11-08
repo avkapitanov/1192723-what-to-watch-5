@@ -3,7 +3,8 @@ import {getFilm} from "../../store/selectors";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import filmProp from "../film-page/film.prop";
-import withPlayer from "../../hocks/with-player/with-player";
+import withPlayer from "../../hocs/with-player/with-player";
+import {PLAYER_PAUSE_BTN_TYPE, PLAYER_PLAY_BTN_TYPE} from "../../const";
 
 class PlayerPage extends PureComponent {
   constructor(props) {
@@ -31,26 +32,9 @@ class PlayerPage extends PureComponent {
   }
 
   render() {
-    const {film, isPlaying, duration, currentTime, videoRef, handlePauseBtnClick, handlePlayBtnClick} = this.props;
+    const {film, isPlaying, duration, currentTime, videoRef, handlePlayerPlayPauseBtnClick} = this.props;
     const playerPosition = (currentTime / duration) * 100;
     const timeElapsed = new Date((duration - currentTime) * 1000).toISOString().substr(11, 8);
-
-    let button;
-    if (isPlaying) {
-      button = <button type="button" className="player__play" onClick={handlePauseBtnClick}>
-        <svg viewBox="0 0 14 21" width="14" height="21">
-          <use xlinkHref="#pause"></use>
-        </svg>
-        <span>Pause</span>
-      </button>;
-    } else {
-      button = <button type="button" className="player__play" onClick={handlePlayBtnClick}>
-        <svg viewBox="0 0 19 19" width="19" height="19">
-          <use xlinkHref="#play-s"></use>
-        </svg>
-        <span>Play</span>
-      </button>;
-    }
 
     return (
       <div className="player">
@@ -68,7 +52,15 @@ class PlayerPage extends PureComponent {
           </div>
 
           <div className="player__controls-row">
-            {button}
+            <button type="button" className="player__play"
+              data-type={isPlaying ? PLAYER_PLAY_BTN_TYPE : PLAYER_PAUSE_BTN_TYPE}
+              onClick={handlePlayerPlayPauseBtnClick}
+            >
+              <svg viewBox="0 0 14 21" width="14" height="21">
+                <use xlinkHref={isPlaying ? `#pause` : `#play-s`}></use>
+              </svg>
+              <span>{isPlaying ? `Pause` : `Play`}</span>
+            </button>
             <div className="player__name">{film.title}</div>
 
             <button type="button" className="player__full-screen" onClick={this.handleFullscreenBtnClick}>
@@ -92,8 +84,7 @@ PlayerPage.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   duration: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
-  handlePauseBtnClick: PropTypes.func.isRequired,
-  handlePlayBtnClick: PropTypes.func.isRequired,
+  handlePlayerPlayPauseBtnClick: PropTypes.func.isRequired,
   updateVideoPlayingInfo: PropTypes.func.isRequired,
   videoRef: PropTypes.oneOfType([
     PropTypes.func,

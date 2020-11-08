@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
-import PageHeaderLogo from "../page-header-logo/page-header-logo";
+import PageLogo from "../page-logo/page-logo";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import filmProp from "../film-page/film.prop";
@@ -12,14 +12,20 @@ class PromoFilm extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handlePlayBtnClick = (evt) => {
-      evt.preventDefault();
-      const {history} = this.props;
-      history.push(`/player/` + evt.target.closest(`button`).dataset.id);
-    };
+    this.handlePlayBtnClick = this.handlePlayBtnClick.bind(this);
+  }
+
+  handlePlayBtnClick(evt) {
+    evt.preventDefault();
+    const {history} = this.props;
+    history.push(`/player/` + evt.currentTarget.dataset.id);
   }
 
   render() {
+    if (!this.props.promoFilm) {
+      return null;
+    }
+
     const {id, title, genre, year, posterImage, background, isFavorite} = this.props.promoFilm;
 
     return (
@@ -31,7 +37,7 @@ class PromoFilm extends PureComponent {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header movie-card__head">
-          <PageHeaderLogo/>
+          <PageLogo/>
 
           <UserAvatarBlock/>
         </header>
@@ -73,10 +79,10 @@ PromoFilm.propTypes = {
   }).isRequired,
 };
 
-export {PromoFilm};
-
 const mapStateToProps = (state) => ({
   promoFilm: getPromoFilm(state)
 });
+
+export {PromoFilm};
 
 export default connect(mapStateToProps)(withRouter(PromoFilm));

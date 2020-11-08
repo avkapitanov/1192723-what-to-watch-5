@@ -9,6 +9,7 @@ export const ActionType = {
   CHANGE_FILM_FAVORITE_STATUS: `CHANGE_FILM_FAVORITE_STATUS`,
   LOAD_REVIEWS_FOR_FILM: `LOAD_REVIEWS_FOR_FILM`,
   LOAD_FILM: `LOAD_FILM`,
+  CHANGE_FILM_ROUTE_ID: `CHANGE_FILM_ROUTE_ID`
 };
 
 export const loadFilms = (films) => ({
@@ -54,4 +55,9 @@ export const getReviewsForFilm = (comments) => ({
 export const loadFilm = (film) => ({
   type: ActionType.LOAD_FILM,
   payload: film,
+});
+
+export const changeFilmRouteId = (id) => ({
+  type: ActionType.CHANGE_FILM_ROUTE_ID,
+  payload: id,
 });

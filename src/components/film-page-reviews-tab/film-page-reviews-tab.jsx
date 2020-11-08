@@ -1,5 +1,5 @@
 import React from "react";
-import ReviewCard from "../film-review-card/film-review-card";
+import FilmReviewCard from "../film-review-card/film-review-card";
 import reviewsProp from "./reviews.prop";
 
 const FilmPageReviewsTab = (props) => {
@@ -13,12 +13,12 @@ const FilmPageReviewsTab = (props) => {
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
         {firstColumn.map((review) => (
-          <ReviewCard key={review.id} review={review}/>
+          <FilmReviewCard key={review.id} review={review}/>
         ))}
       </div>
       <div className="movie-card__reviews-col">
         {secondColumn.map((review) => (
-          <ReviewCard key={review.id} review={review}/>
+          <FilmReviewCard key={review.id} review={review}/>
         ))}
       </div>
     </div>

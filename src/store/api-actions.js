@@ -48,7 +48,7 @@ export const fetchFilm = (id) => (dispatch, _getState, api) => (
 );
 
 export const fetchReview = (id, rating, comment, callback) => (dispatch, _getState, api) => (
-  api.post(`/comments1/${id}`, {rating, comment})
+  api.post(`/comments/${id}`, {rating, comment})
     .then(() => dispatch(redirectToRoute(`/films/${id}`)))
     .catch(() => {
       callback();

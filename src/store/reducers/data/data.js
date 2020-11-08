@@ -1,12 +1,17 @@
-import {adaptFilmsToClient, adaptFilmToClient, extend, getUniqueGenresFromFilms} from "../../../utils";
+import {
+  adaptFilmToClient,
+  extend,
+  getNewFilmsState, getNewFilmsStateAfterFilmUpdate, getNewMyFilmsState,
+} from "../../../utils";
 import {ActionType} from "../../action";
 
 const initialState = {
   films: {
     ids: [],
-    promoId: null,
     entities: {}
   },
+  filmId: null,
+  promoId: null,
   myFilms: [],
   filterGenres: [],
   reviews: [],
@@ -16,32 +21,13 @@ const initialState = {
 const data = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
-      const adaptedFilms = adaptFilmsToClient(action.payload);
-
-      const byId = adaptedFilms.reduce((acc, film) => {
-        acc[film.id] = film;
-        return acc;
-      }, {});
-
-      return extend(state, {
-        films: extend(state.films, {
-          ids: Object.keys(byId),
-          entities: byId
-        }),
-        filterGenres: getUniqueGenresFromFilms(adaptedFilms),
-      });
+      return extend(state, getNewFilmsState(action.payload));
     case ActionType.LOAD_MY_FILMS:
-      const adaptedMyFilms = adaptFilmsToClient(action.payload);
-
-      return extend(state, {
-        myFilms: adaptedMyFilms
-      });
+      return extend(state, getNewMyFilmsState(action.payload));
     case ActionType.LOAD_PROMO:
       const adaptedPromo = adaptFilmToClient(action.payload);
       return extend(state, {
-        films: extend(state.films, {
-          promoId: adaptedPromo.id
-        })
+        promoId: adaptedPromo.id
       });
     case ActionType.CHANGE_FILM_FAVORITE_STATUS:
       const adaptedFilm = adaptFilmToClient(action.payload.film);
@@ -59,8 +45,10 @@ const data = (state = initialState, action) => {
         reviews: action.payload
       });
     case ActionType.LOAD_FILM:
+      return extend(state, getNewFilmsStateAfterFilmUpdate(state, action.payload));
+    case ActionType.CHANGE_FILM_ROUTE_ID:
       return extend(state, {
-        film: adaptFilmToClient(action.payload)
+        filmId: action.payload
       });
   }
 

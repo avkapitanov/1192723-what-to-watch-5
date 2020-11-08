@@ -54,6 +54,67 @@ export const adaptFilmToClient = (film) => {
   return adaptedFilm;
 };
 
+export const getNewFilmsState = (payload) => {
+  const adaptedFilms = adaptFilmsToClient(payload);
+
+  const byId = adaptedFilms.reduce((acc, film) => extend(
+      acc,
+      {[film.id]: film}
+  ), {});
+
+  return {
+    films: {
+      ids: Object.keys(byId),
+      entities: byId
+    },
+    filterGenres: getUniqueGenresFromFilms(adaptedFilms),
+  };
+};
+
+export const getNewMyFilmsState = (payload) => {
+  const adaptedFilms = adaptFilmsToClient(payload);
+
+  return {
+    myFilms: adaptedFilms.map((film) => film.id)
+  };
+};
+
+export const getNewFilmsStateAfterFilmUpdate = (state, payload) => {
+  const film = adaptFilmToClient(payload);
+
+  if (state.films.ids.includes(film.id.toString())) {
+    return {
+      films: extend(state.films,
+          {
+            entities: extend(state.films.entities,
+                {
+                  [film.id]: extend(
+                      state.films.entities[film.id],
+                      film
+                  )
+                }
+            )
+          }
+      ),
+      filmId: film.id
+    };
+  }
+
+  return {
+    films: extend(state.films,
+        {
+          ids: [...state.ids, film.id],
+          entities: extend(state.films.entities,
+              {
+                [film.id]: film
+              }
+          )
+        }
+    ),
+    filmId: film.id
+  };
+};
+
 export const formatFilmDuration = (time) => {
   const hours = Math.floor(time / 60);
   const minutes = time - (hours * 60);

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilmAddReviewFormErrorBlock component render correctly With error 1`] = `
+<div
+  style={
+    Object {
+      "color": "red",
+      "paddingTop": "10px",
+      "textAlign": "center",
+    }
+  }
+>
+  Something wrong, please, try again later
+</div>
+`;
+
+exports[`FilmAddReviewFormErrorBlock component render correctly Without error 1`] = `null`;

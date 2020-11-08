@@ -31,5 +31,4 @@ FilmPageOverviewTab.propTypes = {
   film: filmProp
 };
 
-
 export default FilmPageOverviewTab;

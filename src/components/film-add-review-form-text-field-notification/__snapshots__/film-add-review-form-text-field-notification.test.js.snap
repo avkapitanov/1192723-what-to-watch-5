@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilmAddReviewFormTextFieldNotification component render correctly With max length error 1`] = `
+<div
+  style={
+    Object {
+      "color": "red",
+      "marginRight": "auto",
+    }
+  }
+>
+  Max symbols 400. Current: 401
+</div>
+`;
+
+exports[`FilmAddReviewFormTextFieldNotification component render correctly With min length error 1`] = `
+<div
+  style={
+    Object {
+      "color": "red",
+      "marginRight": "auto",
+    }
+  }
+>
+  Min symbols 50. Current: 49
+</div>
+`;
+
+exports[`FilmAddReviewFormTextFieldNotification component render correctly Without error 1`] = `null`;

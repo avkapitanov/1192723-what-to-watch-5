@@ -2,7 +2,7 @@ import React from "react";
 import reviewProp from "../film-page-reviews-tab/review.prop";
 import {humanizeReviewDate, formatReviewDate} from "../../utils";
 
-const ReviewCard = (props) => {
+const FilmReviewCard = (props) => {
   const {review} = props;
   const {comment, user, rating, date} = review;
 
@@ -22,8 +22,8 @@ const ReviewCard = (props) => {
   );
 };
 
-ReviewCard.propTypes = {
+FilmReviewCard.propTypes = {
   review: reviewProp
 };
 
-export default ReviewCard;
+export default FilmReviewCard;
