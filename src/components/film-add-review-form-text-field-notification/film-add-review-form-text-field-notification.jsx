@@ -1,15 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {MAX_REVIEW_TEXT, MIN_REVIEW_TEXT} from "../../const";
 
-const FilmAddReviewFormTextFieldNotification = ({textLength}) => {
-  if (MIN_REVIEW_TEXT <= textLength && MAX_REVIEW_TEXT >= textLength) {
+const FilmAddReviewFormTextFieldNotification = ({textLength, minLength, maxLength}) => {
+  if (minLength <= textLength && maxLength >= textLength) {
     return null;
   }
 
-  const text = MIN_REVIEW_TEXT > textLength ?
-    `Min symbols ${MIN_REVIEW_TEXT}. Current: ${textLength}` :
-    `Max symbols ${MAX_REVIEW_TEXT}. Current: ${textLength}`;
+  const text = minLength > textLength ?
+    `Min symbols ${minLength}. Current: ${textLength}` :
+    `Max symbols ${maxLength}. Current: ${textLength}`;
 
   return (
     <div style={{
@@ -22,7 +21,9 @@ const FilmAddReviewFormTextFieldNotification = ({textLength}) => {
 };
 
 FilmAddReviewFormTextFieldNotification.propTypes = {
-  textLength: PropTypes.number.isRequired
+  textLength: PropTypes.number.isRequired,
+  minLength: PropTypes.number.isRequired,
+  maxLength: PropTypes.number.isRequired,
 };
 
 export default FilmAddReviewFormTextFieldNotification;

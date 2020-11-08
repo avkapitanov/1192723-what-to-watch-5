@@ -62,9 +62,6 @@ const FilmAddReviewPage = (props) => {
 
 FilmAddReviewPage.propTypes = {
   film: filmProp,
-  match: PropTypes.shape({
-    params: PropTypes.object
-  }),
   fetchFilmForReview: PropTypes.func.isRequired
 };
 

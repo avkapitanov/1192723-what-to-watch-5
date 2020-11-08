@@ -27,3 +27,5 @@ exports[`FilmAddReviewFormTextFieldNotification component render correctly With 
 `;
 
 exports[`FilmAddReviewFormTextFieldNotification component render correctly Without error 1`] = `null`;
+
+exports[`FilmAddReviewFormTextFieldNotification component render correctly Without error in interval 1`] = `null`;

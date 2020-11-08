@@ -63,7 +63,7 @@ const FilmAddReviewForm = (props) => {
         <div className="add-review__text">
           <textarea className="add-review__textarea" name="reviewText" id="review-text" placeholder="Review text" disabled={isDisabled} onChange={handleReviewTextChange}></textarea>
           <div className="add-review__submit">
-            <FilmAddReviewFormTextFieldNotification textLength={reviewText.length} />
+            <FilmAddReviewFormTextFieldNotification textLength={reviewText.length} minLength={MIN_REVIEW_TEXT} maxLength={MAX_REVIEW_TEXT}/>
             <button className="add-review__btn" type="submit" disabled={hasTextError || isDisabled}>Post</button>
           </div>
         </div>
@@ -72,8 +72,6 @@ const FilmAddReviewForm = (props) => {
     </div>
   );
 };
-
-export {FilmAddReviewForm};
 
 FilmAddReviewForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
@@ -85,5 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReview(id, rating * REVIEW_RATING_MODIFIER, comment, callback));
   }
 });
+
+export {FilmAddReviewForm};
 
 export default connect(null, mapDispatchToProps)(FilmAddReviewForm);
