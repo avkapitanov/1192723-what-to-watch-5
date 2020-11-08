@@ -27,7 +27,7 @@ class FilmPage extends PureComponent {
     };
 
     this.updateFilmInfo = () => {
-      const id = this.props.match.params.id;
+      const id = parseInt(this.props.match.params.id, 10);
       this.props.fetchFilm(id);
       this.props.fetchFilmComments(id);
     };

@@ -19,10 +19,11 @@ const SmallCardVideoPlayer = (props) => {
   }, [isLoading]);
 
   const {src, poster} = props;
+  const loader = (isLoading && <Loader />);
 
   return (
       <>
-        <Loader isLoading={isLoading}/>
+        {loader}
         <video ref={videoRef} autoPlay muted src={src} poster={poster} style={{display: isLoading ? `none` : `block`}}></video>
       </>
   );

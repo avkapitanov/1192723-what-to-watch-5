@@ -1,14 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {useHistory} from "react-router-dom";
-import withPlayingStatus from "../../hocs/with-playing-status/with-playing-status";
+import React, {useState, useEffect} from "react";
+import {useHistory} from 'react-router-dom';
 import SmallCardVideoPlayer from "../small-card-video-player/small-card-video-player";
 import filmProp from "../film-page/film.prop";
+import {HOVER_TIME_BEFORE_PLAYING} from "../../const";
 
 const FilmSmallCardImage = (props) => {
   const history = useHistory();
+  const [isPlaying, setPlaying] = useState(false);
+  let timerId = null;
 
-  const {film, isPlaying, onMouseEnter, onMouseLeave} = props;
+  useEffect(() => () => resetHoverTime(), []);
+
+  const {film} = props;
   const {id, title, poster, previewVideoLink} = film;
 
   const visualFilm = isPlaying ? <SmallCardVideoPlayer
@@ -17,33 +20,33 @@ const FilmSmallCardImage = (props) => {
     poster={poster}
   /> : <img src={poster} alt={title} width="280" height="175" />;
 
-  const onImageClick = (card) => {
-    history.push(`/films/${card.id}`);
+  const checkHoverTime = () => {
+    timerId = setTimeout(() => {
+      setPlaying(true);
+    }, HOVER_TIME_BEFORE_PLAYING);
+  };
+
+  const resetHoverTime = () => {
+    clearTimeout(timerId);
+    setPlaying(false);
+  };
+
+  const handleImageClick = (filmId) => {
+    history.push(`/films/${filmId}`);
   };
 
   return (
     <div className="small-movie-card__image"
-      onClick={() => onImageClick(id)}
-      onMouseEnter={(evt) => {
-        evt.preventDefault();
-        onMouseEnter(film);
-      }}
-      onMouseLeave={(evt) => {
-        evt.preventDefault();
-        onMouseLeave();
-      }}>
+      onClick={() => handleImageClick(id)}
+      onMouseEnter={checkHoverTime}
+      onMouseLeave={resetHoverTime}>
       {visualFilm}
     </div>
   );
 };
 
 FilmSmallCardImage.propTypes = {
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
-  film: filmProp,
-  isPlaying: PropTypes.bool.isRequired
+  film: filmProp
 };
 
-export {FilmSmallCardImage};
-
-export default withPlayingStatus(FilmSmallCardImage);
+export default FilmSmallCardImage;

@@ -9,6 +9,7 @@ export const FilmTab = {
 export const DEFAULT_ACTIVE_TAB = FilmTab.OVERVIEW;
 export const DEFAULT_GENRE_FILTER_VALUE = `All genres`;
 export const INITIAL_FILMS_COUNT = 8;
+export const INITIAL_FILMS_SIMILAR_COUNT = 4;
 export const FILMS_COUNT_PER_PAGE = 8;
 export const MAX_GENRES_IN_FILTER = 9;
 export const API_ENDPOINT = `https://5.react.pages.academy/wtw`;

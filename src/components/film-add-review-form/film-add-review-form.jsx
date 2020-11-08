@@ -13,6 +13,8 @@ import FilmAddReviewFormTextFieldNotification
 const FilmAddReviewForm = (props) => {
   const {onFormChange, onSubmitForm, film, rating, reviewText, hasTextError, setSubmitProcess, isDisabled, onError, hasError} = props;
 
+  const error = (hasError && <FilmAddReviewFormErrorBlock errorText={`Something wrong, please, try again later`} />);
+
   return (
     <div className="add-review">
       <form action="#" className="add-review__form" onChange={onFormChange} onSubmit={(evt) => {
@@ -29,7 +31,7 @@ const FilmAddReviewForm = (props) => {
           </div>
         </div>
       </form>
-      <FilmAddReviewFormErrorBlock hasError={hasError} />
+      {error}
     </div>
   );
 };

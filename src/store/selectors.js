@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {AuthorizationStatus, DEFAULT_GENRE_FILTER_VALUE} from "../const";
+import {AuthorizationStatus, DEFAULT_GENRE_FILTER_VALUE, INITIAL_FILMS_SIMILAR_COUNT} from "../const";
 
 const getFilmsSelector = (state) => state.DATA.films.entities;
 export const getFilms = createSelector(
@@ -40,7 +40,7 @@ export const getSimilarFilms = createSelector(
           return film.genre.includes(genre) && film.id !== f.id;
         });
         return similarGenres.length > 0;
-      }).slice(0, 4);
+      }).slice(0, INITIAL_FILMS_SIMILAR_COUNT);
     }
 );
 
