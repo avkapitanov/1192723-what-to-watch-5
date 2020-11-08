@@ -26,60 +26,12 @@ const film = {
   isFavorite: false
 };
 
-const noop = () => {};
-
 describe(`FilmAddReviewForm component render correctly`, () => {
   it(`Init state`, () => {
     const tree = renderer.create(
         <FilmAddReviewForm
           film={film}
-          onFormChange={noop}
-          onSubmitForm={noop}
-          rating={`3`}
-          reviewText={``}
-          hasTextError={false}
-          isDisabled={false}
-          hasError={false}
-          setSubmitProcess={noop}
-          onError={noop}
-        />
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`With error`, () => {
-    const tree = renderer.create(
-        <FilmAddReviewForm
-          film={film}
-          onFormChange={noop}
-          onSubmitForm={noop}
-          rating={`3`}
-          reviewText={``}
-          hasTextError={false}
-          isDisabled={false}
-          hasError={true}
-          setSubmitProcess={noop}
-          onError={noop}
-        />
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`With text length error`, () => {
-    const tree = renderer.create(
-        <FilmAddReviewForm
-          film={film}
-          onFormChange={noop}
-          onSubmitForm={noop}
-          rating={`3`}
-          reviewText={``}
-          hasTextError={true}
-          isDisabled={false}
-          hasError={false}
-          setSubmitProcess={noop}
-          onError={noop}
+          onSubmitForm={() => {}}
         />
     ).toJSON();
 

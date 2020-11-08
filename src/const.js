@@ -51,8 +51,6 @@ export const REVIEW_RATING_MODIFIER = 2;
 export const MIN_REVIEW_TEXT = 50;
 export const MAX_REVIEW_TEXT = 400;
 export const HOVER_TIME_BEFORE_HIDE_ERROR = 5000;
-export const PLAYER_PAUSE_BTN_TYPE = `pause`;
-export const PLAYER_PLAY_BTN_TYPE = `play`;
 export const EMAIL_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 export const APIRoute = {
   FILMS: `/films`,
@@ -61,4 +59,5 @@ export const APIRoute = {
   PROMO_FILM: `/films/promo`,
   LOGIN: `/login`
 };
+export const TIMER_UPDATE_FREQUENCY = 1000;
 

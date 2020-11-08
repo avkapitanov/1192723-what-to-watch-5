@@ -13,6 +13,7 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
       disabled={true}
       id="star-1"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={1}
     />
@@ -29,6 +30,7 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
       disabled={true}
       id="star-2"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={2}
     />
@@ -45,6 +47,7 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
       disabled={true}
       id="star-3"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={3}
     />
@@ -61,6 +64,7 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
       disabled={true}
       id="star-4"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={4}
     />
@@ -77,6 +81,7 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
       disabled={true}
       id="star-5"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={5}
     />
@@ -104,6 +109,7 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
       disabled={false}
       id="star-1"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={1}
     />
@@ -120,6 +126,7 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
       disabled={false}
       id="star-2"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={2}
     />
@@ -136,6 +143,7 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
       disabled={false}
       id="star-3"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={3}
     />
@@ -152,6 +160,7 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
       disabled={false}
       id="star-4"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={4}
     />
@@ -168,6 +177,7 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
       disabled={false}
       id="star-5"
       name="rating"
+      onChange={[Function]}
       type="radio"
       value={5}
     />
