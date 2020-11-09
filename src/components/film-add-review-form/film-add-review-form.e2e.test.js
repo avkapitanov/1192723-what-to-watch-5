@@ -43,8 +43,10 @@ it(`Should Submit Form was sended`, () => {
   );
 
   const addReviewForm = wrapper.find(`.add-review__form`);
+  const formSendPrevention = jest.fn();
   addReviewForm.simulate(`submit`, {
-    preventDefault: () => {}
+    preventDefault: formSendPrevention
   });
   expect(handleSubmit).toHaveBeenCalledTimes(1);
+  expect(formSendPrevention).toHaveBeenCalledTimes(1);
 });

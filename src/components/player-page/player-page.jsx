@@ -18,6 +18,10 @@ const PlayerPage = (props) => {
   const [isPlaying, setPlaying] = useStateWithCallbackLazy(false);
 
   const onVideoRefChange = useCallback((video) => {
+    if (video === null) {
+      return;
+    }
+
     video.oncanplaythrough = () => setDuration(video.duration);
     setVideoRef(video);
   }, []);

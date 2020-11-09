@@ -39,8 +39,6 @@ const mapStateToProps = (state) => ({
   selectedFilterGenre: getSelectedGenre(state)
 });
 
-export {MainPage};
-
 MainPage.propTypes = {
   films: filmsProp,
   selectedFilterGenre: PropTypes.string.isRequired,
@@ -52,5 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchPromoFilm());
   }
 });
+
+export {MainPage};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

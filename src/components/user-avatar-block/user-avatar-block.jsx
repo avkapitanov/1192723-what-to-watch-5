@@ -7,12 +7,12 @@ import {getAuthInfo, getAuthorizationStatus} from "../../store/selectors";
 import UserAvatarBlockImage from "../user-avatar-block-image/user-avatar-block-image";
 
 const UserAvatarBlock = (props) => {
-  const {avatarUrl} = props.authInfo;
   const {authorizationStatus} = props;
   const isLogged = authorizationStatus === AuthorizationStatus.AUTH;
 
   let userBlockContent;
   if (isLogged) {
+    const {avatarUrl} = props.authInfo;
     userBlockContent = <UserAvatarBlockImage avatarUrl={avatarUrl}/>;
   } else {
     userBlockContent = <Link className="user-block__link" to={{pathname: `/login`}}>Sign in</Link>;

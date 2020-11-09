@@ -65,8 +65,6 @@ FilmAddReviewPage.propTypes = {
   fetchFilmForReview: PropTypes.func.isRequired
 };
 
-export {FilmAddReviewPage};
-
 const mapStateToProps = (state) => ({
   film: getFilm(state)
 });
@@ -76,5 +74,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchFilm(id));
   }
 });
+
+export {FilmAddReviewPage};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmAddReviewPage);
