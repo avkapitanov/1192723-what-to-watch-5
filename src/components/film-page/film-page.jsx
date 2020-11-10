@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import {connect} from "react-redux";
 import PageLogo from "../page-logo/page-logo";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useHistory} from "react-router-dom";
 import {getFilm, getFilmId, getFilmReviews, getLoggedFlag, getSimilarFilms} from "../../store/selectors";
 import FilmList from "../film-list/film-list";
 import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
@@ -17,11 +17,11 @@ import {FilmTab} from "../../const";
 
 const FilmPage = (props) =>{
   const match = useParams();
+  const history = useHistory();
   const {film, isLogged, reviews, similarFilms} = props;
 
   const handlePlayBtnClick = (evt) => {
     evt.preventDefault();
-    const {history} = props;
     history.push(`/player/` + evt.target.closest(`button`).dataset.id);
   };
 
@@ -49,9 +49,13 @@ const FilmPage = (props) =>{
   }}
   className="btn movie-card__button">Add review</Link>);
 
+  const movieCardStyle = {
+    background: film.backgroundColor
+  };
+
   return (
       <>
-        <section className="movie-card movie-card--full">
+        <section className="movie-card movie-card--full" style={movieCardStyle}>
           <div className="movie-card__hero">
             <div className="movie-card__bg">
               <img src={film.background} alt={film.title}/>
@@ -117,18 +121,10 @@ FilmPage.propTypes = {
   film: filmProp,
   similarFilms: filmsProp,
   reviews: reviewsProp,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.object
-  }),
   fetchFilm: PropTypes.func.isRequired,
   fetchFilmComments: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired
 };
-
-export {FilmPage};
 
 const mapStateToProps = (state) => ({
   filmId: getFilmId(state),
@@ -146,5 +142,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchFilm(id));
   }
 });
+
+export {FilmPage};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);

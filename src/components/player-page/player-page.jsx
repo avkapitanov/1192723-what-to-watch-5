@@ -18,13 +18,17 @@ const PlayerPage = (props) => {
   const [isPlaying, setPlaying] = useStateWithCallbackLazy(false);
 
   const onVideoRefChange = useCallback((video) => {
-    if (video === null) {
-      return;
+    if (video !== null) {
+      video.oncanplaythrough = () => setDuration(video.duration);
+      setVideoRef(video);
     }
-
-    video.oncanplaythrough = () => setDuration(video.duration);
-    setVideoRef(video);
   }, []);
+
+  useEffect(() => {
+    if (videoRef !== null) {
+      handlePlayBtnClick();
+    }
+  }, [videoRef]);
 
   useEffect(() => {
     updateFilmInfo();
@@ -61,7 +65,7 @@ const PlayerPage = (props) => {
   };
 
   const handleExitBtnClick = () => {
-    history.goBack();
+    history.push(`/films/${film.id}`);
   };
 
   const handleFullscreenBtnClick = () => {

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const RatingStar = (props) => {
-  const {currentRating, isDisabled, maxRating, onChangeHandler} = props;
+  const {isDisabled, maxRating, onChangeHandler} = props;
 
   return (
     <div className="rating">
@@ -12,7 +12,6 @@ const RatingStar = (props) => {
           return (
             <React.Fragment key={`star-${numb}`}>
               <input className="rating__input" id={`star-${value}`} type="radio" name="rating" value={value}
-                defaultChecked={+currentRating === value}
                 disabled={isDisabled}
                 onChange={onChangeHandler}
               />
@@ -27,7 +26,6 @@ const RatingStar = (props) => {
 };
 
 RatingStar.propTypes = {
-  currentRating: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   maxRating: PropTypes.number.isRequired,
   onChangeHandler: PropTypes.func.isRequired

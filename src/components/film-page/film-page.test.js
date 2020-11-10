@@ -1,11 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MainPage from "./main-page";
+import FilmPage from "./film-page";
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
-import configureStore from 'redux-mock-store';
+import configureStore from "redux-mock-store";
+import {AuthorizationStatus} from "../../const";
 import {Provider} from "react-redux";
-import {AuthorizationStatus, DEFAULT_GENRE_FILTER_VALUE} from "../../const";
 
 const films = {
   "1": {
@@ -34,7 +34,7 @@ const films = {
   "2": {
     id: 2,
     title: `What We Do in the Shadows`,
-    genre: [`Comedy`],
+    genre: [`Comedy`, `Drama`],
     year: 2019,
     poster: `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/What-We-Do-in-the-Shadows.jpg`,
     posterImage: `https://assets.htmlacademy.ru/intensives/javascript-3/film/poster/What-We-Do-in-the-Shadows.jpg`,
@@ -79,25 +79,34 @@ const films = {
   }
 };
 
+const reviews = [{
+  "id": 1,
+  "user": {"id": 17, "name": `Emely`},
+  "rating": 7.5,
+  "comment": `This movie is just plain bad. There must be some big payola going round this awards season. Badly written, average acting at best, all the characters are unrelatable and inlikeable. 2 hours of my life wasted.`,
+  "date": `2020-10-08T13:38:44.769Z`
+}, {
+  "id": 2,
+  "user": {"id": 17, "name": `Emely`},
+  "rating": 5.8,
+  "comment": `I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen.`,
+  "date": `2020-11-06T13:38:44.769Z`
+}, {
+  "id": 3,
+  "user": {"id": 10, "name": `Max`},
+  "rating": 7.9,
+  "comment": `I really find it difficult to believe this movie is rated highly by people. It's hands down the worst movie I've seen in my life`,
+  "date": `2020-11-04T13:38:44.769Z`
+}];
+
 const mockStore = configureStore([]);
 const store = mockStore({
   DATA: {
     films: {
       entities: films
     },
-    promoId: 3,
-    filterGenres: [
-      `All genres`,
-      `Drama`,
-      `Comedy`,
-      `Horror`,
-      `Romance`,
-      `Sci-Fi`
-    ],
-  },
-  PROCESS: {
-    selectedFilterGenre: DEFAULT_GENRE_FILTER_VALUE,
-    isLoading: false
+    filmId: 1,
+    reviews
   },
   USER: {
     authorizationStatus: AuthorizationStatus.AUTH,
@@ -110,16 +119,16 @@ const store = mockStore({
   }
 });
 
-it(`MainPage component render correctly`, () => {
+it(`FilmPage component render correctly`, () => {
   const tree = renderer.create(
       <Provider store={store}>
         <BrowserRouter history={browserHistory}>
-          <MainPage
-            fetchMyFilms={() => {}}
-          />
+          <FilmPage />
         </BrowserRouter>
       </Provider>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+
+

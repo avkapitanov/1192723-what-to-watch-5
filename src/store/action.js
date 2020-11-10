@@ -9,6 +9,7 @@ export const ActionType = {
   CHANGE_FILM_FAVORITE_STATUS: `CHANGE_FILM_FAVORITE_STATUS`,
   LOAD_REVIEWS_FOR_FILM: `LOAD_REVIEWS_FOR_FILM`,
   FETCH_FILM_REQUEST: `FETCH_FILM_REQUEST`,
+  SET_LOADING_STATUS: `SET_LOADING_STATUS`
 };
 
 export const loadFilms = (films) => ({
@@ -54,4 +55,9 @@ export const getReviewsForFilm = (comments) => ({
 export const loadFilm = (film) => ({
   type: ActionType.FETCH_FILM_REQUEST,
   payload: film,
+});
+
+export const setLoadingStatus = (status) => ({
+  type: ActionType.SET_LOADING_STATUS,
+  payload: status
 });

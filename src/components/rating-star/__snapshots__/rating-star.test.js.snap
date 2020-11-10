@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = `
+exports[`RatingStar component render correctly Disabled, max 5 1`] = `
 <div
   className="rating"
 >
@@ -9,7 +9,6 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
   >
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={true}
       id="star-1"
       name="rating"
@@ -26,7 +25,6 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
     </label>
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={true}
       id="star-2"
       name="rating"
@@ -43,7 +41,6 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
     </label>
     <input
       className="rating__input"
-      defaultChecked={true}
       disabled={true}
       id="star-3"
       name="rating"
@@ -60,7 +57,6 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
     </label>
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={true}
       id="star-4"
       name="rating"
@@ -77,7 +73,6 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
     </label>
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={true}
       id="star-5"
       name="rating"
@@ -96,7 +91,7 @@ exports[`RatingStar component render correctly Disabled, current 3, max 5 1`] = 
 </div>
 `;
 
-exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
+exports[`RatingStar component render correctly Enabled, max 5 1`] = `
 <div
   className="rating"
 >
@@ -105,7 +100,6 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
   >
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={false}
       id="star-1"
       name="rating"
@@ -122,7 +116,6 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
     </label>
     <input
       className="rating__input"
-      defaultChecked={true}
       disabled={false}
       id="star-2"
       name="rating"
@@ -139,7 +132,6 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
     </label>
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={false}
       id="star-3"
       name="rating"
@@ -156,7 +148,6 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
     </label>
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={false}
       id="star-4"
       name="rating"
@@ -173,7 +164,6 @@ exports[`RatingStar component render correctly Enabled, current 2, max 5 1`] = `
     </label>
     <input
       className="rating__input"
-      defaultChecked={false}
       disabled={false}
       id="star-5"
       name="rating"

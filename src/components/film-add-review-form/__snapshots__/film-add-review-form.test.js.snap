@@ -17,7 +17,6 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
       >
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-1"
           name="rating"
@@ -34,7 +33,6 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-2"
           name="rating"
@@ -51,7 +49,6 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={true}
           disabled={false}
           id="star-3"
           name="rating"
@@ -68,7 +65,6 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-4"
           name="rating"
@@ -85,7 +81,6 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-5"
           name="rating"

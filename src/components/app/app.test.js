@@ -96,7 +96,8 @@ const store = mockStore({
     ],
   },
   PROCESS: {
-    selectedFilterGenre: DEFAULT_GENRE_FILTER_VALUE
+    selectedFilterGenre: DEFAULT_GENRE_FILTER_VALUE,
+    isLoading: false
   },
   USER: {
     authorizationStatus: AuthorizationStatus.AUTH,

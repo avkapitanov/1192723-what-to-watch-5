@@ -131,8 +131,8 @@ describe(`Async operation work correctly`, () => {
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.LOAD_FILMS,
           payload: [{fake: true}],
         });

@@ -1,10 +1,24 @@
-import {loadFilms, loadMyFilms, requireAuthorization, loadPromoFilm, redirectToRoute, getReviewsForFilm, changeFavoriteStatus, loadFilm} from "./action";
+import {
+  loadFilms,
+  loadMyFilms,
+  requireAuthorization,
+  loadPromoFilm,
+  redirectToRoute,
+  getReviewsForFilm,
+  changeFavoriteStatus,
+  loadFilm,
+  setLoadingStatus
+} from "./action";
 import {APIRoute, AppRoute, AuthorizationStatus} from "../const";
 
-export const fetchFilmsList = () => (dispatch, _getState, api) => (
-  api.get(APIRoute.FILMS)
-    .then(({data}) => dispatch(loadFilms(data)))
-);
+export const fetchFilmsList = () => (dispatch, _getState, api) => {
+  dispatch(setLoadingStatus(true));
+  return api.get(APIRoute.FILMS)
+    .then(({data}) => {
+      dispatch(setLoadingStatus(false));
+      dispatch(loadFilms(data));
+    });
+};
 
 export const fetchMyFilmsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE)

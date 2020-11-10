@@ -5,10 +5,9 @@ import RatingStar from "./rating-star";
 const noop = () => {};
 
 describe(`RatingStar component render correctly`, () => {
-  it(`Disabled, current 3, max 5`, () => {
+  it(`Disabled, max 5`, () => {
     const tree = renderer.create(
         <RatingStar
-          currentRating={`3`}
           isDisabled={true}
           maxRating={5}
           onChangeHandler={noop}
@@ -18,10 +17,9 @@ describe(`RatingStar component render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Enabled, current 2, max 5`, () => {
+  it(`Enabled, max 5`, () => {
     const tree = renderer.create(
         <RatingStar
-          currentRating={`2`}
           isDisabled={false}
           maxRating={5}
           onChangeHandler={noop}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loader component render correctly With loading 1`] = `
+exports[`Loader component render correctly 1`] = `
 <svg
   height="57"
   stroke="#fff"

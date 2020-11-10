@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useHistory} from 'react-router-dom';
-import SmallCardVideoPlayer from "../small-card-video-player/small-card-video-player";
+import FilmSmallCardVideoPlayer from "../film-small-card-video-player/film-small-card-video-player";
 import filmProp from "../film-page/film.prop";
 import {HOVER_TIME_BEFORE_PLAYING} from "../../const";
 
@@ -14,8 +14,7 @@ const FilmSmallCardImage = (props) => {
   const {film} = props;
   const {id, title, poster, previewVideoLink} = film;
 
-  const visualFilm = isPlaying ? <SmallCardVideoPlayer
-    isPlaying={false}
+  const visualFilm = isPlaying ? <FilmSmallCardVideoPlayer
     src={previewVideoLink}
     poster={poster}
   /> : <img src={poster} alt={title} width="280" height="175" />;

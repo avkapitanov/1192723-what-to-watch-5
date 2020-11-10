@@ -16,6 +16,7 @@ export const getFilmReviews = (state) => state.DATA.reviews;
 export const getFilm = (state) => state.DATA.films.entities[state.DATA.filmId];
 export const getPromoFilm = (state) => state.DATA.films.entities[state.DATA.promoId];
 export const getFilterGenres = (state) => state.DATA.filterGenres;
+export const getLoadingFlag = (state) => state.PROCESS.isLoading;
 
 export const filterFilmsByGenre = createSelector(
     [getFilms, getSelectedGenre],

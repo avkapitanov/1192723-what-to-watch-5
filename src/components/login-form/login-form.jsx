@@ -1,12 +1,12 @@
-import React, {useState, createRef} from "react";
+import React, {createRef} from "react";
 import {login} from "../../store/api-actions";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {EMAIL_REGEXP} from "../../const";
 
 const LoginForm = (props) => {
-  const [isEmailError, setEmailError] = useState(false);
-  const [isPasswordError, setPasswordError] = useState(false);
+  const [isEmailError, setEmailError] = React.useState(false);
+  const [isPasswordError, setPasswordError] = React.useState(false);
 
   const loginRef = createRef();
   const passwordRef = createRef();

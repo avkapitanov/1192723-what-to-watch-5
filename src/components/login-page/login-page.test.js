@@ -9,7 +9,7 @@ import {AuthorizationStatus} from "../../const";
 
 const mockStore = configureStore([]);
 
-describe(`LoginPage component render correctl`, () => {
+describe(`LoginPage component render correct`, () => {
   it(`No auth`, () => {
     const store = mockStore({
       USER: {
