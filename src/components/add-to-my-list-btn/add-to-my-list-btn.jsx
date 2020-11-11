@@ -1,7 +1,7 @@
 import React from "react";
-import {fetchAddToMyList} from "../../store/api-actions";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {fetchAddToMyList} from "../../store/api-actions";
 import {getLoggedFlag} from "../../store/selectors";
 
 const AddToMyListBtn = (props) => {

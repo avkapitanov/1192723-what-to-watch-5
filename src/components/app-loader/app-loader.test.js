@@ -1,5 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
+
 import AppLoader from "./app-loader";
 
 it(`AppLoader component render correctly`, () => {

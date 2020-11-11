@@ -1,13 +1,15 @@
 import React from "react";
-import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
-import PageLogo from "../page-logo/page-logo";
+import filmProp from "../film-page/film.prop";
 import {connect} from "react-redux";
 import {useHistory} from "react-router-dom";
-import filmProp from "../film-page/film.prop";
-import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+
 import {getPromoFilm} from "../../store/selectors";
 
-const PromoFilm = (props) => {
+import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import PageLogo from "../page-logo/page-logo";
+
+const PromoFilm = ({promoFilm}) => {
   const history = useHistory();
 
   const handlePlayBtnClick = (evt) => {
@@ -15,11 +17,11 @@ const PromoFilm = (props) => {
     history.push(`/player/` + evt.currentTarget.dataset.id);
   };
 
-  if (!props.promoFilm) {
+  if (!promoFilm) {
     return null;
   }
 
-  const {id, title, genre, year, posterImage, background, isFavorite} = props.promoFilm;
+  const {id, title, genre, year, posterImage, background, isFavorite} = promoFilm;
 
   return (
     <section className="movie-card">

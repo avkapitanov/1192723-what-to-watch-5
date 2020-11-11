@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
-import FilmSmallCard from "../film-small-card/film-small-card";
 import filmsProp from "../film-page/films.prop";
-import ShowMoreFilmsBtn from "../show-more-films-btn/show-more-films-btn";
+
 import {FILMS_COUNT_PER_PAGE, INITIAL_FILMS_COUNT} from "../../const";
+import FilmSmallCard from "../film-small-card/film-small-card";
+import ShowMoreFilmsBtn from "../show-more-films-btn/show-more-films-btn";
 
 const FilmList = (props) => {
   const {films, initialFilmsCount, perPage, selectedGenre} = props;

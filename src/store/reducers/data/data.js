@@ -24,10 +24,9 @@ const data = (state = initialState, action) => {
     case ActionType.LOAD_MY_FILMS:
       return extend(state, getNewMyFilmsState(action.payload));
     case ActionType.LOAD_PROMO:
-      const adaptedPromo = adaptFilmToClient(action.payload);
       return extend(state, {
-        films: getNewFilmsStateAfterFilmUpdate(state, adaptedPromo),
-        promoId: adaptedPromo.id
+        films: getNewFilmsStateAfterFilmUpdate(state, action.payload),
+        promoId: action.payload.id
       });
     case ActionType.CHANGE_FILM_FAVORITE_STATUS:
       return extend(state, {
@@ -38,10 +37,9 @@ const data = (state = initialState, action) => {
         reviews: action.payload
       });
     case ActionType.FETCH_FILM_REQUEST:
-      const adaptedFilm = adaptFilmToClient(action.payload);
       return extend(state, {
-        films: getNewFilmsStateAfterFilmUpdate(state, adaptedFilm),
-        filmId: adaptedFilm.id
+        films: getNewFilmsStateAfterFilmUpdate(state, action.payload),
+        filmId: action.payload.id
       });
   }
 

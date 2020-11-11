@@ -1,5 +1,6 @@
 import React from "react";
 import filmProp from "../film-page/film.prop";
+
 import {formatToHumanFilmRating} from "../../utils";
 
 const FilmPageOverviewTab = (props) => {

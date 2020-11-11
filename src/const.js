@@ -62,7 +62,8 @@ export const TIMER_UPDATE_FREQUENCY = 1000;
 export const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
-  FILMS: `/films`
+  FILMS: `/films`,
+  MY_LIST: `/mylist`
 };
 
 

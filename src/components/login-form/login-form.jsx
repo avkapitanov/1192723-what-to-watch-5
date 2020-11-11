@@ -1,7 +1,9 @@
 import React, {createRef} from "react";
-import {login} from "../../store/api-actions";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {login} from "../../store/api-actions";
+
 import {EMAIL_REGEXP} from "../../const";
 
 const LoginForm = (props) => {

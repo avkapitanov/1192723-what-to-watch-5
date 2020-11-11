@@ -3,6 +3,11 @@
 exports[`FilmAddReviewPage component render correctly 1`] = `
 <section
   className="movie-card movie-card--full"
+  style={
+    Object {
+      "background": "#E1DFDE",
+    }
+  }
 >
   <div
     className="movie-card__header"

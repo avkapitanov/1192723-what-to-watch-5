@@ -1,14 +1,16 @@
 import React, {useEffect, useState, useCallback} from "react";
-import {useHistory, useParams} from 'react-router-dom';
-import {getFilm} from "../../store/selectors";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import filmProp from "../film-page/film.prop";
+import {connect} from "react-redux";
+import {useHistory, useParams} from 'react-router-dom';
+
 import {fetchFilm} from "../../store/api-actions";
+import {getFilm} from "../../store/selectors";
 import {useStateWithCallbackLazy} from "../../hooks/use-state-with-callback-lazy/use-state-with-callback-lazy";
 import {TIMER_UPDATE_FREQUENCY} from "../../const";
 
 const PlayerPage = (props) => {
+  const {film} = props;
   const history = useHistory();
   const match = useParams();
   const [timerId, setTimerId] = useState(null);
@@ -16,13 +18,8 @@ const PlayerPage = (props) => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setPlaying] = useStateWithCallbackLazy(false);
-
-  const onVideoRefChange = useCallback((video) => {
-    if (video !== null) {
-      video.oncanplaythrough = () => setDuration(video.duration);
-      setVideoRef(video);
-    }
-  }, []);
+  const playerPosition = (currentTime / duration) * 100;
+  const timeElapsed = new Date((duration - currentTime) * 1000).toISOString().substr(11, 8);
 
   useEffect(() => {
     if (videoRef !== null) {
@@ -35,6 +32,13 @@ const PlayerPage = (props) => {
     return () => {
       clearInterval(timerId);
     };
+  }, []);
+
+  const onVideoRefChange = useCallback((video) => {
+    if (video !== null) {
+      video.oncanplaythrough = () => setDuration(video.duration);
+      setVideoRef(video);
+    }
   }, []);
 
   const handlePauseBtnClick = () => {
@@ -65,6 +69,7 @@ const PlayerPage = (props) => {
   };
 
   const handleExitBtnClick = () => {
+    clearInterval(timerId);
     history.push(`/films/${film.id}`);
   };
 
@@ -86,10 +91,6 @@ const PlayerPage = (props) => {
     const id = parseInt(match.id, 10);
     props.fetchFilm(id);
   };
-
-  const {film} = props;
-  const playerPosition = (currentTime / duration) * 100;
-  const timeElapsed = new Date((duration - currentTime) * 1000).toISOString().substr(11, 8);
 
   if (!film) {
     return null;

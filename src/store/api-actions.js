@@ -10,11 +10,13 @@ import {
   setLoadingStatus
 } from "./action";
 import {APIRoute, AppRoute, AuthorizationStatus} from "../const";
+import {adaptFilmsToClient, adaptFilmToClient} from "../utils";
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => {
   dispatch(setLoadingStatus(true));
   return api.get(APIRoute.FILMS)
-    .then(({data}) => {
+    .then(({data}) => adaptFilmsToClient(data))
+    .then((data) => {
       dispatch(setLoadingStatus(false));
       dispatch(loadFilms(data));
     });
@@ -22,7 +24,8 @@ export const fetchFilmsList = () => (dispatch, _getState, api) => {
 
 export const fetchMyFilmsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE)
-    .then(({data}) => dispatch(loadMyFilms(data)))
+    .then(({data}) => adaptFilmsToClient(data))
+    .then((data) => dispatch(loadMyFilms(data)))
 );
 
 export const fetchAddToMyList = (id, status) => (dispatch, _getState, api) => (
@@ -40,7 +43,8 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const fetchPromoFilm = () => (dispatch, _getState, api) => (
   api.get(APIRoute.PROMO_FILM)
-    .then(({data}) => dispatch(loadPromoFilm(data)))
+    .then(({data}) => adaptFilmToClient(data))
+    .then((data) => dispatch(loadPromoFilm(data)))
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
@@ -58,7 +62,8 @@ export const fetchFilmCommentsList = (id) => (dispatch, _getState, api) => (
 
 export const fetchFilm = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.FILMS}/${id}`)
-    .then(({data}) => dispatch(loadFilm(data)))
+    .then(({data}) => adaptFilmToClient(data))
+    .then((data) => dispatch(loadFilm(data)))
 );
 
 export const fetchReview = (id, rating, comment, callback) => (dispatch, _getState, api) => (

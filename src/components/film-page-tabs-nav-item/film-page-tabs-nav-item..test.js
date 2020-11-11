@@ -1,15 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FilmPageTabsNavItem from "./film-page-tabs-nav-item";
 
-const tabName = `Overview`;
+import {activeTab} from "../../mocks/tabs";
+import FilmPageTabsNavItem from "./film-page-tabs-nav-item";
 
 describe(`FilmPageTabsNavItem component render correctly`, () => {
   it(`Active tab`, () => {
     const tree = renderer.create(
         <FilmPageTabsNavItem
           isActive={true}
-          tabName={tabName}
+          tabName={activeTab}
           onActiveTabChange={() => {}}
         />
     ).toJSON();
@@ -21,7 +21,7 @@ describe(`FilmPageTabsNavItem component render correctly`, () => {
     const tree = renderer.create(
         <FilmPageTabsNavItem
           isActive={false}
-          tabName={tabName}
+          tabName={activeTab}
           onActiveTabChange={() => {}}
         />
     ).toJSON();

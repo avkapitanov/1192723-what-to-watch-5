@@ -1,14 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import AddToMyListBtn from "./add-to-my-list-btn";
+import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {AuthorizationStatus} from "../../const";
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
-import {Provider} from "react-redux";
+
+import {AuthorizationStatus} from "../../const";
+import AddToMyListBtn from "./add-to-my-list-btn";
 
 const mockStore = configureStore([]);
-
 
 describe(`AddToMyListBtn component render correctly`, () => {
   it(`With unauthorized user`, () => {

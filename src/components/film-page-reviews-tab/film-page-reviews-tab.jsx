@@ -1,6 +1,7 @@
 import React from "react";
-import FilmReviewCard from "../film-review-card/film-review-card";
 import reviewsProp from "./reviews.prop";
+
+import FilmReviewCard from "../film-review-card/film-review-card";
 
 const FilmPageReviewsTab = (props) => {
   const {reviews} = props;

@@ -7,6 +7,7 @@ const AppLoader = () => {
     height: `100%`,
     width: `100%`
   };
+
   const loaderStyle = {
     position: `absolute`,
     left: `50%`,

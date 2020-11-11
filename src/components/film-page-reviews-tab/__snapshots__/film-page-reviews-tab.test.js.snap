@@ -16,7 +16,7 @@ exports[`FilmPageReviewsTab component render correctly 1`] = `
         <p
           className="review__text"
         >
-          I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen.
+          This movie is just plain bad. There must be some big payola going round this awards season. Badly written, average acting at best, all the characters are unrelatable and inlikeable. 2 hours of my life wasted.
         </p>
         <footer
           className="review__details"
@@ -24,20 +24,20 @@ exports[`FilmPageReviewsTab component render correctly 1`] = `
           <cite
             className="review__author"
           >
-            Mollie
+            Emely
           </cite>
           <time
             className="review__date"
-            dateTime="2020-10-30"
+            dateTime="2020-10-08"
           >
-            October 30, 2020
+            October 08, 2020
           </time>
         </footer>
       </blockquote>
       <div
         className="review__rating"
       >
-        3.3
+        7.5
       </div>
     </div>
     <div
@@ -57,20 +57,20 @@ exports[`FilmPageReviewsTab component render correctly 1`] = `
           <cite
             className="review__author"
           >
-            Kendall
+            Emely
           </cite>
           <time
             className="review__date"
-            dateTime="2020-10-13"
+            dateTime="2020-11-06"
           >
-            October 13, 2020
+            November 06, 2020
           </time>
         </footer>
       </blockquote>
       <div
         className="review__rating"
       >
-        9.4
+        5.8
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@ exports[`FilmPageReviewsTab component render correctly 1`] = `
         <p
           className="review__text"
         >
-          This movie is perfect in all its categories: credits, sound track, production, casting, writing, photography, editing, acting, and direction. I was amazed with the freedom of the use of the camera. This movie will change the way movies are made. Slow-mo, stills, black and white, and color were all used to brilliant effect.
+          I really find it difficult to believe this movie is rated highly by people. It's hands down the worst movie I've seen in my life
         </p>
         <footer
           className="review__details"
@@ -94,20 +94,20 @@ exports[`FilmPageReviewsTab component render correctly 1`] = `
           <cite
             className="review__author"
           >
-            Zak
+            Max
           </cite>
           <time
             className="review__date"
-            dateTime="2020-10-06"
+            dateTime="2020-11-04"
           >
-            October 06, 2020
+            November 04, 2020
           </time>
         </footer>
       </blockquote>
       <div
         className="review__rating"
       >
-        3.3
+        7.9
       </div>
     </div>
   </div>

@@ -1,8 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import PageLogo from "./page-logo";
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
+
+import PageLogo from "./page-logo";
 
 describe(`PageLogo component render correctly`, () => {
   it(`Header without props`, () => {

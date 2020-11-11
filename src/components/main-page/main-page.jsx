@@ -1,14 +1,16 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import filmsProp from "../film-page/films.prop";
+import {connect} from "react-redux";
+
+import {fetchPromoFilm} from "../../store/api-actions";
+import {filterFilmsByGenre, getLoadingFlag, getSelectedGenre} from "../../store/selectors";
+
+import AppLoader from "../app-loader/app-loader";
 import FilmList from "../film-list/film-list";
 import PageFooter from "../page-footer/page-footer";
 import FilmsFilter from "../films-filter/films-filter";
 import PromoFilm from "../promo-film/promo-film";
-import {filterFilmsByGenre, getLoadingFlag, getSelectedGenre} from "../../store/selectors";
-import {connect} from "react-redux";
-import filmsProp from "../film-page/films.prop";
-import PropTypes from "prop-types";
-import {fetchPromoFilm} from "../../store/api-actions";
-import AppLoader from "../app-loader/app-loader";
 
 const MainPage = (props) => {
   const {films, selectedFilterGenre, fetchPromo, isLoading} = props;

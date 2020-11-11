@@ -6,3 +6,5 @@ export const filterGenres = [
   `Romance`,
   `Sci-Fi`
 ];
+
+export const selectedFilterGenre = `Drama`;

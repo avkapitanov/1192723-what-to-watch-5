@@ -17,3 +17,11 @@ export const reviews = [{
   "comment": `I really find it difficult to believe this movie is rated highly by people. It's hands down the worst movie I've seen in my life`,
   "date": `2020-11-04T13:38:44.769Z`
 }];
+
+export const review = {
+  "id": 1,
+  "user": {"id": 16, "name": `Mollie`},
+  "rating": 3.3,
+  "comment": `I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen.`,
+  "date": `2020-10-30T11:53:40.154Z`
+};

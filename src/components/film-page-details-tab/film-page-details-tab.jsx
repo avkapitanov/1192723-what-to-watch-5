@@ -1,5 +1,6 @@
 import React from "react";
 import filmProp from "../film-page/film.prop";
+
 import {formatFilmDuration} from "../../utils";
 
 const FilmPageDetailsTab = (props) => {

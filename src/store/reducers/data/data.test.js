@@ -18,10 +18,12 @@ import {
   adaptFilmToClient,
   getNewFilmsState,
   getNewMyFilmsState,
-  extend, getNewFilmsStateAfterFilmUpdate
+  extend, getNewFilmsStateAfterFilmUpdate, adaptFilmsToClient
 } from "../../../utils";
 
 const api = createAPI(() => {});
+const adaptedFilms = adaptFilmsToClient(films);
+const adaptedPromoFilm = adaptFilmToClient(promoFilm);
 
 it(`Data reducer without additional parameters should return initial state`, () => {
   expect(data(void 0, {})).toEqual({
@@ -46,8 +48,8 @@ it(`Data reducer should update films and genres by load films`, () => {
     filterGenres: []
   }, {
     type: ActionType.LOAD_FILMS,
-    payload: films,
-  })).toEqual(getNewFilmsState(films));
+    payload: adaptedFilms,
+  })).toEqual(getNewFilmsState(adaptedFilms));
 });
 
 it(`Data reducer should update my films by load my films`, () => {
@@ -55,14 +57,13 @@ it(`Data reducer should update my films by load my films`, () => {
     myFilms: []
   }, {
     type: ActionType.LOAD_MY_FILMS,
-    payload: films,
-  })).toEqual(getNewMyFilmsState(films));
+    payload: adaptedFilms,
+  })).toEqual(getNewMyFilmsState(adaptedFilms));
 });
 
 it(`Data reducer should update promo film by load promo film`, () => {
-  const adaptedFilm = adaptFilmToClient(promoFilm);
   const initialState = extend(
-      getNewFilmsState(films),
+      getNewFilmsState(adaptedFilms),
       {
         promoId: null
       }
@@ -70,10 +71,10 @@ it(`Data reducer should update promo film by load promo film`, () => {
   expect(data(
       initialState, {
         type: ActionType.LOAD_PROMO,
-        payload: promoFilm,
+        payload: adaptedPromoFilm,
       })).toEqual(extend(initialState,
       {
-        promoId: adaptedFilm.id
+        promoId: adaptedPromoFilm.id
       }));
 });
 
@@ -89,9 +90,8 @@ it(`Data reducer should update film reviews by load reviews`, () => {
 });
 
 it(`Data reducer should update film reviews by load film`, () => {
-  const adaptedFilm = adaptFilmToClient(promoFilm);
   const initialState = extend(
-      getNewFilmsState(films),
+      getNewFilmsState(adaptedFilms),
       {
         filmId: null
       }
@@ -99,16 +99,16 @@ it(`Data reducer should update film reviews by load film`, () => {
   expect(data(
       initialState, {
         type: ActionType.FETCH_FILM_REQUEST,
-        payload: promoFilm,
+        payload: adaptedPromoFilm,
       })).toEqual(extend(initialState,
       {
-        filmId: adaptedFilm.id
+        filmId: adaptedPromoFilm.id
       }));
 });
 
 it(`Data reducer should update film reviews by change favorite status`, () => {
   const adaptedFilm = adaptFilmToClient(filmWIthChangedStatus);
-  const initialState = getNewFilmsState(films);
+  const initialState = getNewFilmsState(adaptedFilms);
   expect(data(
       initialState, {
         type: ActionType.CHANGE_FILM_FAVORITE_STATUS,
@@ -127,14 +127,14 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(APIRoute.FILMS)
-      .reply(200, [{fake: true}]);
+      .reply(200, []);
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.LOAD_FILMS,
-          payload: [{fake: true}],
+          payload: [],
         });
       });
   });
@@ -146,14 +146,14 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(APIRoute.FAVORITE)
-      .reply(200, [{fake: true}]);
+      .reply(200, []);
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_MY_FILMS,
-          payload: [{fake: true}],
+          payload: [],
         });
       });
   });
@@ -165,14 +165,14 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(APIRoute.PROMO_FILM)
-      .reply(200, [{fake: true}]);
+      .reply(200, promoFilm);
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO,
-          payload: [{fake: true}],
+          payload: adaptedPromoFilm,
         });
       });
   });
@@ -205,14 +205,14 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(`${APIRoute.FILMS}/${filmId}`)
-      .reply(200, [{fake: true}]);
+      .reply(200, promoFilm);
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.FETCH_FILM_REQUEST,
-          payload: [{fake: true}],
+          payload: adaptedPromoFilm,
         });
       });
   });

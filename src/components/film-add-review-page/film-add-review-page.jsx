@@ -1,13 +1,15 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import filmProp from "../film-page/film.prop";
+import {connect} from "react-redux";
+import {Link, useParams} from "react-router-dom";
+
+import {fetchFilm} from "../../store/api-actions";
+import {getFilm} from "../../store/selectors";
+
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import PageLogo from "../page-logo/page-logo";
 import FilmAddReviewForm from "../film-add-review-form/film-add-review-form";
-import {getFilm} from "../../store/selectors";
-import {connect} from "react-redux";
-import filmProp from "../film-page/film.prop";
-import {fetchFilm} from "../../store/api-actions";
-import PropTypes from "prop-types";
-import {Link, useParams} from "react-router-dom";
 
 const FilmAddReviewPage = (props) => {
   const match = useParams();
@@ -21,8 +23,12 @@ const FilmAddReviewPage = (props) => {
     return null;
   }
 
+  const movieCardStyle = {
+    background: film.backgroundColor
+  };
+
   return (
-    <section className="movie-card movie-card--full">
+    <section className="movie-card movie-card--full" style={movieCardStyle}>
       <div className="movie-card__header">
         <div className="movie-card__bg">
           <img src={film.background} alt={film.title}/>

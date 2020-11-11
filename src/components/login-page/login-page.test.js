@@ -1,11 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import LoginPage from "./login-page";
+import {Provider} from "react-redux";
+import configureStore from 'redux-mock-store';
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
-import configureStore from 'redux-mock-store';
-import {Provider} from "react-redux";
+
 import {AuthorizationStatus} from "../../const";
+import LoginPage from "./login-page";
 
 const mockStore = configureStore([]);
 

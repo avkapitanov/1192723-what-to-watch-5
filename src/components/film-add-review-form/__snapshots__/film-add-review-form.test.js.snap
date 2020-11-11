@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilmAddReviewForm component render correctly Init state 1`] = `
+exports[`FilmAddReviewForm component render correctly 1`] = `
 <div
   className="add-review"
 >

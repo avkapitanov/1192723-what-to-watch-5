@@ -1,44 +1,45 @@
 import React, {useEffect} from "react";
-import PageFooter from "../page-footer/page-footer";
-import FilmPageTabs from "../film-page-tabs/film-page-tabs";
+import PropTypes from "prop-types";
 import filmProp from "./film.prop";
 import filmsProp from "./films.prop";
-import PropTypes from "prop-types";
-import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
-import {connect} from "react-redux";
-import PageLogo from "../page-logo/page-logo";
-import {Link, useParams, useHistory} from "react-router-dom";
-import {getFilm, getFilmId, getFilmReviews, getLoggedFlag, getSimilarFilms} from "../../store/selectors";
-import FilmList from "../film-list/film-list";
-import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
-import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
-import {FilmTab} from "../../const";
+import {connect} from "react-redux";
+import {Link, useParams, useHistory} from "react-router-dom";
 
-const FilmPage = (props) =>{
+import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
+import {getFilm, getFilmId, getFilmReviews, getLoggedFlag, getSimilarFilms} from "../../store/selectors";
+
+import {FilmTab} from "../../const";
+import FilmList from "../film-list/film-list";
+import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import PageFooter from "../page-footer/page-footer";
+import FilmPageTabs from "../film-page-tabs/film-page-tabs";
+import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import PageLogo from "../page-logo/page-logo";
+
+const FilmPage = ({film, filmId, isLogged, reviews, similarFilms, fetchFilmInfo, fetchFilmComments}) =>{
   const match = useParams();
   const history = useHistory();
-  const {film, isLogged, reviews, similarFilms} = props;
 
   const handlePlayBtnClick = (evt) => {
     evt.preventDefault();
     history.push(`/player/` + evt.target.closest(`button`).dataset.id);
   };
 
-  const updateFilmInfo = () => {
-    const id = parseInt(match.id, 10);
-    props.fetchFilm(id);
-    props.fetchFilmComments(id);
-  };
-
   useEffect(() => updateFilmInfo(), []);
 
   useEffect(() => {
     const id = parseInt(match.id, 10);
-    if (props.filmId && props.filmId !== id) {
+    if (filmId && filmId !== id) {
       updateFilmInfo();
     }
-  }, [match.id]);
+  }, [match.id, filmId]);
+
+  const updateFilmInfo = () => {
+    const id = parseInt(match.id, 10);
+    fetchFilmInfo(id);
+    fetchFilmComments(id);
+  };
 
   if (!film) {
     return null;
@@ -121,7 +122,7 @@ FilmPage.propTypes = {
   film: filmProp,
   similarFilms: filmsProp,
   reviews: reviewsProp,
-  fetchFilm: PropTypes.func.isRequired,
+  fetchFilmInfo: PropTypes.func.isRequired,
   fetchFilmComments: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired
 };
@@ -138,7 +139,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchFilmComments(id) {
     dispatch(fetchFilmCommentsList(id));
   },
-  fetchFilm(id) {
+  fetchFilmInfo(id) {
     dispatch(fetchFilm(id));
   }
 });

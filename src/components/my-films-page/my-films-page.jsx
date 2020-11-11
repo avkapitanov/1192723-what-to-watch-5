@@ -1,13 +1,15 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import filmsProp from "../film-page/films.prop";
+import {connect} from "react-redux";
+
+import {fetchMyFilmsList} from "../../store/api-actions";
+import {getMyFilms} from "../../store/selectors";
+
 import FilmList from "../film-list/film-list";
 import PageFooter from "../page-footer/page-footer";
 import PageLogo from "../page-logo/page-logo";
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
-import {connect} from "react-redux";
-import {getMyFilms} from "../../store/selectors";
-import filmsProp from "../film-page/films.prop";
-import {fetchMyFilmsList} from "../../store/api-actions";
-import PropTypes from "prop-types";
 
 const MyFilmsPage = (props) => {
   const {films, fetchMyFilms} = props;

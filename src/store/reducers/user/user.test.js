@@ -6,6 +6,7 @@ import {checkAuth, login} from "../../api-actions";
 import {APIRoute, AppRoute} from "../../../const";
 import {AuthorizationStatus} from "../../../const";
 import {authInfo} from "../../../mocks/users";
+import {describe, expect, it} from '@jest/globals';
 
 const api = createAPI(() => {});
 

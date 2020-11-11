@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FilmAddReviewFormTextFieldNotification from "./film-add-review-form-text-field-notification";
+
 import {MAX_REVIEW_TEXT, MIN_REVIEW_TEXT} from "../../const";
+import FilmAddReviewFormTextFieldNotification from "./film-add-review-form-text-field-notification";
 
 describe(`FilmAddReviewFormTextFieldNotification component render correctly`, () => {
   it(`With min length error`, () => {
