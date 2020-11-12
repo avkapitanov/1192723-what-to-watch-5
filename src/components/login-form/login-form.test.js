@@ -8,10 +8,16 @@ jest
   .spyOn(React, `useState`)
   .mockImplementationOnce(() => realUseState())
   .mockImplementationOnce(() => realUseState())
+  .mockImplementationOnce(() => realUseState({}))
   .mockImplementationOnce(() => realUseState(true))
   .mockImplementationOnce(() => realUseState())
+  .mockImplementationOnce(() => realUseState({}))
   .mockImplementationOnce(() => realUseState())
-  .mockImplementationOnce(() => realUseState(true));
+  .mockImplementationOnce(() => realUseState(true))
+  .mockImplementationOnce(() => realUseState({}))
+  .mockImplementationOnce(() => realUseState(true))
+  .mockImplementationOnce(() => realUseState(true))
+  .mockImplementationOnce(() => realUseState({}));
 
 describe(`LoginForm component render correct`, () => {
   it(`No errors`, () => {
@@ -33,6 +39,15 @@ describe(`LoginForm component render correct`, () => {
   });
 
   it(`Password error`, () => {
+    const tree = renderer.create(
+        <LoginForm
+          onSubmit={() => {}}
+        />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Email and Password error`, () => {
     const tree = renderer.create(
         <LoginForm
           onSubmit={() => {}}

@@ -1,40 +1,54 @@
-import React, {createRef} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {login} from "../../store/api-actions";
 
+import {extend} from "../../utils";
 import {EMAIL_REGEXP} from "../../const";
 
-const LoginForm = (props) => {
+export const FormFieldName = {
+  LOGIN: `user-email`,
+  PASSWORD: `user-password`
+};
+
+const LoginForm = ({onSubmit}) => {
   const [isEmailError, setEmailError] = React.useState(false);
   const [isPasswordError, setPasswordError] = React.useState(false);
+  const [formValues, setFormValues] = React.useState({});
 
-  const loginRef = createRef();
-  const passwordRef = createRef();
+  const checkEmail = (value) => !EMAIL_REGEXP.test(value);
+  const checkPassword = (value) => value.length === 0;
 
-  const checkEmail = () => EMAIL_REGEXP.test(loginRef.current.value);
-
-  const checkPassword = () => passwordRef.current.value.length > 0;
+  const handleFormValuesChange = (evt) => {
+    switch (evt.target.name) {
+      case FormFieldName.LOGIN:
+        setEmailError(checkEmail(evt.target.value));
+        break;
+      case FormFieldName.PASSWORD:
+        setPasswordError(checkPassword(evt.target.value));
+        break;
+    }
+    setFormValues(extend(formValues, {
+      [evt.target.name]: evt.target.value,
+    }));
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    if (!checkEmail()) {
+    if (Object.values(formValues).filter((value) => value).length === 0) {
       setEmailError(true);
-      return;
-    }
-
-    if (!checkPassword()) {
       setPasswordError(true);
       return;
     }
 
-    const {onSubmit} = props;
+    if (isEmailError || isPasswordError) {
+      return;
+    }
 
     onSubmit({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
+      login: formValues[FormFieldName.LOGIN],
+      password: formValues[FormFieldName.PASSWORD],
     });
   };
 
@@ -52,11 +66,11 @@ const LoginForm = (props) => {
       {passwordErrorText}
       <div className="sign-in__fields">
         <div className="sign-in__field">
-          <input ref={loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"/>
+          <input onChange={handleFormValuesChange} className="sign-in__input" type="email" placeholder="Email address" name={FormFieldName.LOGIN} id="user-email"/>
           <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
         </div>
         <div className="sign-in__field">
-          <input ref={passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password"/>
+          <input onChange={handleFormValuesChange} className="sign-in__input" type="password" placeholder="Password" name={FormFieldName.PASSWORD} id="user-password"/>
           <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
         </div>
       </div>

@@ -50,7 +50,7 @@ export const REVIEW_RATING_MODIFIER = 2;
 export const MIN_REVIEW_TEXT = 50;
 export const MAX_REVIEW_TEXT = 400;
 export const HOVER_TIME_BEFORE_HIDE_ERROR = 5000;
-export const EMAIL_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+export const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 export const APIRoute = {
   FILMS: `/films`,
   FAVORITE: `/favorite`,
