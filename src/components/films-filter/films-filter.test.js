@@ -1,17 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
+
+import {filterGenres, selectedFilterGenre} from "../../mocks/filters";
 import {FilmsFilter} from "./films-filter";
-
-const filterGenres = [
-  `All genres`,
-  `Drama`,
-  `Comedy`,
-  `Horror`,
-  `Romance`,
-  `Sci-Fi`
-];
-
-const selectedFilterGenre = `Drama`;
 
 it(`FilmsFilter component render correctly`, () => {
   const tree = renderer.create(

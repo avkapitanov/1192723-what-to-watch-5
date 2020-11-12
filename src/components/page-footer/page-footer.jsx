@@ -1,4 +1,5 @@
 import React from "react";
+
 import PageLogo from "../page-logo/page-logo";
 
 const PageFooter = () => {

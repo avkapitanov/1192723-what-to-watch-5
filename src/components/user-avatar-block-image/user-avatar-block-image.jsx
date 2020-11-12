@@ -2,15 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import {useHistory, useLocation} from "react-router-dom";
 
-const UserAvatarBlockImage = (props) => {
+import {AppRoute} from "../../const";
+
+const UserAvatarBlockImage = ({avatarUrl}) => {
   const history = useHistory();
   const location = useLocation();
 
-  const {avatarUrl} = props;
-
   const handleAvatarClick = () => {
-    if (location.pathname !== `/mylist`) {
-      history.push(`/mylist`);
+    if (location.pathname !== AppRoute.MY_LIST) {
+      history.push(AppRoute.MY_LIST);
     }
   };
 

@@ -1,22 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const FilmAddReviewFormErrorBlock = ({hasError}) => {
-  if (!hasError) {
-    return null;
-  }
-
+const FilmAddReviewFormErrorBlock = ({errorText}) => {
   return (
     <div style={{
       color: `red`,
       textAlign: `center`,
       paddingTop: `10px`
-    }}>Something wrong, please, try again later</div>
+    }}>{errorText}</div>
   );
 };
 
 FilmAddReviewFormErrorBlock.propTypes = {
-  hasError: PropTypes.bool.isRequired
+  errorText: PropTypes.string.isRequired
 };
 
 export default FilmAddReviewFormErrorBlock;

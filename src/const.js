@@ -1,4 +1,3 @@
-export const DEFAULT_RATING_FORM_VALUE = `3`;
 export const MAX_RATING_VALUE_FORM = 5;
 export const HOVER_TIME_BEFORE_PLAYING = 2000;
 export const FilmTab = {
@@ -9,6 +8,7 @@ export const FilmTab = {
 export const DEFAULT_ACTIVE_TAB = FilmTab.OVERVIEW;
 export const DEFAULT_GENRE_FILTER_VALUE = `All genres`;
 export const INITIAL_FILMS_COUNT = 8;
+export const INITIAL_FILMS_SIMILAR_COUNT = 4;
 export const FILMS_COUNT_PER_PAGE = 8;
 export const MAX_GENRES_IN_FILTER = 9;
 export const API_ENDPOINT = `https://5.react.pages.academy/wtw`;
@@ -50,7 +50,20 @@ export const REVIEW_RATING_MODIFIER = 2;
 export const MIN_REVIEW_TEXT = 50;
 export const MAX_REVIEW_TEXT = 400;
 export const HOVER_TIME_BEFORE_HIDE_ERROR = 5000;
-export const PLAYER_PAUSE_BTN_TYPE = `pause`;
-export const PLAYER_PLAY_BTN_TYPE = `play`;
-export const EMAIL_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+export const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+export const APIRoute = {
+  FILMS: `/films`,
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`,
+  PROMO_FILM: `/films/promo`,
+  LOGIN: `/login`
+};
+export const TIMER_UPDATE_FREQUENCY = 1000;
+export const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  FILMS: `/films`,
+  MY_LIST: `/mylist`
+};
+
 

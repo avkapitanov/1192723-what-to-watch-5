@@ -1,11 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import PrivateRoute from "./private-route";
+import {Provider} from "react-redux";
+import configureStore from 'redux-mock-store';
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
-import configureStore from 'redux-mock-store';
-import {Provider} from "react-redux";
-import {AuthorizationStatus} from "../../const";
+
+import {AppRoute, AuthorizationStatus} from "../../const";
+import PrivateRoute from "./private-route";
 
 const mockStore = configureStore([]);
 const store = mockStore({
@@ -20,7 +21,7 @@ it(`PrivateRoute component render correctly`, () => {
         <BrowserRouter history={browserHistory}>
           <PrivateRoute
             exact={true}
-            path={`/myfilms`}
+            path={AppRoute.MY_LIST}
             render={() => {}}
           />
         </BrowserRouter>

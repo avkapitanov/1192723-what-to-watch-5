@@ -1,29 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
+
 import FilmAddReviewFormErrorBlock from "./film-add-review-form-error-block";
 
-describe(`FilmAddReviewFormErrorBlock component render correctly`, () => {
-  it(`With error`, () => {
-    const tree = renderer.create(
-        <FilmAddReviewFormErrorBlock
-          hasError={true}
-          onChangeFilmsCount={() => {}}
-        />
-    ).toJSON();
+const errorText = `Something wrong, please, try again later`;
 
-    expect(tree).toMatchSnapshot();
-  });
+it(`FilmAddReviewFormErrorBlock component render correctly`, () => {
+  const tree = renderer.create(
+      <FilmAddReviewFormErrorBlock
+        errorText={errorText}
+      />
+  ).toJSON();
 
-  it(`Without error`, () => {
-    const tree = renderer.create(
-        <FilmAddReviewFormErrorBlock
-          hasError={false}
-          onChangeFilmsCount={() => {}}
-        />
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
+  expect(tree).toMatchSnapshot();
 });
 
 

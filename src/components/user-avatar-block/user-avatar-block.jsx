@@ -2,20 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {AuthorizationStatus} from "../../const";
+
 import {getAuthInfo, getAuthorizationStatus} from "../../store/selectors";
+
+import {AppRoute, AuthorizationStatus} from "../../const";
 import UserAvatarBlockImage from "../user-avatar-block-image/user-avatar-block-image";
 
-const UserAvatarBlock = (props) => {
-  const {avatarUrl} = props.authInfo;
-  const {authorizationStatus} = props;
+const UserAvatarBlock = ({authorizationStatus, authInfo}) => {
   const isLogged = authorizationStatus === AuthorizationStatus.AUTH;
 
   let userBlockContent;
   if (isLogged) {
+    const {avatarUrl} = authInfo;
     userBlockContent = <UserAvatarBlockImage avatarUrl={avatarUrl}/>;
   } else {
-    userBlockContent = <Link className="user-block__link" to={{pathname: `/login`}}>Sign in</Link>;
+    userBlockContent = <Link className="user-block__link" to={{pathname: AppRoute.LOGIN}}>Sign in</Link>;
   }
 
   return (

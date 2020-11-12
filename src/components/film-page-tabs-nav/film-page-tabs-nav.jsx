@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import FilmPageTabsNavItem from "../film-page-tabs-nav-item/film-page-tabs-nav-item";
 
 const FilmPageTabsNav = (props) => {

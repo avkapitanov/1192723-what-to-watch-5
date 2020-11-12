@@ -1,7 +1,8 @@
 import React from "react";
-import {changeFilterGenre} from "../../store/action";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {changeFilterGenre} from "../../store/action";
 import {getFilterGenres, getSelectedGenre} from "../../store/selectors";
 
 const FilmsFilter = (props) => {

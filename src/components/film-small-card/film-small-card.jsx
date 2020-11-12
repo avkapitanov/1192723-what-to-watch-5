@@ -1,6 +1,7 @@
 import React from "react";
 import filmProp from "../film-page/film.prop";
 import {Link} from "react-router-dom";
+
 import FilmSmallCardImage from "../film-small-card-image/film-small-card-image";
 
 const FilmSmallCard = (props) => {

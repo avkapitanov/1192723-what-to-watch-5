@@ -28,7 +28,7 @@ export const adaptFilmsToClient = (films) => {
 };
 
 export const adaptFilmToClient = (film) => {
-  const adaptedFilm = extend(
+  return extend(
       {},
       {
         id: film.id,
@@ -50,14 +50,10 @@ export const adaptFilmToClient = (film) => {
         isFavorite: film.is_favorite
       }
   );
-
-  return adaptedFilm;
 };
 
 export const getNewFilmsState = (payload) => {
-  const adaptedFilms = adaptFilmsToClient(payload);
-
-  const byId = adaptedFilms.reduce((acc, film) => extend(
+  const byId = payload.reduce((acc, film) => extend(
       acc,
       {[film.id]: film}
   ), {});
@@ -67,52 +63,42 @@ export const getNewFilmsState = (payload) => {
       ids: Object.keys(byId),
       entities: byId
     },
-    filterGenres: getUniqueGenresFromFilms(adaptedFilms),
+    filterGenres: getUniqueGenresFromFilms(payload),
   };
 };
 
 export const getNewMyFilmsState = (payload) => {
-  const adaptedFilms = adaptFilmsToClient(payload);
-
   return {
-    myFilms: adaptedFilms.map((film) => film.id)
+    myFilms: payload.map((film) => film.id)
   };
 };
 
-export const getNewFilmsStateAfterFilmUpdate = (state, payload) => {
-  const film = adaptFilmToClient(payload);
-
+export const getNewFilmsStateAfterFilmUpdate = (state, film) => {
   if (state.films.ids.includes(film.id.toString())) {
-    return {
-      films: extend(state.films,
-          {
-            entities: extend(state.films.entities,
-                {
-                  [film.id]: extend(
-                      state.films.entities[film.id],
-                      film
-                  )
-                }
-            )
-          }
-      ),
-      filmId: film.id
-    };
-  }
-
-  return {
-    films: extend(state.films,
+    return extend(state.films,
         {
-          ids: [...state.ids, film.id],
           entities: extend(state.films.entities,
               {
-                [film.id]: film
+                [film.id]: extend(
+                    state.films.entities[film.id],
+                    film
+                )
               }
           )
         }
-    ),
-    filmId: film.id
-  };
+    );
+  }
+
+  return extend(state.films,
+      {
+        ids: [...state.ids, film.id],
+        entities: extend(state.films.entities,
+            {
+              [film.id]: film
+            }
+        )
+      }
+  );
 };
 
 export const formatFilmDuration = (time) => {

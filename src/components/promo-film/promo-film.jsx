@@ -1,82 +1,73 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
-import PageLogo from "../page-logo/page-logo";
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import React from "react";
 import filmProp from "../film-page/film.prop";
-import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import {connect} from "react-redux";
+import {useHistory} from "react-router-dom";
+
 import {getPromoFilm} from "../../store/selectors";
 
-class PromoFilm extends PureComponent {
-  constructor(props) {
-    super(props);
+import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import PageLogo from "../page-logo/page-logo";
 
-    this.handlePlayBtnClick = this.handlePlayBtnClick.bind(this);
-  }
+const PromoFilm = ({promoFilm}) => {
+  const history = useHistory();
 
-  handlePlayBtnClick(evt) {
+  const handlePlayBtnClick = (evt) => {
     evt.preventDefault();
-    const {history} = this.props;
     history.push(`/player/` + evt.currentTarget.dataset.id);
+  };
+
+  if (!promoFilm) {
+    return null;
   }
 
-  render() {
-    if (!this.props.promoFilm) {
-      return null;
-    }
+  const {id, title, genre, year, posterImage, background, isFavorite} = promoFilm;
 
-    const {id, title, genre, year, posterImage, background, isFavorite} = this.props.promoFilm;
+  return (
+    <section className="movie-card">
+      <div className="movie-card__bg">
+        <img src={background} alt={title}/>
+      </div>
 
-    return (
-      <section className="movie-card">
-        <div className="movie-card__bg">
-          <img src={background} alt={title}/>
-        </div>
+      <h1 className="visually-hidden">WTW</h1>
 
-        <h1 className="visually-hidden">WTW</h1>
+      <header className="page-header movie-card__head">
+        <PageLogo/>
 
-        <header className="page-header movie-card__head">
-          <PageLogo/>
+        <UserAvatarBlock/>
+      </header>
 
-          <UserAvatarBlock/>
-        </header>
+      <div className="movie-card__wrap">
+        <div className="movie-card__info">
+          <div className="movie-card__poster">
+            <img src={posterImage} alt={title} width="218" height="327"/>
+          </div>
 
-        <div className="movie-card__wrap">
-          <div className="movie-card__info">
-            <div className="movie-card__poster">
-              <img src={posterImage} alt={title} width="218" height="327"/>
-            </div>
+          <div className="movie-card__desc">
+            <h2 className="movie-card__title">{title}</h2>
+            <p className="movie-card__meta">
+              <span className="movie-card__genre">{genre}</span>
+              <span className="movie-card__year">{year}</span>
+            </p>
 
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
-              </p>
-
-              <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" data-id={id} onClick={this.handlePlayBtnClick}>
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <AddToMyListBtn filmId={id} isFavorite={isFavorite} isPromo={true}/>
-              </div>
+            <div className="movie-card__buttons">
+              <button className="btn btn--play movie-card__button" type="button" data-id={id} onClick={handlePlayBtnClick}>
+                <svg viewBox="0 0 19 19" width="19" height="19">
+                  <use xlinkHref="#play-s"></use>
+                </svg>
+                <span>Play</span>
+              </button>
+              <AddToMyListBtn filmId={id} isFavorite={isFavorite}/>
             </div>
           </div>
         </div>
-      </section>
-    );
-  }
-}
+      </div>
+    </section>
+  );
+};
 
 PromoFilm.propTypes = {
   promoFilm: filmProp,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -85,4 +76,4 @@ const mapStateToProps = (state) => ({
 
 export {PromoFilm};
 
-export default connect(mapStateToProps)(withRouter(PromoFilm));
+export default connect(mapStateToProps)(PromoFilm);

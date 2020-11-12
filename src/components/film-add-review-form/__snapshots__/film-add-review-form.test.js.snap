@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilmAddReviewForm component render correctly Init state 1`] = `
+exports[`FilmAddReviewForm component render correctly 1`] = `
 <div
   className="add-review"
 >
   <form
     action="#"
     className="add-review__form"
-    onChange={[Function]}
     onSubmit={[Function]}
   >
     <div
@@ -18,10 +17,10 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
       >
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-1"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={1}
         />
@@ -34,10 +33,10 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-2"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={2}
         />
@@ -50,10 +49,10 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={true}
           disabled={false}
           id="star-3"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={3}
         />
@@ -66,10 +65,10 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-4"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={4}
         />
@@ -82,10 +81,10 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         </label>
         <input
           className="rating__input"
-          defaultChecked={false}
           disabled={false}
           id="star-5"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={5}
         />
@@ -106,285 +105,7 @@ exports[`FilmAddReviewForm component render correctly Init state 1`] = `
         disabled={false}
         id="review-text"
         name="reviewText"
-        placeholder="Review text"
-      />
-      <div
-        className="add-review__submit"
-      >
-        <div
-          style={
-            Object {
-              "color": "red",
-              "marginRight": "auto",
-            }
-          }
-        >
-          Min symbols 50. Current: 0
-        </div>
-        <button
-          className="add-review__btn"
-          disabled={false}
-          type="submit"
-        >
-          Post
-        </button>
-      </div>
-    </div>
-  </form>
-</div>
-`;
-
-exports[`FilmAddReviewForm component render correctly With error 1`] = `
-<div
-  className="add-review"
->
-  <form
-    action="#"
-    className="add-review__form"
-    onChange={[Function]}
-    onSubmit={[Function]}
-  >
-    <div
-      className="rating"
-    >
-      <div
-        className="rating__stars"
-      >
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-1"
-          name="rating"
-          type="radio"
-          value={1}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-1"
-        >
-          Rating 
-          1
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-2"
-          name="rating"
-          type="radio"
-          value={2}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-2"
-        >
-          Rating 
-          2
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={true}
-          disabled={false}
-          id="star-3"
-          name="rating"
-          type="radio"
-          value={3}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-3"
-        >
-          Rating 
-          3
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-4"
-          name="rating"
-          type="radio"
-          value={4}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-4"
-        >
-          Rating 
-          4
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-5"
-          name="rating"
-          type="radio"
-          value={5}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-5"
-        >
-          Rating 
-          5
-        </label>
-      </div>
-    </div>
-    <div
-      className="add-review__text"
-    >
-      <textarea
-        className="add-review__textarea"
-        disabled={false}
-        id="review-text"
-        name="reviewText"
-        placeholder="Review text"
-      />
-      <div
-        className="add-review__submit"
-      >
-        <div
-          style={
-            Object {
-              "color": "red",
-              "marginRight": "auto",
-            }
-          }
-        >
-          Min symbols 50. Current: 0
-        </div>
-        <button
-          className="add-review__btn"
-          disabled={false}
-          type="submit"
-        >
-          Post
-        </button>
-      </div>
-    </div>
-  </form>
-  <div
-    style={
-      Object {
-        "color": "red",
-        "paddingTop": "10px",
-        "textAlign": "center",
-      }
-    }
-  >
-    Something wrong, please, try again later
-  </div>
-</div>
-`;
-
-exports[`FilmAddReviewForm component render correctly With text length error 1`] = `
-<div
-  className="add-review"
->
-  <form
-    action="#"
-    className="add-review__form"
-    onChange={[Function]}
-    onSubmit={[Function]}
-  >
-    <div
-      className="rating"
-    >
-      <div
-        className="rating__stars"
-      >
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-1"
-          name="rating"
-          type="radio"
-          value={1}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-1"
-        >
-          Rating 
-          1
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-2"
-          name="rating"
-          type="radio"
-          value={2}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-2"
-        >
-          Rating 
-          2
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={true}
-          disabled={false}
-          id="star-3"
-          name="rating"
-          type="radio"
-          value={3}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-3"
-        >
-          Rating 
-          3
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-4"
-          name="rating"
-          type="radio"
-          value={4}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-4"
-        >
-          Rating 
-          4
-        </label>
-        <input
-          className="rating__input"
-          defaultChecked={false}
-          disabled={false}
-          id="star-5"
-          name="rating"
-          type="radio"
-          value={5}
-        />
-        <label
-          className="rating__label"
-          htmlFor="star-5"
-        >
-          Rating 
-          5
-        </label>
-      </div>
-    </div>
-    <div
-      className="add-review__text"
-    >
-      <textarea
-        className="add-review__textarea"
-        disabled={false}
-        id="review-text"
-        name="reviewText"
+        onChange={[Function]}
         placeholder="Review text"
       />
       <div

@@ -1,102 +1,155 @@
-import React, {PureComponent} from "react";
-import {getFilm} from "../../store/selectors";
-import {connect} from "react-redux";
+import React, {useEffect, useState, useCallback} from "react";
 import PropTypes from "prop-types";
 import filmProp from "../film-page/film.prop";
-import withPlayer from "../../hocs/with-player/with-player";
-import {PLAYER_PAUSE_BTN_TYPE, PLAYER_PLAY_BTN_TYPE} from "../../const";
+import {connect} from "react-redux";
+import {useHistory, useParams} from 'react-router-dom';
 
-class PlayerPage extends PureComponent {
-  constructor(props) {
-    super(props);
+import {fetchFilm} from "../../store/api-actions";
+import {getFilm} from "../../store/selectors";
+import {useStateWithCallbackLazy} from "../../hooks/use-state-with-callback-lazy/use-state-with-callback-lazy";
+import {TIMER_UPDATE_FREQUENCY} from "../../const";
 
-    this.handleExitBtnClick = () => {
-      this.props.history.goBack();
+const PlayerPage = (props) => {
+  const {film} = props;
+  const history = useHistory();
+  const match = useParams();
+  const [timerId, setTimerId] = useState(null);
+  const [videoRef, setVideoRef] = useState(null);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [isPlaying, setPlaying] = useStateWithCallbackLazy(false);
+  const playerPosition = (currentTime / duration) * 100;
+  const timeElapsed = new Date((duration - currentTime) * 1000).toISOString().substr(11, 8);
+
+  useEffect(() => {
+    if (videoRef !== null) {
+      handlePlayBtnClick();
+    }
+  }, [videoRef]);
+
+  useEffect(() => {
+    updateFilmInfo();
+    return () => {
+      clearInterval(timerId);
     };
+  }, []);
 
-    this.handleFullscreenBtnClick = () => {
-      const elem = this.props.videoRef.current;
+  const onVideoRefChange = useCallback((video) => {
+    if (video !== null) {
+      video.oncanplaythrough = () => setDuration(video.duration);
+      setVideoRef(video);
+    }
+  }, []);
 
-      const requestFullScreen = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.msRequestFullscreen;
+  const handlePauseBtnClick = () => {
+    videoRef.pause();
+    clearInterval(timerId);
+    setPlaying(false);
+  };
 
-      requestFullScreen.call(elem);
+  const handlePlayBtnClick = () => {
+    videoRef.play();
+    const timer = setInterval(() => {
+      setCurrentTime((prevState) => prevState + 1);
+    }, TIMER_UPDATE_FREQUENCY);
+    setTimerId(timer);
+    setPlaying(true);
+  };
 
-      document.addEventListener(`fullscreenchange`, this.handlerFullscreenChange);
-    };
+  const updateVideoPlayingInfo = () => {
+    const isVideoPlaying = videoRef.currentTime > 0 && !videoRef.paused && !videoRef.ended && videoRef.readyState > 2;
+    setCurrentTime(videoRef.currentTime);
+    if (isVideoPlaying) {
+      setPlaying(isVideoPlaying, () => {
+        handlePlayBtnClick();
+      });
+    } else {
+      setPlaying(isVideoPlaying);
+    }
+  };
 
-    this.handlerFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        this.props.updateVideoPlayingInfo();
-      }
-    };
+  const handleExitBtnClick = () => {
+    clearInterval(timerId);
+    history.push(`/films/${film.id}`);
+  };
+
+  const handleFullscreenBtnClick = () => {
+    const requestFullScreen = videoRef.requestFullscreen || videoRef.webkitRequestFullscreen || videoRef.msRequestFullscreen;
+
+    requestFullScreen.call(videoRef);
+
+    document.addEventListener(`fullscreenchange`, handlerFullscreenChange);
+  };
+
+  const handlerFullscreenChange = () => {
+    if (!document.fullscreenElement) {
+      updateVideoPlayingInfo();
+    }
+  };
+
+  const updateFilmInfo = () => {
+    const id = parseInt(match.id, 10);
+    props.fetchFilm(id);
+  };
+
+  if (!film) {
+    return null;
   }
 
-  render() {
-    const {film, isPlaying, duration, currentTime, videoRef, handlePlayerPlayPauseBtnClick} = this.props;
-    const playerPosition = (currentTime / duration) * 100;
-    const timeElapsed = new Date((duration - currentTime) * 1000).toISOString().substr(11, 8);
+  return (
+    <div className="player">
+      <video ref={onVideoRefChange} src={film.video} className="player__video" poster={film.background}></video>
 
-    return (
-      <div className="player">
-        <video ref={videoRef} src={film.video} className="player__video" poster={film.background}></video>
+      <button type="button" className="player__exit" onClick={handleExitBtnClick}>Exit</button>
 
-        <button type="button" className="player__exit" onClick={this.handleExitBtnClick}>Exit</button>
-
-        <div className="player__controls">
-          <div className="player__controls-row">
-            <div className="player__time">
-              <progress className="player__progress" value={currentTime} max={duration}></progress>
-              <div className="player__toggler" style={{left: playerPosition + `%`}}>Toggler</div>
-            </div>
-            <div className="player__time-value">{timeElapsed}</div>
+      <div className="player__controls">
+        <div className="player__controls-row">
+          <div className="player__time">
+            <progress className="player__progress" value={currentTime} max={duration}></progress>
+            <div className="player__toggler" style={{left: playerPosition + `%`}}>Toggler</div>
           </div>
+          <div className="player__time-value">{timeElapsed}</div>
+        </div>
 
-          <div className="player__controls-row">
-            <button type="button" className="player__play"
-              data-type={isPlaying ? PLAYER_PLAY_BTN_TYPE : PLAYER_PAUSE_BTN_TYPE}
-              onClick={handlePlayerPlayPauseBtnClick}
-            >
-              <svg viewBox="0 0 14 21" width="14" height="21">
-                <use xlinkHref={isPlaying ? `#pause` : `#play-s`}></use>
-              </svg>
-              <span>{isPlaying ? `Pause` : `Play`}</span>
-            </button>
-            <div className="player__name">{film.title}</div>
+        <div className="player__controls-row">
+          <button type="button" className="player__play"
+            onClick={isPlaying ? handlePauseBtnClick : handlePlayBtnClick}
+          >
+            <svg viewBox="0 0 14 21" width="14" height="21">
+              <use xlinkHref={isPlaying ? `#pause` : `#play-s`}></use>
+            </svg>
+            <span>{isPlaying ? `Pause` : `Play`}</span>
+          </button>
+          <div className="player__name">{film.title}</div>
 
-            <button type="button" className="player__full-screen" onClick={this.handleFullscreenBtnClick}>
-              <svg viewBox="0 0 27 27" width="27" height="27">
-                <use xlinkHref="#full-screen"></use>
-              </svg>
-              <span>Full screen</span>
-            </button>
-          </div>
+          <button type="button" className="player__full-screen" onClick={handleFullscreenBtnClick}>
+            <svg viewBox="0 0 27 27" width="27" height="27">
+              <use xlinkHref="#full-screen"></use>
+            </svg>
+            <span>Full screen</span>
+          </button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 
-}
-
-export {PlayerPage};
+};
 
 PlayerPage.propTypes = {
   film: filmProp,
-  isPlaying: PropTypes.bool.isRequired,
-  duration: PropTypes.number.isRequired,
-  currentTime: PropTypes.number.isRequired,
-  handlePlayerPlayPauseBtnClick: PropTypes.func.isRequired,
-  updateVideoPlayingInfo: PropTypes.func.isRequired,
-  videoRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({current: PropTypes.instanceOf(Element)})
-  ]),
-  history: PropTypes.shape({
-    goBack: PropTypes.func.isRequired
-  }).isRequired,
+  fetchFilm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   film: getFilm(state)
 });
 
-export default connect(mapStateToProps)(withPlayer(PlayerPage));
+const mapDispatchToProps = (dispatch) => ({
+  fetchFilm(id) {
+    dispatch(fetchFilm(id));
+  }
+});
+
+export {PlayerPage};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerPage);

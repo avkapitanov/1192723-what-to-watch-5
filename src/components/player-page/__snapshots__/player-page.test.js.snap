@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerPage component render correctly 1`] = `
+<div
+  className="player"
+>
+  <video
+    className="player__video"
+    poster="https://assets.htmlacademy.ru/intensives/javascript-3/film/background/What-We-Do-in-the-Shadows.jpg"
+    src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
+  />
+  <button
+    className="player__exit"
+    onClick={[Function]}
+    type="button"
+  >
+    Exit
+  </button>
+  <div
+    className="player__controls"
+  >
+    <div
+      className="player__controls-row"
+    >
+      <div
+        className="player__time"
+      >
+        <progress
+          className="player__progress"
+          max={0}
+          value={0}
+        />
+        <div
+          className="player__toggler"
+          style={
+            Object {
+              "left": "NaN%",
+            }
+          }
+        >
+          Toggler
+        </div>
+      </div>
+      <div
+        className="player__time-value"
+      >
+        00:00:00
+      </div>
+    </div>
+    <div
+      className="player__controls-row"
+    >
+      <button
+        className="player__play"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="21"
+          viewBox="0 0 14 21"
+          width="14"
+        >
+          <use
+            xlinkHref="#play-s"
+          />
+        </svg>
+        <span>
+          Play
+        </span>
+      </button>
+      <div
+        className="player__name"
+      >
+        What We Do in the Shadows
+      </div>
+      <button
+        className="player__full-screen"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="27"
+          viewBox="0 0 27 27"
+          width="27"
+        >
+          <use
+            xlinkHref="#full-screen"
+          />
+        </svg>
+        <span>
+          Full screen
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

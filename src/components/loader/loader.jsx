@@ -1,11 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const Loader = ({isLoading}) => {
-  if (!isLoading) {
-    return null;
-  }
-
+const Loader = () => {
   const loaderStyle = {
     position: `absolute`,
     top: `50%`,
@@ -61,10 +56,6 @@ const Loader = ({isLoading}) => {
       </g>
     </svg>
   );
-};
-
-Loader.propTypes = {
-  isLoading: PropTypes.bool.isRequired
 };
 
 export default Loader;

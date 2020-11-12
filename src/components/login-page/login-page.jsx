@@ -1,11 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+
+import {getLoggedFlag} from "../../store/selectors";
+
 import PageFooter from "../page-footer/page-footer";
 import PageLogo from "../page-logo/page-logo";
 import LoginForm from "../login-form/login-form";
-import {connect} from "react-redux";
-import PropTypes from "prop-types";
-import {getLoggedFlag} from "../../store/selectors";
-import {Redirect} from "react-router-dom";
 
 const LoginPage = (props) => {
   const {isLogged} = props;

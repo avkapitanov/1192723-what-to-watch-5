@@ -1,87 +1,86 @@
-import React, {PureComponent} from "react";
+import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import filmProp from "../film-page/film.prop";
+import {connect} from "react-redux";
+import {Link, useParams} from "react-router-dom";
+
+import {fetchFilm} from "../../store/api-actions";
+import {getFilm} from "../../store/selectors";
+
 import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
 import PageLogo from "../page-logo/page-logo";
 import FilmAddReviewForm from "../film-add-review-form/film-add-review-form";
-import {getFilm} from "../../store/selectors";
-import {connect} from "react-redux";
-import filmProp from "../film-page/film.prop";
-import {fetchFilm} from "../../store/api-actions";
-import PropTypes from "prop-types";
-import {Link, withRouter} from "react-router-dom";
 
-class FilmAddReviewPage extends PureComponent {
+const FilmAddReviewPage = (props) => {
+  const match = useParams();
+  const {film, fetchFilmForReview} = props;
 
-  componentDidMount() {
-    const id = this.props.match.params.id;
-    this.props.fetchFilm(id);
+  useEffect(() => {
+    fetchFilmForReview(match.id);
+  }, [match.id]);
+
+  if (!film) {
+    return null;
   }
 
-  render() {
-    const {film} = this.props;
+  const movieCardStyle = {
+    background: film.backgroundColor
+  };
 
-    if (!film) {
-      return null;
-    }
-
-    return (
-      <section className="movie-card movie-card--full">
-        <div className="movie-card__header">
-          <div className="movie-card__bg">
-            <img src={film.background} alt={film.title}/>
-          </div>
-
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header">
-            <PageLogo/>
-
-            <nav className="breadcrumbs">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <Link to={{
-                    pathname: `/films/${film.id}`
-                  }}
-                  className="breadcrumbs__link">{film.title}</Link>
-                </li>
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
-                </li>
-              </ul>
-            </nav>
-
-            <UserAvatarBlock/>
-          </header>
-
-          <div className="movie-card__poster movie-card__poster--small">
-            <img src={film.posterImage} alt={film.title + ` poster`} width="218" height="327"/>
-          </div>
+  return (
+    <section className="movie-card movie-card--full" style={movieCardStyle}>
+      <div className="movie-card__header">
+        <div className="movie-card__bg">
+          <img src={film.background} alt={film.title}/>
         </div>
 
-        <FilmAddReviewForm film={film}/>
-      </section>
-    );
-  }
+        <h1 className="visually-hidden">WTW</h1>
 
-}
+        <header className="page-header">
+          <PageLogo/>
+
+          <nav className="breadcrumbs">
+            <ul className="breadcrumbs__list">
+              <li className="breadcrumbs__item">
+                <Link to={{
+                  pathname: `/films/${film.id}`
+                }}
+                className="breadcrumbs__link">{film.title}</Link>
+              </li>
+              <li className="breadcrumbs__item">
+                <a className="breadcrumbs__link">Add review</a>
+              </li>
+            </ul>
+          </nav>
+
+          <UserAvatarBlock/>
+        </header>
+
+        <div className="movie-card__poster movie-card__poster--small">
+          <img src={film.posterImage} alt={film.title + ` poster`} width="218" height="327"/>
+        </div>
+      </div>
+
+      <FilmAddReviewForm film={film}/>
+    </section>
+  );
+};
 
 FilmAddReviewPage.propTypes = {
   film: filmProp,
-  match: PropTypes.shape({
-    params: PropTypes.object
-  }),
-  fetchFilm: PropTypes.func.isRequired
+  fetchFilmForReview: PropTypes.func.isRequired
 };
-
-export {FilmAddReviewPage};
 
 const mapStateToProps = (state) => ({
   film: getFilm(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchFilm(id) {
+  fetchFilmForReview(id) {
     dispatch(fetchFilm(id));
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilmAddReviewPage));
+export {FilmAddReviewPage};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilmAddReviewPage);

@@ -1,11 +1,11 @@
 import React from "react";
-import {fetchAddToMyList} from "../../store/api-actions";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {fetchAddToMyList} from "../../store/api-actions";
 import {getLoggedFlag} from "../../store/selectors";
 
 const AddToMyListBtn = (props) => {
-  const {filmId, isFavorite, onAddToMyListBtnClick, isLogged, isPromo} = props;
+  const {filmId, isFavorite, onAddToMyListBtnClick, isLogged} = props;
 
   if (!isLogged) {
     return null;
@@ -15,7 +15,7 @@ const AddToMyListBtn = (props) => {
     <button className="btn btn--list movie-card__button" type="button"
       onClick={(evt) => {
         evt.preventDefault();
-        onAddToMyListBtnClick(filmId, isFavorite, isPromo);
+        onAddToMyListBtnClick(filmId, isFavorite);
       }}>
       <svg viewBox="0 0 19 20" width="19" height="20">
         <use xlinkHref="#add"></use>
@@ -29,8 +29,7 @@ AddToMyListBtn.propTypes = {
   filmId: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   onAddToMyListBtnClick: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool.isRequired,
-  isPromo: PropTypes.bool
+  isLogged: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -38,9 +37,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddToMyListBtnClick(filmId, isFavorite, isPromo = false) {
+  onAddToMyListBtnClick(filmId, isFavorite) {
     const isFavoriteParam = isFavorite ? `0` : `1`;
-    dispatch(fetchAddToMyList(filmId, isFavoriteParam, isPromo));
+    dispatch(fetchAddToMyList(filmId, isFavoriteParam));
   }
 });
 

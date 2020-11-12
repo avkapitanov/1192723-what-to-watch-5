@@ -1,65 +1,62 @@
-import React, {PureComponent} from "react";
-import PageFooter from "../page-footer/page-footer";
-import FilmPageTabs from "../film-page-tabs/film-page-tabs";
+import React, {useEffect} from "react";
+import PropTypes from "prop-types";
 import filmProp from "./film.prop";
 import filmsProp from "./films.prop";
-import PropTypes from "prop-types";
-import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
-import {connect} from "react-redux";
-import PageLogo from "../page-logo/page-logo";
-import {Link} from "react-router-dom";
-import {getFilm, getFilmId, getFilmReviews, getLoggedFlag, getSimilarFilms} from "../../store/selectors";
-import FilmList from "../film-list/film-list";
-import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
 import reviewsProp from "../film-page-reviews-tab/reviews.prop";
-import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import {connect} from "react-redux";
+import {Link, useParams, useHistory} from "react-router-dom";
+
+import {fetchFilm, fetchFilmCommentsList} from "../../store/api-actions";
+import {getFilm, getFilmId, getFilmReviews, getLoggedFlag, getSimilarFilms} from "../../store/selectors";
+
 import {FilmTab} from "../../const";
-import {changeFilmRouteId} from "../../store/action";
+import FilmList from "../film-list/film-list";
+import AddToMyListBtn from "../add-to-my-list-btn/add-to-my-list-btn";
+import PageFooter from "../page-footer/page-footer";
+import FilmPageTabs from "../film-page-tabs/film-page-tabs";
+import UserAvatarBlock from "../user-avatar-block/user-avatar-block";
+import PageLogo from "../page-logo/page-logo";
 
-class FilmPage extends PureComponent {
-  constructor(props) {
-    super(props);
+const FilmPage = ({film, filmId, isLogged, reviews, similarFilms, fetchFilmInfo, fetchFilmComments}) =>{
+  const match = useParams();
+  const history = useHistory();
 
-    this.handlePlayBtnClick = (evt) => {
-      evt.preventDefault();
-      const {history} = this.props;
-      history.push(`/player/` + evt.target.closest(`button`).dataset.id);
-    };
+  const handlePlayBtnClick = (evt) => {
+    evt.preventDefault();
+    history.push(`/player/` + evt.target.closest(`button`).dataset.id);
+  };
 
-    this.updateFilmInfo = () => {
-      const id = this.props.match.params.id;
-      this.props.fetchFilm(id);
-      this.props.fetchFilmComments(id);
-    };
-  }
+  useEffect(() => updateFilmInfo(), []);
 
-  componentDidMount() {
-    this.updateFilmInfo();
-  }
-
-  componentDidUpdate() {
-    const id = +this.props.match.params.id;
-    if (this.props.filmId !== id) {
-      this.props.changeRoute(+id);
-      this.updateFilmInfo();
+  useEffect(() => {
+    const id = parseInt(match.id, 10);
+    if (filmId && filmId !== id) {
+      updateFilmInfo();
     }
+  }, [match.id, filmId]);
+
+  const updateFilmInfo = () => {
+    const id = parseInt(match.id, 10);
+    fetchFilmInfo(id);
+    fetchFilmComments(id);
+  };
+
+  if (!film) {
+    return null;
   }
 
-  render() {
-    const {film, isLogged, reviews, similarFilms} = this.props;
+  const addReviewBtn = (isLogged && <Link to={{
+    pathname: `/films/${film.id}/review`
+  }}
+  className="btn movie-card__button">Add review</Link>);
 
-    if (!film) {
-      return null;
-    }
+  const movieCardStyle = {
+    background: film.backgroundColor
+  };
 
-    const addReviewBtn = (isLogged && <Link to={{
-      pathname: `/films/${film.id}/review`
-    }}
-    className="btn movie-card__button">Add review</Link>);
-
-    return (
+  return (
       <>
-        <section className="movie-card movie-card--full">
+        <section className="movie-card movie-card--full" style={movieCardStyle}>
           <div className="movie-card__hero">
             <div className="movie-card__bg">
               <img src={film.background} alt={film.title}/>
@@ -82,7 +79,7 @@ class FilmPage extends PureComponent {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button" data-id={film.id} onClick={this.handlePlayBtnClick}>
+                  <button className="btn btn--play movie-card__button" type="button" data-id={film.id} onClick={handlePlayBtnClick}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
@@ -116,28 +113,19 @@ class FilmPage extends PureComponent {
           <PageFooter/>
         </div>
       </>
-    );
-  }
-}
+  );
+
+};
 
 FilmPage.propTypes = {
   filmId: PropTypes.number,
   film: filmProp,
   similarFilms: filmsProp,
   reviews: reviewsProp,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.object
-  }),
-  fetchFilm: PropTypes.func.isRequired,
+  fetchFilmInfo: PropTypes.func.isRequired,
   fetchFilmComments: PropTypes.func.isRequired,
-  changeRoute: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired
 };
-
-export {FilmPage};
 
 const mapStateToProps = (state) => ({
   filmId: getFilmId(state),
@@ -151,12 +139,11 @@ const mapDispatchToProps = (dispatch) => ({
   fetchFilmComments(id) {
     dispatch(fetchFilmCommentsList(id));
   },
-  changeRoute(id) {
-    dispatch(changeFilmRouteId(id));
-  },
-  fetchFilm(id) {
+  fetchFilmInfo(id) {
     dispatch(fetchFilm(id));
   }
 });
+
+export {FilmPage};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);

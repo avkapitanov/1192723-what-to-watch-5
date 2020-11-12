@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginPage component render correctl Auth 1`] = `null`;
+exports[`LoginPage component render correct Auth 1`] = `null`;
 
-exports[`LoginPage component render correctl No auth 1`] = `
+exports[`LoginPage component render correct No auth 1`] = `
 <div
   className="user-page"
 >
@@ -58,6 +58,7 @@ exports[`LoginPage component render correctl No auth 1`] = `
             className="sign-in__input"
             id="user-email"
             name="user-email"
+            onChange={[Function]}
             placeholder="Email address"
             type="email"
           />
@@ -75,6 +76,7 @@ exports[`LoginPage component render correctl No auth 1`] = `
             className="sign-in__input"
             id="user-password"
             name="user-password"
+            onChange={[Function]}
             placeholder="Password"
             type="password"
           />

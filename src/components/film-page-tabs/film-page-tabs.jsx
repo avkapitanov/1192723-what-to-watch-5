@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
+import filmProp from "../film-page/film.prop";
+import reviewsProp from "../film-page-reviews-tab/reviews.prop";
+
+import {DEFAULT_ACTIVE_TAB, FilmTab} from "../../const";
 import FilmPageOverviewTab from "../film-page-overview-tab/film-page-overview-tab";
 import FilmPageDetailsTab from "../film-page-details-tab/film-page-details-tab";
 import FilmPageReviewsTab from "../film-page-reviews-tab/film-page-reviews-tab";
 import FilmPageTabsNav from "../film-page-tabs-nav/film-page-tabs-nav";
-import {DEFAULT_ACTIVE_TAB, FilmTab} from "../../const";
-import filmProp from "../film-page/film.prop";
-import reviewsProp from "../film-page-reviews-tab/reviews.prop";
 
 const FilmPageTabs = (props) => {
   const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);

@@ -1,14 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import UserAvatarBlock from "./user-avatar-block";
+import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {AuthorizationStatus} from "../../const";
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
-import {Provider} from "react-redux";
+
+import {AuthorizationStatus} from "../../const";
+import {authInfo} from "../../mocks/users";
+import UserAvatarBlock from "./user-avatar-block";
 
 const mockStore = configureStore([]);
-
 
 describe(`UserAvatarBlock component render correctly`, () => {
   it(`With unauthorized user`, () => {
@@ -34,12 +35,7 @@ describe(`UserAvatarBlock component render correctly`, () => {
     const store = mockStore({
       USER: {
         authorizationStatus: AuthorizationStatus.AUTH,
-        authInfo: {
-          id: 1,
-          email: `Oliver.conner@gmail.com`,
-          name: `Oliver.conner`,
-          avatarUrl: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/3.jpg`
-        }
+        authInfo
       }
     });
 
